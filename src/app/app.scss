@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,37 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-header {
+    background: #162536; /* Old browsers */
+    background: -moz-linear-gradient(top, #162536 0%, #0d1721 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #162536 0%, #0d1721 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #162536 0%, #0d1721 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#162536', endColorstr='#0d1721', GradientType=0); /* IE6-9 */
+
+    .toolbar-background {
+        background-color: transparent;
+    }
+}
+
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    content: none;
+}
+
+ion-content,
+ion-tabs > .tabbar {
+    background-color: #0d1721 !important;
+}
+
+ion-tabs > .tabbar {
+    border-bottom: 1px solid rgba(255, 255, 255, .03);
+    border-top: 1px solid rgba(255, 255, 255, .03);
+
+    > a {
+        color: #ccd9e7 !important;
+
+        &[aria-selected="true"] {
+            color: #FFF;
+        }
+    }
+}
