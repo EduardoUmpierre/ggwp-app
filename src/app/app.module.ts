@@ -1,7 +1,15 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP } from '@ionic-native/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+
+import { HttpClientModule } from '@angular/common/http';
+
+import { ApiProvider } from '../providers/api/api';
+import { HttpProvider } from '../providers/api/http/http';
+import { HttpNativeProvider } from '../providers/api/http/http-native';
+import { HttpAngularProvider } from '../providers/api/http/http-angular';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -21,6 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         IonicModule.forRoot(MyApp, {
             tabsPlacement: 'top'
         })
@@ -36,6 +45,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     providers: [
         StatusBar,
         SplashScreen,
+        ApiProvider,
+        HttpProvider,
+        HttpAngularProvider,
+        HttpNativeProvider,
+        HTTP,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

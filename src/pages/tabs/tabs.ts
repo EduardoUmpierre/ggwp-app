@@ -5,15 +5,15 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 
 @Component({
-  templateUrl: 'tabs.html'
+    templateUrl: 'tabs.html'
 })
 export class TabsPage {
+    menu = HomePage;
+    schedule = AboutPage;
+    bill = ContactPage;
+    music = ContactPage;
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+    constructor() {
 
-  constructor() {
-
-  }
+    }
 }
