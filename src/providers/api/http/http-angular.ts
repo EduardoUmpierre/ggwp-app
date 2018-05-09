@@ -8,12 +8,13 @@ export class HttpAngularProvider {
     }
 
     /**
+     *
      * @param url
      * @param options
      * @returns {Observable<any>}
      */
     public get(url, options: any = {}) {
-        return this.http.get(url).map(res => res);
+        return this.http.get(url);
     }
 
     /**

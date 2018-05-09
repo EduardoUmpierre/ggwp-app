@@ -5,7 +5,7 @@ import { HttpNativeProvider } from './http-native';
 
 @Injectable()
 export class HttpProvider {
-    public http;
+    public http: HttpNativeProvider | HttpAngularProvider;
 
     constructor(private platform: Platform, private angularHttp: HttpAngularProvider, private nativeHttp: HttpNativeProvider) {
         this.platform.ready().then(() => {

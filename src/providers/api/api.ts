@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, AlertController, App, Platform, ToastController } from 'ionic-angular';
-import { HttpProvider } from './http/http';
+import { LoadingController, AlertController, Platform } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
+import { HttpNativeProvider } from "./http/http-native";
+import { HttpAngularProvider } from "./http/http-angular";
 
 @Injectable()
 export class ApiProvider {
     private url: string;
     protected urlBase = 'http://localhost:8000/';
     protected loading;
+    private http: HttpNativeProvider | HttpAngularProvider;
 
-    constructor(public httpProvider: HttpProvider, private platform: Platform, public loadingCtrl: LoadingController,
-                public alertCtrl: AlertController, public app: App, protected toastCtrl: ToastController) {
+    constructor(private platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+                private httpAngular: HttpAngularProvider, private httpNative: HttpNativeProvider) {
+        this.http = this.isApp() ? this.httpNative : this.httpAngular;
     }
 
     /**
@@ -62,6 +65,8 @@ export class ApiProvider {
 
             this.url += urlParams !== '' ? '?' + urlParams : '';
         }
+
+        return this.url;
     }
 
     /**
@@ -71,9 +76,7 @@ export class ApiProvider {
      * @returns {any}
      */
     get(params = {}) {
-        this.buildUrlParams(params);
-
-        return this.resolve(this.httpProvider.http.get(this.url).subscribe(res => res));
+        return this.resolve(this.http.get(this.buildUrlParams(params)));
     }
 
     /**
@@ -83,7 +86,7 @@ export class ApiProvider {
      * @returns {any}
      */
     post(params) {
-        return this.resolve(this.httpProvider.http.post(this.url, params, {'Content-Type': 'application/json'}));
+        return this.resolve(this.http.post(this.url, params, {'Content-Type': 'application/json'}));
     }
 
     /**
@@ -93,7 +96,7 @@ export class ApiProvider {
      * @returns {any}
      */
     put(params) {
-        return this.resolve(this.httpProvider.http.put(this.url, params, {'Content-Type': 'application/json'}));
+        return this.resolve(this.http.put(this.url, params, {'Content-Type': 'application/json'}));
     }
 
     /**
@@ -102,13 +105,13 @@ export class ApiProvider {
      * @returns {any}
      */
     delete() {
-        return this.resolve(this.httpProvider.http.delete(this.url));
+        return this.resolve(this.http.delete(this.url));
     }
 
     /**
      * @param request
      */
-    public resolve(request) {
+    resolve(request) {
         return request
             .map((res) => {
                 this.hideLoader();
