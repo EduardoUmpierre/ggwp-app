@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button color="light" (click)="dismiss()">Voltar</button>
+        </ion-buttons>
+
+        <ion-title>Produto</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngIf="product">
+        <h1>{{ product.name }}</h1>
+        <h2>{{ product.price | currency:'BRL':'R$' }}</h2>
+        <h3>{{ product.experience }}EXP</h3>
+
+        <ul>
+            <li *ngFor="let item of product.ingredients">
+                {{ item.ingredient.name }}
+                {{ item.ingredient.allergenic ? '(Alergênico)' : '' }}
+            </li>
+        </ul>
+    </ion-card>
+</ion-content>
