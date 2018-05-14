@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { TabsPage } from '../pages/tabs/tabs';
+import { TabsPage } from '../pages/default/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,16 +13,16 @@ import { HttpAngularProvider } from "../providers/api/http/http-angular";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpNativeProvider } from "../providers/api/http/http-native";
 import { HTTP } from "@ionic-native/http";
-import { ProductsPage } from "../pages/products/index/products";
-import { ProductsDetailPage } from "../pages/products/detail/products-detail";
+import { ProductsPage } from "../pages/default/products/index/products";
+import { ProductsDetailPage } from "../pages/default/products/detail/products-detail";
+import { BillsPage } from "../pages/default/bills/bills";
 
 @NgModule({
     declarations: [
         MyApp,
-        AboutPage,
-        ContactPage,
         ProductsPage,
         ProductsDetailPage,
+        BillsPage,
         TabsPage
     ],
     imports: [
@@ -37,10 +35,9 @@ import { ProductsDetailPage } from "../pages/products/detail/products-detail";
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        AboutPage,
-        ContactPage,
         ProductsPage,
         ProductsDetailPage,
+        BillsPage,
         TabsPage
     ],
     providers: [
