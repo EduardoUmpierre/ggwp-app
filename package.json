@@ -1,8 +1,7 @@
 {
-  "name": "ggwp-app",
+  "name": "underdogs-app",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Eduardo Umpierre",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -45,7 +44,7 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project",
+  "description": "Aplicativo para um pub temático",
   "cordova": {
     "plugins": {
       "cordova-plugin-advanced-http": {},
