@@ -14,13 +14,11 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-ion-header {
-    background: #162536; /* Old browsers */
-    background: -moz-linear-gradient(top, #162536 0%, #0d1721 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #162536 0%, #0d1721 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #162536 0%, #0d1721 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#162536', endColorstr='#0d1721', GradientType=0); /* IE6-9 */
+html {
+    font-size: 9px;
+}
 
+ion-header {
     .toolbar-background {
         background-color: transparent;
     }
@@ -30,20 +28,181 @@ ion-header {
     content: none;
 }
 
-ion-content,
-ion-tabs > .tabbar {
-    background-color: #0d1721 !important;
+ion-content {
+    background-color: map-get($colors, primary) !important;
 }
 
 ion-tabs > .tabbar {
-    border-bottom: 1px solid rgba(255, 255, 255, .03);
-    border-top: 1px solid rgba(255, 255, 255, .03);
+    background-color: #0e0e0f !important;
 
     > a {
-        color: #ccd9e7 !important;
+        color: rgba(255, 255, 255, .6) !important;
+        position: relative;
+        overflow: initial !important;
+
+        &::after {
+            border-top: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            content: '';
+            position: absolute;
+            bottom: -8px;
+        }
+
+        > .tab-button-text {
+            text-transform: uppercase !important;
+        }
 
         &[aria-selected="true"] {
-            color: #FFF;
+            background-color: #FFF !important;
+
+            &::after {
+                border-top-color: #FFF;
+            }
+
+            > .tab-button-text {
+                color: map-get($colors, secondary);
+                font-size: 1.2rem;
+                font-weight: 600;
+                transform: none !important;
+            }
         }
     }
+}
+
+ion-list {
+    &,
+    > ion-item.item-md {
+        background-color: transparent;
+        color: #FFF;
+    }
+
+    > ion-item.item-md {
+        padding-left: 0;
+    }
+
+    ion-label {
+
+    }
+
+    .item-inner {
+    }
+
+    > .list__container {
+        border-bottom: 1px dashed #FFF !important;
+        margin-top: 4rem;
+
+        &:first-child {
+            margin-top: 3rem;
+        }
+
+        > .item-inner {
+            border-bottom: 0 !important;
+            padding-right: 0 !important;
+
+            > .input-wrapper {
+
+                > ion-label {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .list__header {
+        border-bottom: 1px solid #FFF;
+        color: map-get($colors, primary);
+        font-size: 1.4rem;
+        font-style: italic;
+        font-weight: 300;
+        text-transform: uppercase;
+
+        > span {
+            background-color: #FFF;
+            display: inline-block;
+            line-height: 4rem;
+            min-width: 14.5rem;
+            text-align: center;
+        }
+    }
+
+    .list__content {
+        margin: 0;
+
+        ion-label {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        .item-inner {
+            padding: 2rem 1rem;
+        }
+
+        > ion-item {
+            > .item-inner {
+                border-bottom-style: dashed !important;
+            }
+
+            .list__content-title {
+                font-size: 2rem;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .list__content-description {
+                font-size: 1.2rem;
+                font-weight: 300;
+            }
+
+            .list__content-side {
+                font-size: 2rem;
+                font-style: italic;
+                font-weight: 300;
+            }
+        }
+    }
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/montserrat-bold-webfont.eot');
+    src: url('../assets/fonts/montserrat-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-bold-webfont.woff') format('woff'),
+    url('../assets/fonts/montserrat-bold-webfont.svg#montserratbold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/montserrat-lightitalic-webfont.eot');
+    src: url('../assets/fonts/montserrat-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/montserrat-lightitalic-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-lightitalic-webfont.woff') format('woff'),
+    url('../assets/fonts/montserrat-lightitalic-webfont.svg#montserratlight_italic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/montserrat-regular-webfont.eot');
+    src: url('../assets/fonts/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-regular-webfont.woff') format('woff'),
+    url('../assets/fonts/montserrat-regular-webfont.svg#montserratregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/montserrat-semibold-webfont.eot');
+    src: url('../assets/fonts/montserrat-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/montserrat-semibold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-semibold-webfont.woff') format('woff'),
+    url('../assets/fonts/montserrat-semibold-webfont.svg#montserratsemibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
 }

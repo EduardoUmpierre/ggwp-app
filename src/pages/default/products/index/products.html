@@ -6,8 +6,23 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let product of products" (click)="showModal(product.id)">
-            {{ product.name }}
+        <ion-item *ngFor="let category of categories" class="list__container">
+            <div class="list__header">
+                <span>{{ category.name }}</span>
+            </div>
+
+            <ion-list class="list__content">
+                <ion-item *ngFor="let product of category.list" (click)="showModal(product.id)">
+                    <div class="list__content-title">{{ product.name }}</div>
+                    <div class="list__content-description">{{ product.name }}</div>
+
+                    <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
+                </ion-item>
+
+                <ion-item *ngIf="category.list.length == 0">
+                    <div class="list__content-description">Nenhum produto encontrado</div>
+                </ion-item>
+            </ion-list>
         </ion-item>
     </ion-list>
 </ion-content>

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { ApiProvider } from "../../../../providers/api/api";
 import { ProductsDetailPage } from "../detail/products-detail";
-import { Product } from "../../../../models/Product";
 
 @IonicPage()
 @Component({
@@ -10,7 +9,7 @@ import { Product } from "../../../../models/Product";
     templateUrl: 'products.html',
 })
 export class ProductsPage {
-    products: Product[] = [];
+    categories = [];
     private modal;
 
     constructor(private navCtrl: NavController, private apiProvider: ApiProvider, private modalCtrl: ModalController) {
@@ -20,7 +19,7 @@ export class ProductsPage {
      * Loads the products list on page load
      */
     ionViewDidLoad() {
-        this.apiProvider.builder('products').loader().get().subscribe(res => this.products = res);
+        this.apiProvider.builder('products').loader().get().subscribe(res => this.categories = res);
     }
 
     /**
