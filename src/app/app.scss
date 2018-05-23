@@ -126,7 +126,8 @@ ion-list {
         }
     }
 
-    .list__content {
+    .list__content,
+    &.list__content {
         margin: 0;
 
         ion-label {

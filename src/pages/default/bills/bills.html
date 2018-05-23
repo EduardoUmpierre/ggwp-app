@@ -5,10 +5,16 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list *ngIf="bill">
+    <ion-list class="list__content" *ngIf="bill">
         <ion-item *ngFor="let item of bill.products" (click)="showModal(item.product.id)">
-            {{ item.product.name }}
-            {{ item.product.price | currency:'BRL':'R$' }}
+            <div class="list__content-title">{{ item.product.name }}</div>
+            <div class="list__content-description">{{ item.product.name }}</div>
+
+            <div class="list__content-side" item-end>{{ item.product.price | currency:'BRL':'R$' }}</div>
+        </ion-item>
+
+        <ion-item *ngIf="bill.products && bill.products.length == 0">
+            <div class="list__content-description">Nenhum produto adicionado</div>
         </ion-item>
     </ion-list>
 </ion-content>
