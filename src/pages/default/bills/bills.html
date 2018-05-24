@@ -16,10 +16,14 @@
         <ion-item *ngIf="bill.products && bill.products.length == 0">
             <div class="list__content-description">Nenhum produto adicionado</div>
         </ion-item>
+
+        <ion-item *ngIf="!bill.products">
+            <div class="list__content-description">Nenhuma comanda ativa</div>
+        </ion-item>
     </ion-list>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="bill.products">
     <ion-toolbar>
         <ion-title>{{ total | currency:'BRL':'R$' }}</ion-title>
     </ion-toolbar>
