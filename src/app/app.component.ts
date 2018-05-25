@@ -4,12 +4,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/default/tabs/tabs';
+import { ManagerTabsPage } from '../pages/manager/tabs/tabs';
 
 @Component({
     templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage: any = TabsPage;
+    // rootPage: any = TabsPage;
+    rootPage: any = ManagerTabsPage;
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
         platform.ready().then(() => {

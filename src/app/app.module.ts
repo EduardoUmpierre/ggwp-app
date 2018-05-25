@@ -16,6 +16,12 @@ import { HTTP } from "@ionic-native/http";
 import { ProductsPage } from "../pages/default/products/index/products";
 import { ProductsDetailPage } from "../pages/default/products/detail/products-detail";
 import { BillsPage } from "../pages/default/bills/bills";
+import { ManagerTabsPage } from "../pages/manager/tabs/tabs";
+import { ProductsListPage } from "../pages/manager/products/index/products-list";
+import { ProductsDetailPage } from "../pages/manager/products/detail/products-detail";
+import { IngredientsDetailPage } from "../pages/manager/ingredients/detail/ingredients-detail";
+import { IngredientsListPage } from "../pages/manager/ingredients/index/ingredients-list";
+import { MenuPage } from "../pages/manager/menu/menu";
 
 @NgModule({
     declarations: [
@@ -23,7 +29,13 @@ import { BillsPage } from "../pages/default/bills/bills";
         ProductsPage,
         ProductsDetailPage,
         BillsPage,
-        TabsPage
+        TabsPage,
+        ManagerTabsPage,
+        ProductsListPage,
+        ProductsDetailPage,
+        IngredientsDetailPage,
+        IngredientsListPage,
+        MenuPage
     ],
     imports: [
         BrowserModule,
@@ -38,7 +50,13 @@ import { BillsPage } from "../pages/default/bills/bills";
         ProductsPage,
         ProductsDetailPage,
         BillsPage,
-        TabsPage
+        TabsPage,
+        ManagerTabsPage,
+        ProductsListPage,
+        ProductsDetailPage,
+        IngredientsDetailPage,
+        IngredientsListPage,
+        MenuPage
     ],
     providers: [
         StatusBar,
