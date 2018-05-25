@@ -89,7 +89,7 @@ ion-list {
     }
 
     > .list__container {
-        border-bottom: 1px dashed #FFF !important;
+        //border-bottom: 1px dashed #FFF !important;
         margin-top: 4rem;
 
         &:first-child {
@@ -141,7 +141,7 @@ ion-list {
 
         > ion-item {
             > .item-inner {
-                border-bottom-style: dashed !important;
+                border-bottom: 1px dashed #FFF !important;
             }
 
             .list__content-title {

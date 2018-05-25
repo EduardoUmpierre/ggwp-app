@@ -9,16 +9,30 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card *ngIf="product">
-        <h1>{{ product.name }}</h1>
-        <h2>{{ product.price | currency:'BRL':'R$' }}</h2>
-        <h3>{{ product.experience }}EXP</h3>
+    <ion-grid *ngIf="product" class="grid-container">
+        <ion-row>
+            <ion-col col-12>
+                <ion-grid>
+                    <ion-row justify-content-between>
+                        <ion-col col-9>
+                            <div class="grid__title">{{ product.name }}</div>
+                        </ion-col>
+                        <ion-col col-3>
+                            <div class="grid__title-side">{{ product.experience }}EXP</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
-        <ul>
-            <li *ngFor="let item of product.ingredients">
-                {{ item.ingredient.name }}
-                {{ item.ingredient.allergenic ? '(Alergênico)' : '' }}
-            </li>
-        </ul>
-    </ion-card>
+                <ul class="grid__list">
+                    <li *ngFor="let item of product.ingredients; let i = index">
+                        {{ i == product.ingredients.length - 1 && i != 0 ? ' e ' : '' }}{{ item.ingredient.name }}{{
+                        item.ingredient.allergenic ? ' (Alergênico)' : '' }}{{ i < product.ingredients.length - 2 ? ',' : ''
+                        }}{{ i == product.ingredients.length - 1 ? '.' : '' }}
+                    </li>
+                </ul>
+
+                <div class="grid__footer">{{ product.price | currency:'BRL':'R$' }}</div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
