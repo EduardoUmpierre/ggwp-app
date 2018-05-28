@@ -15,7 +15,7 @@
 // automatically applied to the <body> element in the app.
 
 html {
-    font-size: 9px;
+    font-size: 10px;
 }
 
 ion-header {
@@ -45,6 +45,7 @@ ion-tabs > .tabbar {
 .segment-button,
 ion-tabs > .tabbar > a {
     color: rgba(255, 255, 255, .6) !important;
+    font-weight: 300;
     position: relative !important;
     overflow: initial !important;
 
@@ -52,11 +53,16 @@ ion-tabs > .tabbar > a {
         border-top: 6px solid transparent;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         bottom: -6px;
+        content: '';
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+    }
+
+    > .tab-button-text {
+        font-size: 1rem;
+        transform: none !important;
     }
 
     &[aria-selected="true"] {
@@ -68,9 +74,7 @@ ion-tabs > .tabbar > a {
 
         > .tab-button-text {
             color: map-get($colors, secondary) !important;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transform: none !important;
+            font-weight: 700;
         }
     }
 }
@@ -94,11 +98,10 @@ ion-list {
     }
 
     > .list__container {
-        //border-bottom: 1px dashed #FFF !important;
-        margin-top: 4rem;
+        margin-top: 3rem;
 
         &:first-child {
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         > .item-inner {
@@ -117,7 +120,7 @@ ion-list {
     .list__header {
         border-bottom: 1px solid #FFF;
         color: map-get($colors, primary);
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-style: italic;
         font-weight: 300;
         text-transform: uppercase;
@@ -125,8 +128,8 @@ ion-list {
         > span {
             background-color: #FFF;
             display: inline-block;
-            line-height: 4rem;
-            min-width: 14.5rem;
+            line-height: 3rem;
+            min-width: 12rem;
             text-align: center;
         }
     }
@@ -150,33 +153,23 @@ ion-list {
             }
 
             .list__content-title {
-                font-size: 2rem;
+                font-size: 1.6rem;
                 font-weight: 600;
+                line-height: 1.2;
                 text-transform: uppercase;
             }
 
             .list__content-description {
-                font-size: 1.2rem;
+                font-size: 1rem;
                 font-weight: 300;
             }
 
             .list__content-side {
-                font-size: 2rem;
+                font-size: 1.6rem;
                 font-style: italic;
                 font-weight: 300;
             }
         }
-    }
-}
-
-// Segment
-.segment-button {
-    margin-top: 2rem;
-
-    &.segment-activated {
-        background-color: #FFF !important;
-        color: map-get($colors, secondary) !important;
-
     }
 }
 

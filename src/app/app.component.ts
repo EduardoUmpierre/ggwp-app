@@ -10,8 +10,8 @@ import { ManagerProductsListPage } from "../pages/manager/products/index/manager
     templateUrl: 'app.html'
 })
 export class MyApp {
-    // rootPage: any = TabsPage;
-    rootPage: any = ManagerProductsListPage;
+    rootPage: any = TabsPage;
+    // rootPage: any = ManagerProductsListPage;
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
         platform.ready().then(() => {
