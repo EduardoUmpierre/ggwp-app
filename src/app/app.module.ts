@@ -16,12 +16,11 @@ import { HTTP } from "@ionic-native/http";
 import { ProductsPage } from "../pages/default/products/index/products";
 import { ProductsDetailPage } from "../pages/default/products/detail/products-detail";
 import { BillsPage } from "../pages/default/bills/bills";
-import { ManagerTabsPage } from "../pages/manager/tabs/tabs";
-import { ProductsListPage } from "../pages/manager/products/index/products-list";
-import { ManagerProductsDetailPage } from "../pages/manager/products/detail/manager-products-detail";
+import { ManagerProductsListPage } from "../pages/manager/products/index/manager-products-list";
+import { ManagerProductsFormPage } from "../pages/manager/products/form/manager-products-form";
 import { IngredientsDetailPage } from "../pages/manager/ingredients/detail/ingredients-detail";
 import { IngredientsListPage } from "../pages/manager/ingredients/index/ingredients-list";
-import { MenuPage } from "../pages/manager/menu/menu";
+import { BrMaskerModule } from "brmasker-ionic-3";
 
 @NgModule({
     declarations: [
@@ -30,16 +29,15 @@ import { MenuPage } from "../pages/manager/menu/menu";
         ProductsDetailPage,
         BillsPage,
         TabsPage,
-        ManagerTabsPage,
-        ProductsListPage,
-        ManagerProductsDetailPage,
+        ManagerProductsListPage,
+        ManagerProductsFormPage,
         IngredientsDetailPage,
         IngredientsListPage,
-        MenuPage
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
+        BrMaskerModule,
         IonicModule.forRoot(MyApp, {
             tabsPlacement: 'top'
         })
@@ -51,12 +49,10 @@ import { MenuPage } from "../pages/manager/menu/menu";
         ProductsDetailPage,
         BillsPage,
         TabsPage,
-        ManagerTabsPage,
-        ProductsListPage,
-        ManagerProductsDetailPage,
+        ManagerProductsListPage,
+        ManagerProductsFormPage,
         IngredientsDetailPage,
         IngredientsListPage,
-        MenuPage
     ],
     providers: [
         StatusBar,

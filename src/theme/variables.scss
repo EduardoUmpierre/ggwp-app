@@ -27,9 +27,7 @@ $font-family-wp-base: "Montserrat", "Segoe UI", "Noto Sans", sans-serif;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
-
-
-// Named Color Variables
+    // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
 // It's highly recommended to change the default colors
@@ -57,7 +55,7 @@ $colors: (
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
+$toolbar-md-title-text-color: #FFF;
 
 
 // App Windows Variables
