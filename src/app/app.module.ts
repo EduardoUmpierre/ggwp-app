@@ -18,7 +18,7 @@ import { ProductsDetailPage } from "../pages/default/products/detail/products-de
 import { BillsPage } from "../pages/default/bills/bills";
 import { ManagerTabsPage } from "../pages/manager/tabs/tabs";
 import { ProductsListPage } from "../pages/manager/products/index/products-list";
-import { ProductsDetailPage } from "../pages/manager/products/detail/products-detail";
+import { ManagerProductsDetailPage } from "../pages/manager/products/detail/manager-products-detail";
 import { IngredientsDetailPage } from "../pages/manager/ingredients/detail/ingredients-detail";
 import { IngredientsListPage } from "../pages/manager/ingredients/index/ingredients-list";
 import { MenuPage } from "../pages/manager/menu/menu";
@@ -32,7 +32,7 @@ import { MenuPage } from "../pages/manager/menu/menu";
         TabsPage,
         ManagerTabsPage,
         ProductsListPage,
-        ProductsDetailPage,
+        ManagerProductsDetailPage,
         IngredientsDetailPage,
         IngredientsListPage,
         MenuPage
@@ -53,7 +53,7 @@ import { MenuPage } from "../pages/manager/menu/menu";
         TabsPage,
         ManagerTabsPage,
         ProductsListPage,
-        ProductsDetailPage,
+        ManagerProductsDetailPage,
         IngredientsDetailPage,
         IngredientsListPage,
         MenuPage

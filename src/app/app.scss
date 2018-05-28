@@ -36,36 +36,41 @@ ion-tabs > .tabbar {
     background-color: #0e0e0f !important;
 
     > a {
-        color: rgba(255, 255, 255, .6) !important;
-        position: relative;
-        overflow: initial !important;
-
-        &::after {
-            border-top: 8px solid transparent;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            content: '';
-            position: absolute;
-            bottom: -8px;
-        }
-
         > .tab-button-text {
             text-transform: uppercase !important;
         }
+    }
+}
 
-        &[aria-selected="true"] {
-            background-color: #FFF !important;
+.segment-button,
+ion-tabs > .tabbar > a {
+    color: rgba(255, 255, 255, .6) !important;
+    position: relative !important;
+    overflow: initial !important;
 
-            &::after {
-                border-top-color: #FFF;
-            }
+    &::after {
+        border-top: 6px solid transparent;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -6px;
+    }
 
-            > .tab-button-text {
-                color: map-get($colors, secondary);
-                font-size: 1.2rem;
-                font-weight: 600;
-                transform: none !important;
-            }
+    &[aria-selected="true"] {
+        background-color: #FFF !important;
+
+        &::after {
+            border-top-color: #FFF;
+        }
+
+        > .tab-button-text {
+            color: map-get($colors, secondary) !important;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transform: none !important;
         }
     }
 }
@@ -161,6 +166,17 @@ ion-list {
                 font-weight: 300;
             }
         }
+    }
+}
+
+// Segment
+.segment-button {
+    margin-top: 2rem;
+
+    &.segment-activated {
+        background-color: #FFF !important;
+        color: map-get($colors, secondary) !important;
+
     }
 }
 

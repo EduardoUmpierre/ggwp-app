@@ -10,10 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-products-detail',
-  templateUrl: 'products-detail.html',
+  selector: 'manager-page-products-detail',
+  templateUrl: 'manager-products-detail.html',
 })
-export class ProductsDetailPage {
+export class ManagerProductsDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
