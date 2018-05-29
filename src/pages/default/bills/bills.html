@@ -1,16 +1,17 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Comanda</ion-title>
+        <ion-title></ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list class="list__content" *ngIf="bill">
-        <ion-item *ngFor="let item of bill.products" (click)="showModal(item.product.id)">
-            <div class="list__content-title">{{ item.product.name }}</div>
-            <div class="list__content-description">{{ item.product.name }}</div>
+        <ion-item *ngFor="let item of bill.products" (click)="showModal(item.id)" text-wrap>
+            <div class="list__content-title">{{ item.name }}</div>
+            <div class="list__content-description">{{ item.name }}</div>
 
-            <div class="list__content-side" item-end>{{ item.product.price | currency:'BRL':'R$' }}</div>
+            <div class="list__content-side" item-end>{{ item.price | currency:'BRL':'R$' }}</div>
+            <div class="list__content-side" item-end><small>X</small>{{ item.quantity }}</div>
         </ion-item>
 
         <ion-item *ngIf="bill.products && bill.products.length == 0">
@@ -25,6 +26,17 @@
 
 <ion-footer *ngIf="bill.products">
     <ion-toolbar>
-        <ion-title>{{ total | currency:'BRL':'R$' }}</ion-title>
+        <ion-title>
+            <ion-grid>
+                <ion-row justify-content-between align-items-center>
+                    <ion-col>
+                        Total:
+                    </ion-col>
+                    <ion-col>
+                        <div class="total">{{ bill.total | currency:'BRL':'R$' }}</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-title>
     </ion-toolbar>
 </ion-footer>
