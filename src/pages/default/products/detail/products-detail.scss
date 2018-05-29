@@ -4,6 +4,19 @@ page-products-detail {
         padding: 0;
     }
 
+    ion-content {
+        background: url('../assets/imgs/hamburguer.jpg') center no-repeat;
+        background-size: cover;
+    }
+
+    ion-header {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+98&0.75+0,0+100 */
+        background: -moz-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.02) 98%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.02) 98%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.02) 98%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    }
+
     .grid-container {
         background-color: transparent;
         box-shadow: none;
@@ -14,6 +27,16 @@ page-products-detail {
 
         ion-col {
             padding: 0;
+            flex-grow: 0;
+        }
+
+        > .row {
+            margin: -1.6rem;
+
+            > .col {
+                background-color: rgba(map_get($colors, 'primary'), 0.95);
+                padding: 3rem 1.5rem;
+            }
         }
 
         .grid__title,
@@ -21,24 +44,43 @@ page-products-detail {
             font-size: 2.5rem;
         }
 
+        .grid__title {
+            margin-top: 1rem;
+        }
+
         .grid__title-side {
-            font-size: 1rem;
-            text-align: right;
+            align-items: center;
+            background-color: map-get($colors, secondary);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            font-size: 2rem;
+            font-weight: 600;
+            justify-content: center;
+            line-height: 1;
+            min-height: 5rem;
+            text-align: center;
+            //padding-top: 0.5rem;
+            width: 5rem;
+
+            > small {
+                display: block;
+                font-size: 1rem;
+                font-weight: 300;
+                line-height: 1;
+            }
         }
 
         .grid__list {
+            font-size: 1.2rem;
             list-style: none;
-            margin: 1rem 0 4rem;
+            margin: 1rem 0 2rem;
             padding: 0;
 
             > li {
                 display: inline;
                 line-height: 1.5;
             }
-        }
-
-        .grid__footer {
-
         }
     }
 }
