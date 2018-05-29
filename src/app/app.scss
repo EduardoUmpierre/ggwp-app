@@ -18,6 +18,10 @@ html {
     font-size: 10px;
 }
 
+.toolbar-title {
+    font-size: 1.6rem !important;
+}
+
 ion-header {
     .toolbar-background {
         background-color: transparent;
@@ -130,6 +134,7 @@ ion-list {
             display: inline-block;
             line-height: 3rem;
             min-width: 12rem;
+            padding: 0 1rem;
             text-align: center;
         }
     }
