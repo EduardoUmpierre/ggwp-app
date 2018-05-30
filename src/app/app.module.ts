@@ -16,10 +16,8 @@ import { HTTP } from "@ionic-native/http";
 import { ProductsPage } from "../pages/default/products/index/products";
 import { ProductsDetailPage } from "../pages/default/products/detail/products-detail";
 import { BillsPage } from "../pages/default/bills/bills";
-import { ManagerProductsListPage } from "../pages/manager/products/index/manager-products-list";
 import { ManagerProductsFormPage } from "../pages/manager/products/form/manager-products-form";
 import { IngredientsDetailPage } from "../pages/manager/ingredients/detail/ingredients-detail";
-import { IngredientsListPage } from "../pages/manager/ingredients/index/ingredients-list";
 import { BrMaskerModule } from "brmasker-ionic-3";
 
 @NgModule({
@@ -29,10 +27,8 @@ import { BrMaskerModule } from "brmasker-ionic-3";
         ProductsDetailPage,
         BillsPage,
         TabsPage,
-        ManagerProductsListPage,
         ManagerProductsFormPage,
-        IngredientsDetailPage,
-        IngredientsListPage,
+        IngredientsDetailPage
     ],
     imports: [
         BrowserModule,
@@ -49,10 +45,8 @@ import { BrMaskerModule } from "brmasker-ionic-3";
         ProductsDetailPage,
         BillsPage,
         TabsPage,
-        ManagerProductsListPage,
         ManagerProductsFormPage,
-        IngredientsDetailPage,
-        IngredientsListPage,
+        IngredientsDetailPage
     ],
     providers: [
         StatusBar,
