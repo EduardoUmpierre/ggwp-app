@@ -35,7 +35,9 @@ export class ManagerProductsFormPage {
      *
      */
     ionViewWillEnter() {
-        this.apiProvider.builder('products/' + this.id).loader().get().subscribe(res => this.product = res);
+        if (this.id) {
+            this.apiProvider.builder('products/' + this.id).loader().get().subscribe(res => this.product = res);
+        }
     }
 
     /**
