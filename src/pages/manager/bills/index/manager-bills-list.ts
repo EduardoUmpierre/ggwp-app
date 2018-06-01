@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from "../../../../providers/api/api";
 
 @IonicPage()
@@ -9,13 +9,12 @@ import { ApiProvider } from "../../../../providers/api/api";
 })
 export class ManagerBillsListPage {
     private bills = [];
-    private modal;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private apiProvider: ApiProvider, private modalCtrl: ModalController) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private apiProvider: ApiProvider) {
     }
 
     /**
-     *
+     * Loads the bills data
      */
     ionViewWillEnter() {
         this.apiProvider.builder('bills').loader().get().subscribe(res => this.bills = res);
@@ -27,7 +26,15 @@ export class ManagerBillsListPage {
      * @param {number} id
      */
     goToForm(id: number = null) {
-        this.modal = this.modalCtrl.create('ManagerBillsFormPage', {id: id});
-        this.modal.present();
+        this.navCtrl.push('ManagerBillsFormPage', {id: id});
+    }
+
+    /**
+     * Push to the detail page
+     *
+     * @param {number} id
+     */
+    goToDetails(id: number) {
+        this.navCtrl.push('ManagerBillsDetailPage', {id: id});
     }
 }
