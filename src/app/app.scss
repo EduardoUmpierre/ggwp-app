@@ -178,6 +178,25 @@ ion-list {
     }
 }
 
+// Detail container
+.detail-container {
+    color: #FFF;
+
+    > .detail-container__group {
+        margin-bottom: 2rem;
+
+        > .detail-container__label {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        > .detail-container__text {
+            font-size: 1.6rem;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
 @font-face {
     font-family: 'Montserrat';
     src: url('../assets/fonts/montserrat-bold-webfont.eot');

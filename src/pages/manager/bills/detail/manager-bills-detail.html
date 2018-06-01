@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ title }}</ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-only (click)="delete(bill.id)">
+                <ion-icon name="trash"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="goToForm(bill.id)">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="detail-container" *ngIf="bill">
+        <div class="detail-container__group">
+            <div class="detail-container__label">Cliente</div>
+            <div class="detail-container__text">{{ bill.user.name }}</div>
+        </div>
+
+        <div class="detail-container__group">
+            <div class="detail-container__label">Cartão</div>
+            <div class="detail-container__text">#{{ bill.card.number }}</div>
+        </div>
+
+        <div class="detail-container__group">
+            <div class="detail-container__label">Produtos</div>
+            <ion-list class="list__content">
+                <ion-item *ngFor="let product of bill.products">
+                    <div class="list__content-title">{{ product.name }}</div>
+                    <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
+                </ion-item>
+
+                <ion-item *ngIf="bill.products.length == 0">
+                    <div class="list__content-description">Nenhum produto adicionado</div>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>
