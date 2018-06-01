@@ -18,6 +18,35 @@ html {
     font-size: 10px;
 }
 
+/**
+ * Main menu
+ */
+#main-menu {
+
+    ion-list {
+        margin-bottom: 0;
+
+        > button {
+            background-color: transparent;
+            color: #FFF;
+            font-size: 1.4rem;
+            min-height: 5rem;
+            padding-right: 1.6rem;
+
+            > .item-inner {
+                border-bottom: 1px dashed #FFF;
+
+                ion-label {
+                    overflow: initial;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Header
+ */
 .toolbar-title {
     font-size: 1.6rem !important;
 }
@@ -32,6 +61,9 @@ ion-header {
     content: none;
 }
 
+/**
+ * Content
+ */
 ion-content {
     background-color: map-get($colors, primary) !important;
 }
@@ -46,6 +78,9 @@ ion-tabs > .tabbar {
     }
 }
 
+/**
+ * Segment
+ */
 .segment-button,
 ion-tabs > .tabbar > a {
     color: rgba(255, 255, 255, .6) !important;
@@ -83,6 +118,9 @@ ion-tabs > .tabbar > a {
     }
 }
 
+/**
+ * List
+ */
 ion-list {
     &,
     > ion-item.item-md {
