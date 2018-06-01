@@ -6,6 +6,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import { HttpNativeProvider } from "./http/http-native";
 import { HttpAngularProvider } from "./http/http-angular";
+import { HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class ApiProvider {
@@ -86,7 +87,9 @@ export class ApiProvider {
      * @returns {any}
      */
     post(params) {
-        return this.resolve(this.http.post(this.url, params, {'Content-Type': 'application/json'}));
+        const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+
+        return this.resolve(this.http.post(this.url, params, headers));
     }
 
     /**

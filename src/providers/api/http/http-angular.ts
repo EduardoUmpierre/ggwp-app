@@ -24,7 +24,7 @@ export class HttpAngularProvider {
      * @returns {Observable<any>}
      */
     public post(url, params: any, options: any = {}) {
-        return this.http.post(url, {headers: options, params: params}).map(res => console.log(res));
+        return this.http.post(url, params, {headers: options}).map(res => console.log(res));
     }
 
     /**

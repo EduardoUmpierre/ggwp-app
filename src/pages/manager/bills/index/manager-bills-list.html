@@ -19,7 +19,7 @@
     <ion-list class="list__content">
         <ion-item *ngFor="let bill of bills" (click)="goToForm(bill.id)">
             <div class="list__content-title">{{ bill.name }}</div>
-            <div class="list__content-side" item-end>{{ bill.price | currency:'BRL':'R$' }}</div>
+            <div class="list__content-side" item-end>#{{ bill.number }}</div>
         </ion-item>
 
         <ion-item *ngIf="bills.length == 0">

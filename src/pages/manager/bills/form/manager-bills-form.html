@@ -1,13 +1,15 @@
 <ion-header>
     <ion-navbar>
         <ion-buttons left>
-            <button ion-button color="light" (click)="dismiss()">Voltar</button>
+            <button ion-button icon-only type="button" (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
         </ion-buttons>
 
         <ion-title>{{ title }}</ion-title>
 
         <ion-buttons right>
-            <button ion-button icon-only>
+            <button ion-button icon-only [disabled]="!form.valid" (click)="submit()">
                 <ion-icon name="checkmark"></ion-icon>
             </button>
         </ion-buttons>
@@ -15,5 +17,35 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-list>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <ion-item>
+                <select-searchable
+                        formControlName="users_id"
+                        itemValueField="id"
+                        itemTextField="name"
+                        title="Usuários"
+                        [items]="users"
+                        [canSearch]="true">
+                    <ng-template selectSearchableLabelTemplate>
+                        Usuário
+                    </ng-template>
+                </select-searchable>
+            </ion-item>
 
+            <ion-item>
+                <select-searchable
+                        formControlName="cards_id"
+                        itemValueField="id"
+                        itemTextField="number"
+                        title="Cartões"
+                        [items]="cards"
+                        [canSearch]="true">
+                    <ng-template selectSearchableLabelTemplate>
+                        Cartão
+                    </ng-template>
+                </select-searchable>
+            </ion-item>
+        </form>
+    </ion-list>
 </ion-content>

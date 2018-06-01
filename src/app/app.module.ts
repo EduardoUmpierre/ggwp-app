@@ -19,6 +19,7 @@ import { BillsPage } from "../pages/default/bills/bills";
 import { ManagerProductsFormPage } from "../pages/manager/products/form/manager-products-form";
 import { IngredientsDetailPage } from "../pages/manager/ingredients/detail/ingredients-detail";
 import { BrMaskerModule } from "brmasker-ionic-3";
+import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { BrMaskerModule } from "brmasker-ionic-3";
         BrowserModule,
         HttpClientModule,
         BrMaskerModule,
+        SelectSearchableModule,
         IonicModule.forRoot(MyApp, {
             tabsPlacement: 'top'
         })
