@@ -16,6 +16,12 @@ export class ManagerBillsFormPage {
     private form: FormGroup;
 
     constructor(private viewCtrl: ViewController, public navParams: NavParams, private apiProvider: ApiProvider, private formBuilder: FormBuilder) {
+        this.id = this.navParams.get('id');
+
+        if (this.id) {
+            this.title = 'Editar comanda';
+        }
+
         this.form = this.formBuilder.group({
             cards_id: new FormControl('', Validators.required),
             users_id: new FormControl('', Validators.required)
@@ -23,13 +29,22 @@ export class ManagerBillsFormPage {
     }
 
     /**
-     * @todo Load the bill by id
+     * Loads the cards, users and bill data
      */
     ionViewWillLoad() {
-        this.apiProvider.builder('cards').loader().get().subscribe(res => {
-            this.cards = res;
+        this.apiProvider.builder('cards').loader().get().subscribe(cards => {
+            this.cards = cards;
 
-            this.apiProvider.builder('users').loader().get().subscribe(res => this.users = res);
+            this.apiProvider.builder('users').loader().get().subscribe(users => {
+                this.users = users;
+
+                if (this.id) {
+                    this.apiProvider.builder('bills/' + this.id).loader().get().subscribe(bill => {
+                        this.form.controls['users_id'].setValue(bill.user);
+                        this.form.controls['cards_id'].setValue(bill.card);
+                    });
+                }
+            });
         });
     }
 
@@ -45,7 +60,7 @@ export class ManagerBillsFormPage {
      */
     submit() {
         if (this.id) {
-            // this.apiProvider.builder('users/' + this.navParams.get('id')).loader().put(Object.assign({}, {id: this.id}, this.form.value)).subscribe((res) => this.redirect());
+            this.apiProvider.builder('bills/' + this.id).loader().put(Object.assign({}, {id: this.id}, this.dataNormalizer())).subscribe((res) => this.dismiss());
         } else {
             this.apiProvider.builder('bills').loader().post(this.dataNormalizer()).subscribe((res) => this.dismiss());
         }
