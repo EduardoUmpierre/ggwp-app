@@ -34,7 +34,7 @@ export class HttpAngularProvider {
      * @returns {Observable<any>}
      */
     public put(url, params: any, options: any = {}) {
-        return this.http.put(url, {headers: options, params: params}).map(res => console.log(res));
+        return this.http.put(url, params, {headers: options}).map(res => console.log(res));
     }
 
     /**
