@@ -16,8 +16,6 @@ import { HTTP } from "@ionic-native/http";
 import { ProductsPage } from "../pages/default/products/index/products";
 import { ProductsDetailPage } from "../pages/default/products/detail/products-detail";
 import { BillsPage } from "../pages/default/bills/bills";
-import { ManagerProductsFormPage } from "../pages/manager/products/form/manager-products-form";
-import { IngredientsDetailPage } from "../pages/manager/ingredients/detail/ingredients-detail";
 import { BrMaskerModule } from "brmasker-ionic-3";
 import { SelectSearchableModule } from 'ionic-select-searchable';
 
@@ -27,9 +25,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
         ProductsPage,
         ProductsDetailPage,
         BillsPage,
-        TabsPage,
-        ManagerProductsFormPage,
-        IngredientsDetailPage
+        TabsPage
     ],
     imports: [
         BrowserModule,
@@ -46,9 +42,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
         ProductsPage,
         ProductsDetailPage,
         BillsPage,
-        TabsPage,
-        ManagerProductsFormPage,
-        IngredientsDetailPage
+        TabsPage
     ],
     providers: [
         StatusBar,
