@@ -14,6 +14,7 @@ export class ManagerProductsFormPage {
     private id: number;
     private product: Product;
     private categories = [];
+    private ingredients = [];
     private form: FormGroup;
 
     constructor(private viewCtrl: ViewController, public navParams: NavParams, private apiProvider: ApiProvider, private formBuilder: FormBuilder) {
@@ -32,12 +33,16 @@ export class ManagerProductsFormPage {
     }
 
     /**
-     *
+     * Loads the ingredient data
      */
-    ionViewWillEnter() {
-        if (this.id) {
-            this.apiProvider.builder('products/' + this.id).loader().get().subscribe(res => this.product = res);
-        }
+    ionViewWillLoad() {
+        this.apiProvider.builder('categories').loader().get().subscribe(categories => {
+            this.categories = categories;
+
+            if (this.id) {
+                this.apiProvider.builder('products/' + this.id).loader().get().subscribe(product => this.product = product);
+            }
+        });
     }
 
     /**
@@ -45,5 +50,16 @@ export class ManagerProductsFormPage {
      */
     dismiss() {
         this.viewCtrl.dismiss();
+    }
+
+    /**
+     *
+     */
+    submit() {
+        if (this.id) {
+            this.apiProvider.builder('produtcts/' + this.id).loader().put(Object.assign({}, {id: this.id}, this.form.value)).subscribe((res) => this.dismiss());
+        } else {
+            this.apiProvider.builder('produtcts').loader().post(this.form.value).subscribe((res) => this.dismiss());
+        }
     }
 }
