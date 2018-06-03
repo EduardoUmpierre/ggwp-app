@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { ApiProvider } from "../../../../providers/api/api";
-import { ManagerProductsFormPage } from "../form/manager-products-form";
 
 @IonicPage()
 @Component({
@@ -10,16 +9,19 @@ import { ManagerProductsFormPage } from "../form/manager-products-form";
 })
 export class ManagerProductsListPage {
     private products = [];
-    private modal;
+    private loaded: boolean = false;
 
-    constructor(public navCtrl: NavController, private apiProvider: ApiProvider, private modalCtrl: ModalController) {
+    constructor(public navCtrl: NavController, private apiProvider: ApiProvider) {
     }
 
     /**
      *
      */
     ionViewWillEnter() {
-        this.apiProvider.builder('products').loader().get().subscribe(res => this.products = res);
+        this.apiProvider.builder('products').loader().get().subscribe(res => {
+            this.products = res;
+            this.loaded = true;
+        });
     }
 
     /**
@@ -27,8 +29,7 @@ export class ManagerProductsListPage {
      *
      * @param {number} id
      */
-    goToForm(id: number) {
-        this.modal = this.modalCtrl.create(ManagerProductsFormPage, {id: id});
-        this.modal.present();
+    goToForm(id: number = null) {
+        this.navCtrl.push('ManagerProductsFormPage', {id: id});
     }
 }
