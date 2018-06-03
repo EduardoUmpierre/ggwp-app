@@ -9,6 +9,7 @@ import { ApiProvider } from "../../../../providers/api/api";
 })
 export class ManagerBillsListPage {
     private bills = [];
+    private loaded: boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private apiProvider: ApiProvider) {
     }
@@ -17,7 +18,10 @@ export class ManagerBillsListPage {
      * Loads the bills data
      */
     ionViewWillEnter() {
-        this.apiProvider.builder('bills').loader().get().subscribe(res => this.bills = res);
+        this.apiProvider.builder('bills').loader().get().subscribe(res => {
+            this.bills = res;
+            this.loaded = true;
+        });
     }
 
     /**
@@ -30,7 +34,7 @@ export class ManagerBillsListPage {
     }
 
     /**
-     * Push to the detail page
+     * Push to the form page
      *
      * @param {number} id
      */

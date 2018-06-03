@@ -4,9 +4,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
 
-        <ion-title>
-            Comandas
-        </ion-title>
+        <ion-title>Comandas</ion-title>
 
         <ion-buttons end>
             <button ion-button icon-only (click)="goToForm()">
@@ -17,13 +15,13 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list class="list__content">
-        <ion-item *ngFor="let bill of bills" (click)="goToDetails(bill.id)">
+    <ion-list class="list__content list__content-manager">
+        <ion-item *ngFor="let bill of bills" (click)="goToDetails(bill.id)" text-wrap>
             <div class="list__content-title">{{ bill.name }}</div>
             <div class="list__content-side" item-end>#{{ bill.number }}</div>
         </ion-item>
 
-        <ion-item *ngIf="bills.length == 0">
+        <ion-item *ngIf="bills.length == 0 && loaded">
             <div class="list__content-description">Nenhuma comanda ativa</div>
         </ion-item>
     </ion-list>
