@@ -9,7 +9,7 @@ import { ProductsDetailPage } from "../detail/products-detail";
     templateUrl: 'products.html',
 })
 export class ProductsPage {
-    categories = [];
+    private categories = [];
     private modal;
 
     constructor(private navCtrl: NavController, private apiProvider: ApiProvider, private modalCtrl: ModalController) {
