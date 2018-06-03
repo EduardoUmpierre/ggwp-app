@@ -1,9 +1,28 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>ingredients-list</ion-title>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title>Ingredientes</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToForm()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+    <ion-list class="list__content list__content-manager">
+        <ion-item *ngFor="let ingredient of ingredients" (click)="goToForm(ingredient.id)">
+            <div class="list__content-title">{{ ingredient.name }}</div>
+            <div class="list__content-side" item-end *ngIf="ingredient.allergenic">Alergênico</div>
+        </ion-item>
 
+        <ion-item *ngIf="ingredients.length == 0 && loaded">
+            <div class="list__content-description">Nenhum ingrediente encontrado</div>
+        </ion-item>
+    </ion-list>
 </ion-content>

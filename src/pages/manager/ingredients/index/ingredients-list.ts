@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import { ApiProvider } from "../../../../providers/api/api";
 
 @IonicPage()
 @Component({
@@ -7,10 +8,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
     templateUrl: 'ingredients-list.html',
 })
 export class IngredientsListPage {
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    private ingredients = [];
+    private loaded: boolean = false;
+
+    constructor(public navCtrl: NavController, private apiProvider: ApiProvider) {
     }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad IngredientsListPage');
+    /**
+     *
+     */
+    ionViewWillEnter() {
+        this.apiProvider.builder('ingredients').loader().get().subscribe(res => {
+            this.ingredients = res;
+            this.loaded = true;
+        });
+    }
+
+    /**
+     * Push to the form page
+     *
+     * @param {number} id
+     */
+    goToForm(id: number = null) {
+        this.navCtrl.push('ManagerIngredientsFormPage', {id: id});
     }
 }
