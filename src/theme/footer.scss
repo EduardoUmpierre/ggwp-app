@@ -1,0 +1,16 @@
+ion-footer {
+
+    .toolbar-background {
+        background-color: #0e0e0f !important;
+    }
+
+    ion-col {
+        padding: 0;
+        flex-grow: 0 !important;
+
+        .total {
+            font-style: italic;
+            font-weight: 700;
+        }
+    }
+}

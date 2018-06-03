@@ -1,0 +1,21 @@
+// Detail container
+.detail-container {
+    color: #FFF;
+
+    > .detail-container__group {
+        margin-bottom: 2rem;
+    }
+
+    .detail-container__group {
+
+        > .detail-container__label {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        > .detail-container__text {
+            font-size: 1.6rem;
+        }
+    }
+}

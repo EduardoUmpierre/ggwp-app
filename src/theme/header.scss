@@ -1,0 +1,20 @@
+/**
+ * Header
+ */
+.toolbar-title {
+    font-size: 1.6rem !important;
+}
+
+ion-header {
+    .toolbar-background {
+        background-color: #0e0e0f;
+        //background-color: transparent;
+    }
+}
+
+.header-md::after,
+.tabs-md[tabsPlacement="top"] > .tabbar::after,
+.footer-md::before,
+.tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    content: none;
+}

@@ -1,0 +1,16 @@
+/**
+ * Content
+ */
+ion-content {
+    background-color: map-get($colors, primary) !important;
+}
+
+ion-tabs > .tabbar {
+    background-color: #0e0e0f !important;
+
+    > a {
+        > .tab-button-text {
+            text-transform: uppercase !important;
+        }
+    }
+}

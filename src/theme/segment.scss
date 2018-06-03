@@ -1,0 +1,39 @@
+/**
+ * Segment
+ */
+.segment-button,
+ion-tabs > .tabbar > a {
+    color: rgba(255, 255, 255, .6) !important;
+    font-weight: 300;
+    position: relative !important;
+    overflow: initial !important;
+
+    &::after {
+        border-top: 6px solid transparent;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        bottom: -6px;
+        content: '';
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+    }
+
+    > .tab-button-text {
+        font-size: 1rem;
+        transform: none !important;
+    }
+
+    &[aria-selected="true"] {
+        background-color: #FFF !important;
+
+        &::after {
+            border-top-color: #FFF;
+        }
+
+        > .tab-button-text {
+            color: map-get($colors, secondary) !important;
+            font-weight: 700;
+        }
+    }
+}

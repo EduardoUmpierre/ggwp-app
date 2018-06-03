@@ -1,0 +1,25 @@
+/**
+ * Main menu
+ */
+#main-menu {
+
+    ion-list {
+        margin-bottom: 0;
+
+        > button {
+            background-color: transparent;
+            color: #FFF;
+            font-size: 1.4rem;
+            min-height: 5rem;
+            padding-right: 1.6rem;
+
+            > .item-inner {
+                border-bottom: 1px dashed #FFF;
+
+                ion-label {
+                    overflow: initial;
+                }
+            }
+        }
+    }
+}
