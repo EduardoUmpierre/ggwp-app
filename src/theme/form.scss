@@ -1,0 +1,26 @@
+form {
+
+    > ion-item {
+        background-color: transparent !important;
+        padding-left: 0 !important;
+
+        > .item-inner {
+            border-bottom-style: dashed !important;
+            box-shadow: none !important;
+
+            ion-label,
+            ion-input,
+            ion-select,
+            ion-textarea {
+                color: #FFF !important;
+            }
+        }
+
+        &.item-input-has-focus {
+
+            > .item-inner {
+                border-bottom-color: #FFF !important;
+            }
+        }
+    }
+}
