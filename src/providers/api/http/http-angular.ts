@@ -24,7 +24,7 @@ export class HttpAngularProvider {
      * @returns {Observable<any>}
      */
     public post(url, params: any, options: any = {}) {
-        return this.http.post(url, params, {headers: options}).map(res => console.log(res));
+        return this.http.post(url, params, {headers: options});
     }
 
     /**
@@ -34,7 +34,7 @@ export class HttpAngularProvider {
      * @returns {Observable<any>}
      */
     public put(url, params: any, options: any = {}) {
-        return this.http.put(url, params, {headers: options}).map(res => console.log(res));
+        return this.http.put(url, params, {headers: options});
     }
 
     /**
@@ -43,6 +43,6 @@ export class HttpAngularProvider {
      * @returns {Observable<any>}
      */
     public delete(url, options: any = {}) {
-        return this.http.delete(url, {headers: options}).map(res => console.log(res));
+        return this.http.delete(url, {headers: options});
     }
 }
