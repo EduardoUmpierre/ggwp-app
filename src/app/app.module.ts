@@ -13,19 +13,13 @@ import { HttpAngularProvider } from "../providers/api/http/http-angular";
 import { HttpClientModule } from "@angular/common/http";
 import { HttpNativeProvider } from "../providers/api/http/http-native";
 import { HTTP } from "@ionic-native/http";
-import { ProductsPage } from "../pages/default/products/index/products";
-import { ProductsDetailPage } from "../pages/default/products/detail/products-detail";
-import { BillsPage } from "../pages/default/bills/bills";
 import { BrMaskerModule } from "brmasker-ionic-3";
 import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
     declarations: [
         MyApp,
-        ProductsPage,
-        ProductsDetailPage,
-        BillsPage,
-        TabsPage
+        TabsPage,
     ],
     imports: [
         BrowserModule,
@@ -39,10 +33,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        ProductsPage,
-        ProductsDetailPage,
-        BillsPage,
-        TabsPage
+        TabsPage,
     ],
     providers: [
         StatusBar,
