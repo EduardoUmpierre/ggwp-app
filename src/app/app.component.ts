@@ -11,8 +11,8 @@ import { TabsPage } from '../pages/default/tabs/tabs';
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    // rootPage: any = TabsPage;
-    rootPage: any = 'ManagerProductsListPage';
+    rootPage: any = TabsPage;
+    // rootPage: any = 'ManagerProductsListPage';
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
         platform.ready().then(() => {
