@@ -18,3 +18,7 @@ ion-header {
 .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
     content: none;
 }
+
+.tabbar {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+}
