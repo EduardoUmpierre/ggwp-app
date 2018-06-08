@@ -1,10 +1,8 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title></ion-title>
-    </ion-navbar>
+    <expandable-header [scrollArea]="mycontent" headerHeight="90"></expandable-header>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding #mycontent>
     <ion-list>
         <ion-item *ngFor="let category of categories" class="list__container">
             <div class="list__header">
@@ -19,7 +17,7 @@
                     <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
                 </ion-item>
 
-                <ion-item *ngIf="category.list.length == 0">
+                <ion-item *ngIf="category.list && category.list.length == 0">
                     <div class="list__content-description">Nenhum produto encontrado</div>
                 </ion-item>
             </ion-list>
