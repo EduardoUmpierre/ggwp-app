@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController } from 'ionic-angular';
 import { ApiProvider } from "../../../providers/api/api";
-import { ProductsDetailPage } from "../products/detail/products-detail";
 
 @IonicPage()
 @Component({
@@ -12,7 +11,7 @@ export class BillsPage {
     private bill = {};
     private modal;
 
-    constructor(private navCtrl: NavController, private navParams: NavParams, private apiProvider: ApiProvider, private modalCtrl: ModalController) {
+    constructor(private apiProvider: ApiProvider, private modalCtrl: ModalController) {
     }
 
     /**
@@ -28,7 +27,7 @@ export class BillsPage {
      * @param {number} id
      */
     showModal(id: number) {
-        this.modal = this.modalCtrl.create(ProductsDetailPage, {id: id});
+        this.modal = this.modalCtrl.create('ProductsDetailPage', {id: id});
         this.modal.present();
     }
 }
