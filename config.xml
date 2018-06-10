@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="underdogs-app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Underdogs PUB APP</name>
     <description>Aplicativo para um pub temático</description>
     <author email="umpierre.eduardo@gmail.com" href="https://github.com/EduardoUmpierre">Eduardo Pieretti Umpierre</author>
@@ -86,5 +86,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.1" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.2" />
-    <engine name="android" spec="~6.3.0" />
+    <engine name="android" spec="6.3.0" />
 </widget>
