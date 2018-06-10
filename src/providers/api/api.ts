@@ -11,7 +11,7 @@ import { HttpHeaders } from "@angular/common/http";
 @Injectable()
 export class ApiProvider {
     private url: string;
-    protected urlBase = 'http://localhost:8000/';
+    protected urlBase = this.isApp() ? 'https://underdogs-app.herokuapp.com/' : 'http://localhost:8000/';
     protected loading;
     private http: HttpNativeProvider | HttpAngularProvider;
 
