@@ -1,0 +1,17 @@
+<div id="user-header" class="{{ layout }}">
+    <div class="user-header__image"></div>
+
+    <div class="user-header__content">
+        <div class="user-header__detail">
+            <div class="user-header__detail-name">{{ user ? user.name : 'Carregando...' }}</div>
+            <div class="user-header__detail-level" *ngIf="user && user.current_level && user.next_level">
+                Nível {{ user.current_level.number }} ({{ user.experience }}/{{ user.next_level.experience }})
+            </div>
+        </div>
+
+        <div class="user-header__level" *ngIf="user">
+            <div class="user-header__level-bar"
+                 [ngStyle]="{'width': progressBarValue + '%'}"></div>
+        </div>
+    </div>
+</div>

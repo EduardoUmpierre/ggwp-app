@@ -1,0 +1,81 @@
+user-level {
+    #user-header {
+        display: flex;
+        padding: 2rem;
+        width: 100%;
+
+        > .user-header__image {
+            background-color: #FFF;
+            border-radius: 50%;
+            height: 5rem;
+            min-width: 5rem;
+            width: 5rem;
+        }
+
+        > .user-header__content {
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            padding-left: 1.5rem;
+            width: 100%;
+
+            > .user-header__detail {
+                align-items: baseline;
+                color: #FFF;
+                display: flex;
+                font-weight: 300;
+                justify-content: space-between;
+                width: 100%;
+
+                > .user-header__detail-name {
+                    font-size: 1.4rem;
+                    font-style: italic;
+                }
+
+                > .user-header__detail-level {
+                    font-size: 0.8rem;
+                }
+            }
+
+            > .user-header__level {
+                background-color: #FFF;
+                border-radius: 2.5rem;
+                height: 0.8rem;
+                margin-top: 1rem;
+                overflow: hidden;
+                position: relative;
+                width: 100%;
+                -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+
+                > .user-header__level-bar {
+                    background-color: map-get($colors, 'secondary');
+                    height: 0.8rem;
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                    transition: width 1000ms ease;
+                    width: 0;
+                }
+            }
+        }
+
+        // Compact layout
+        &.compact {
+        }
+
+        // Big layout
+        &.big {
+            align-items: center;
+            flex-direction: column;
+
+            > .user-header__image {
+                height: 10rem;
+                width: 10rem;
+            }
+
+            > .user-header__content {
+                padding: 2rem 0 0;
+            }
+        }
+    }
+}
