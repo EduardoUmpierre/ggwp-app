@@ -7,16 +7,20 @@ import 'rxjs/add/operator/catch';
 import { HttpNativeProvider } from "./http/http-native";
 import { HttpAngularProvider } from "./http/http-angular";
 import { HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import { Storage } from "@ionic/storage";
 
 @Injectable()
 export class ApiProvider {
     private url: string;
+    private resolveError: boolean;
     protected urlBase = this.isApp() ? 'https://underdogs-app.herokuapp.com/' : 'http://localhost:8000/';
     protected loading;
-    private http: HttpNativeProvider | HttpAngularProvider;
+    protected http: HttpNativeProvider | HttpAngularProvider;
 
     constructor(private platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-                private httpAngular: HttpAngularProvider, private httpNative: HttpNativeProvider) {
+                private httpAngular: HttpAngularProvider, private httpNative: HttpNativeProvider,
+                private storage: Storage) {
         this.http = this.isApp() ? this.httpNative : this.httpAngular;
     }
 
@@ -24,12 +28,21 @@ export class ApiProvider {
      * Builds the final URL
      *
      * @param {string} controller
-     * @returns {ApiProvider}
+     * @param {boolean} resolve
+     * @returns {this}
      */
-    builder(controller: string) {
+    builder(controller: string, resolve: boolean = true) {
         this.url = this.urlBase + 'api/v1/' + controller;
+        this.resolveError = resolve;
 
         return this;
+    }
+
+    /**
+     * @returns {Observable<Headers>}
+     */
+    getApiToken(): Observable<Headers> {
+        return Observable.fromPromise(this.storage.get('token'));
     }
 
     /**
@@ -77,7 +90,13 @@ export class ApiProvider {
      * @returns {any}
      */
     get(params = {}) {
-        return this.resolve(this.http.get(this.buildUrlParams(params)));
+        return this.resolve(this.getApiToken().flatMap((res) => {
+            const headers = new HttpHeaders({
+                'Authorization': 'Bearer ' + res
+            });
+
+            return this.http.get(this.buildUrlParams(params), headers);
+        }));
     }
 
     /**
@@ -87,9 +106,14 @@ export class ApiProvider {
      * @returns {any}
      */
     post(params) {
-        const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+        return this.resolve(this.getApiToken().flatMap(res => {
+            const headers = new HttpHeaders({
+                'Authorization': 'Bearer ' + res,
+                'Content-Type': 'application/json'
+            });
 
-        return this.resolve(this.http.post(this.url, params, headers));
+            return this.http.post(this.url, params, headers);
+        }));
     }
 
     /**
@@ -99,7 +123,14 @@ export class ApiProvider {
      * @returns {any}
      */
     put(params) {
-        return this.resolve(this.http.put(this.url, params, {'Content-Type': 'application/json'}));
+        return this.resolve(this.getApiToken().flatMap(res => {
+            const headers = new HttpHeaders({
+                'Authorization': 'Bearer ' + res,
+                'Content-Type': 'application/json'
+            });
+
+            return this.http.put(this.url, params, headers);
+        }));
     }
 
     /**
@@ -108,7 +139,9 @@ export class ApiProvider {
      * @returns {any}
      */
     delete() {
-        return this.resolve(this.http.delete(this.url));
+        return this.resolve(this.getApiToken().flatMap(res => this.http.delete(this.url, {
+            'Authorization': 'Bearer ' + res
+        })));
     }
 
     /**
@@ -123,6 +156,10 @@ export class ApiProvider {
             })
             .catch((err) => {
                 this.hideLoader();
+
+                if (!this.resolveError) {
+                    return [err];
+                }
 
                 this.promiseErrorResolver(err).present();
 
