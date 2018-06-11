@@ -22,6 +22,8 @@ export class ApiProvider {
                 private httpAngular: HttpAngularProvider, private httpNative: HttpNativeProvider,
                 private storage: Storage) {
         this.http = this.isApp() ? this.httpNative : this.httpAngular;
+
+        console.log('Is App:', this.isApp());
     }
 
     /**
@@ -91,9 +93,9 @@ export class ApiProvider {
      */
     get(params = {}) {
         return this.resolve(this.getApiToken().flatMap((res) => {
-            const headers = new HttpHeaders({
+            const headers = {
                 'Authorization': 'Bearer ' + res
-            });
+            };
 
             return this.http.get(this.buildUrlParams(params), headers);
         }));
@@ -107,10 +109,10 @@ export class ApiProvider {
      */
     post(params) {
         return this.resolve(this.getApiToken().flatMap(res => {
-            const headers = new HttpHeaders({
+            const headers = {
                 'Authorization': 'Bearer ' + res,
                 'Content-Type': 'application/json'
-            });
+            };
 
             return this.http.post(this.url, params, headers);
         }));
@@ -124,10 +126,10 @@ export class ApiProvider {
      */
     put(params) {
         return this.resolve(this.getApiToken().flatMap(res => {
-            const headers = new HttpHeaders({
+            const headers = {
                 'Authorization': 'Bearer ' + res,
                 'Content-Type': 'application/json'
-            });
+            };
 
             return this.http.put(this.url, params, headers);
         }));

@@ -19,7 +19,7 @@ export class HttpNativeProvider {
         return Observable.fromPromise(this.platform.ready().then(() => {
             return this.http.get(url, {}, options)
                 .then(resp => options.responseType == 'text' ? resp.data : JSON.parse(resp.data))
-                .catch((err) => Pro.monitoring.log('Erro API get nativo: ' + err.toLocaleString(), {level: 'error'}));
+                .catch((err) => console.log('Erro API get nativo: ' + err.toLocaleString()));
         }));
     }
 
