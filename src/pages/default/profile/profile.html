@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button color="light" (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Perfil</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <user-level [user]="user" layout="big"></user-level>
+
+    <ion-list>
+        <ion-item class="list__container">
+            <div class="list__header">
+                <span>Recompensas</span>
+            </div>
+
+            <ion-list class="list__content">
+                <ion-item>
+                    <div class="list__content-description">Nenhuma recompensa</div>
+                </ion-item>
+            </ion-list>
+        </ion-item>
+
+        <ion-item class="list__container">
+            <div class="list__header">
+                <span>Conquistas</span>
+            </div>
+
+            <ion-list class="list__content">
+                <ion-item>
+                    <div class="list__content-description">Nenhuma conquista</div>
+                </ion-item>
+            </ion-list>
+        </ion-item>
+
+        <ion-item class="list__container">
+            <div class="list__header">
+                <span>Amigos</span>
+            </div>
+
+            <ion-list class="list__content">
+                <ion-item>
+                    <div class="list__content-description">Nenhum amigo</div>
+                </ion-item>
+            </ion-list>
+        </ion-item>
+    </ion-list>
+</ion-content>
