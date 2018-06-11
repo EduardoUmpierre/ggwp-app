@@ -14,7 +14,7 @@ export class HttpAngularProvider {
      * @returns {Observable<any>}
      */
     public get(url, options: any = {}) {
-        return this.http.get(url);
+        return this.http.get(url, {headers: options});
     }
 
     /**
