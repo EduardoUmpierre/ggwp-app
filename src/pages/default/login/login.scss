@@ -1,0 +1,17 @@
+page-login {
+
+    .item-inner {
+        padding: 0 !important;
+
+        > .input-wrapper {
+
+            > ion-label {
+                margin: 2rem 0 0;
+
+                > button {
+                    font-style: italic;
+                }
+            }
+        }
+    }
+}

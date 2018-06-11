@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button color="light" (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Login</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="form" (submit)="login($event)" class="list-item">
+        <ion-list>
+            <ion-item>
+                <ion-input type="text" formControlName="username" placeholder="Usuário"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="password" formControlName="password" placeholder="Senha"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <button ion-button large color="light" full [disabled]="form && !form.valid">Entrar</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>
