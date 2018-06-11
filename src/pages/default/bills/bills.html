@@ -1,11 +1,9 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title></ion-title>
-    </ion-navbar>
+    <expandable-header [scrollArea]="mycontent" headerHeight="90"></expandable-header>
 </ion-header>
 
-<ion-content padding>
-    <ion-list class="list__content" *ngIf="bill">
+<ion-content padding #mycontent>
+    <ion-list class="list__content" *ngIf="bill && loaded">
         <ion-item *ngFor="let item of bill.products" (click)="showModal(item.id)" text-wrap>
             <div class="list__content-title">{{ item.name }}</div>
             <div class="list__content-description">{{ item.name }}</div>
@@ -17,14 +15,16 @@
         <ion-item *ngIf="bill.products && bill.products.length == 0">
             <div class="list__content-description">Nenhum produto adicionado</div>
         </ion-item>
+    </ion-list>
 
-        <ion-item *ngIf="!bill.products">
+    <ion-list class="list__content" *ngIf="!bill && loaded">
+        <ion-item>
             <div class="list__content-description">Nenhuma comanda ativa</div>
         </ion-item>
     </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="bill.products">
+<ion-footer *ngIf="bill && loaded">
     <ion-toolbar>
         <ion-title>
             <ion-grid>

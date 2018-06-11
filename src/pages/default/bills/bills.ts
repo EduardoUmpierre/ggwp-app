@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController } from 'ionic-angular';
 import { ApiProvider } from "../../../providers/api/api";
+import { Storage } from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -9,16 +10,27 @@ import { ApiProvider } from "../../../providers/api/api";
 })
 export class BillsPage {
     private bill = {};
+    private loaded: boolean = false;
     private modal;
 
-    constructor(private apiProvider: ApiProvider, private modalCtrl: ModalController) {
+    constructor(private apiProvider: ApiProvider, private modalCtrl: ModalController, private storage: Storage) {
     }
 
     /**
      * @todo Add logged user id
      */
     ionViewWillEnter() {
-        this.apiProvider.builder('bills/' + 1).loader().get().subscribe(res => this.bill = res);
+        this.storage.get('user').then(res => {
+            if (!res) {
+                this.bill = null;
+                this.loaded = true;
+            } else {
+                this.apiProvider.builder('bills/' + res.id, false).get().subscribe(res => {
+                    this.bill = res;
+                    this.loaded = true;
+                });
+            }
+        })
     }
 
     /**
