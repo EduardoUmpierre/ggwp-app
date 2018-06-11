@@ -15,6 +15,9 @@ import { HttpNativeProvider } from "../providers/api/http/http-native";
 import { HTTP } from "@ionic-native/http";
 import { BrMaskerModule } from "brmasker-ionic-3";
 import { SelectSearchableModule } from 'ionic-select-searchable';
+import { IonicStorageModule } from "@ionic/storage";
+import { AuthProvider } from "../providers/auth/auth";
+import { ComponentsModule } from "../components/components.module";
 
 @NgModule({
     declarations: [
@@ -26,8 +29,13 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
         HttpClientModule,
         BrMaskerModule,
         SelectSearchableModule,
+        ComponentsModule,
         IonicModule.forRoot(MyApp, {
             tabsPlacement: 'top'
+        }),
+        IonicStorageModule.forRoot({
+            name: '__mydb',
+            driverOrder: ['indexeddb', 'sqlite', 'websql']
         })
     ],
     bootstrap: [IonicApp],
@@ -39,6 +47,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
         StatusBar,
         SplashScreen,
         ApiProvider,
+        AuthProvider,
         HttpProvider,
         HttpAngularProvider,
         HttpNativeProvider,
