@@ -1,14 +1,9 @@
-<div id="user-header">
-    <div class="user-header__image"></div>
+<!-- User data -->
+<user-level [user]="user" layout="compact" *ngIf="user" (click)="goToProfile(user)"></user-level>
 
-    <div class="user-header__content">
-        <div class="user-header__detail">
-            <div class="user-header__detail-name">João da Silva</div>
-            <div class="user-header__detail-level">Nível 1 (50/100)</div>
-        </div>
+<!-- Login button -->
+<div id="login-header-container" *ngIf="!user" (click)="loginModal()">
+    Você não está logado
 
-        <div class="user-header__level">
-            <div class="user-header__level-bar"></div>
-        </div>
-    </div>
+    <button ion-button color="light" outline>Entrar</button>
 </div>

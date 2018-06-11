@@ -1,4 +1,6 @@
 import { Component, Input, ElementRef, Renderer2 } from '@angular/core';
+import { Storage } from "@ionic/storage";
+import { ModalController } from "ionic-angular";
 
 @Component({
     selector: 'expandable-header',
@@ -9,8 +11,10 @@ export class ExpandableHeaderComponent {
     @Input('headerHeight') headerHeight: number;
 
     newHeaderHeight: any;
+    private user = null;
 
-    constructor(public element: ElementRef, public renderer: Renderer2) {
+    constructor(private element: ElementRef, private renderer: Renderer2, private storage: Storage,
+                private modalCtrl: ModalController) {
     }
 
     ngOnInit() {
@@ -19,8 +23,34 @@ export class ExpandableHeaderComponent {
         this.scrollArea.ionScroll.subscribe((ev) => {
             this.resizeHeader(ev);
         });
+
+        setTimeout(() => {
+            this.renderer.setStyle(this.scrollArea._elementRef.nativeElement.firstChild, 'margin-top', '90px');
+        }, 300);
     }
 
+    ngOnChanges() {
+        this.storage.get('user').then(user => this.user = user);
+    }
+
+    /**
+     * Calls the login page
+     */
+    loginModal() {
+        const modal = this.modalCtrl.create('LoginPage');
+        modal.present();
+    }
+
+    goToProfile() {
+        const modal = this.modalCtrl.create('ProfilePage', {user: this.user});
+        modal.present();
+    }
+
+    /**
+     * Animates the header on scroll
+     *
+     * @param ev
+     */
     resizeHeader(ev) {
         ev.domWrite(() => {
             this.newHeaderHeight = this.headerHeight - ev.scrollTop;
@@ -33,20 +63,19 @@ export class ExpandableHeaderComponent {
             const contentTabsRef = this.scrollArea._tabs;
             let tabHeight = this.newHeaderHeight;
             let tabRefHeight = tabHeight;
+            const tabYMargin = tabHeight - this.headerHeight;
 
             if (contentTabsRef) {
-                this.renderer.setStyle(contentTabsRef._tabbar.nativeElement, 'top', tabHeight + 'px');
+                this.renderer.setStyle(contentTabsRef._tabbar.nativeElement, 'transform', 'translate3d(0, ' + tabYMargin + 'px, 0)');
 
                 tabRefHeight = tabHeight + 56;
             }
 
             const scrollContent = tabRefHeight;
-            const fixedContent = scrollContent;
 
-            this.renderer.setStyle(this.element.nativeElement, 'height', this.newHeaderHeight + 'px');
+            this.renderer.setStyle(this.element.nativeElement, 'height', tabHeight + 'px');
             this.renderer.setStyle(contentElementRef.lastChild, 'margin-top', scrollContent + 'px');
-            this.renderer.setStyle(contentElementRef.firstChild, 'margin-top', fixedContent + 'px');
-            this.renderer.setStyle(this.element.nativeElement.children[0], 'opacity', (this.newHeaderHeight + 10) / 100);
+            this.renderer.setStyle(this.element.nativeElement.children[0], 'opacity', (tabHeight + 10) / 100);
         });
     }
 }
