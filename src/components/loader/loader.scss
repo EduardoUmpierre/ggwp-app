@@ -1,0 +1,15 @@
+loader {
+
+    > div {
+        display: flex;
+        justify-content: center;
+        padding: 2rem;
+
+        ion-spinner * {
+            width: 28px;
+            height: 28px;
+            stroke: #FFF !important;
+            fill: transparent !important;
+        }
+    }
+}

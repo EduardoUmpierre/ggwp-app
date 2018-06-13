@@ -2,16 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpandableHeaderComponent } from "./expandable-header/expandable-header";
 import { UserLevelComponent } from './user-level/user-level';
+import { IonicModule } from "ionic-angular";
+import { LoaderComponent } from './loader/loader';
 
 @NgModule({
     declarations: [
         ExpandableHeaderComponent,
-        UserLevelComponent
+        UserLevelComponent,
+        LoaderComponent
     ],
-    imports: [CommonModule],
+    imports: [
+        CommonModule,
+        IonicModule
+    ],
     exports: [
         ExpandableHeaderComponent,
-        UserLevelComponent
+        UserLevelComponent,
+        LoaderComponent
     ]
 })
 export class ComponentsModule {
