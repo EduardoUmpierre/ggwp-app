@@ -32,6 +32,15 @@ export class AuthProvider extends ApiProvider {
     }
 
     /**
+     * Removes the user key in storage
+     *
+     * @returns {Promise<any>}
+     */
+    logout() {
+        return this.storage.remove('user');
+    }
+
+    /**
      * Refresh the authorization token
      *
      * @param data
