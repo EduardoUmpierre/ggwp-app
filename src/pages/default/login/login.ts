@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { AlertController, IonicPage, NavParams, ViewController, Events } from 'ionic-angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../../providers/auth/auth";
 import { Storage } from "@ionic/storage";
@@ -13,7 +13,8 @@ export class LoginPage {
     private form: FormGroup;
 
     constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public navParams: NavParams,
-                private AuthProvider: AuthProvider, private formBuilder: FormBuilder, private storage: Storage) {
+                private AuthProvider: AuthProvider, private formBuilder: FormBuilder, private storage: Storage,
+                private events: Events) {
         this.form = this.formBuilder.group({
             username: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
@@ -38,7 +39,10 @@ export class LoginPage {
 
                 this.storage.set('token', res.access_token).then(() => {
                     this.AuthProvider.getUser().subscribe((user) => {
-                        this.storage.set('user', user).then(() => this.dismiss());
+                        this.storage.set('user', user).then(() => {
+                            this.events.publish('user:updated', true);
+                            this.dismiss();
+                        });
                     })
                 })
             })
