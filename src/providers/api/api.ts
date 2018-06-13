@@ -20,7 +20,7 @@ export class ApiProvider {
 
     constructor(private platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
                 private httpAngular: HttpAngularProvider, private httpNative: HttpNativeProvider,
-                private storage: Storage) {
+                protected storage: Storage) {
         this.http = this.isApp() ? this.httpNative : this.httpAngular;
 
         console.log('Is App:', this.isApp());
