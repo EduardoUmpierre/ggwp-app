@@ -3,7 +3,9 @@
 </ion-header>
 
 <ion-content padding #mycontent>
-    <ion-list>
+    <loader [loading]="loaded"></loader>
+
+    <ion-list *ngIf="categories && loaded">
         <ion-item *ngFor="let category of categories" class="list__container">
             <div class="list__header">
                 <span>{{ category.name }}</span>

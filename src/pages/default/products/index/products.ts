@@ -10,6 +10,7 @@ import { ApiProvider } from "../../../../providers/api/api";
 export class ProductsPage {
     private categories = [];
     private modal;
+    private loaded: boolean = false;
 
     constructor(private apiProvider: ApiProvider, private modalCtrl: ModalController) {
     }
@@ -18,7 +19,12 @@ export class ProductsPage {
      * Loads the products list on page load
      */
     ionViewDidLoad() {
-        this.apiProvider.builder('products').loader().get().subscribe(res => this.categories = res);
+        this.loaded = false;
+
+        this.apiProvider.builder('products').get().subscribe(res => {
+            this.categories = res;
+            this.loaded = true;
+        });
     }
 
     /**
