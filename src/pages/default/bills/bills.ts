@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController } from 'ionic-angular';
 import { ApiProvider } from "../../../providers/api/api";
 import { Storage } from "@ionic/storage";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @IonicPage()
 @Component({
@@ -9,7 +10,7 @@ import { Storage } from "@ionic/storage";
     templateUrl: 'bills.html',
 })
 export class BillsPage {
-    private bill = {};
+    private bill = null;
     private loaded: boolean = false;
     private modal;
 
@@ -17,20 +18,27 @@ export class BillsPage {
     }
 
     /**
-     * @todo Add logged user id
+     * Loads the bill data
      */
     ionViewWillEnter() {
+        this.loaded = false;
+
         this.storage.get('user').then(res => {
             if (!res) {
                 this.bill = null;
                 this.loaded = true;
             } else {
                 this.apiProvider.builder('bills/' + res.id, false).get().subscribe(res => {
-                    this.bill = res;
+                    if (res instanceof HttpErrorResponse) {
+                        this.bill = null;
+                    } else {
+                        this.bill = res;
+                    }
+
                     this.loaded = true;
                 });
             }
-        })
+        });
     }
 
     /**

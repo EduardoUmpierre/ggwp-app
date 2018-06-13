@@ -3,6 +3,8 @@
 </ion-header>
 
 <ion-content padding #mycontent>
+    <loader [loading]="loaded"></loader>
+
     <ion-list class="list__content" *ngIf="bill && loaded">
         <ion-item *ngFor="let item of bill.products" (click)="showModal(item.id)" text-wrap>
             <div class="list__content-title">{{ item.name }}</div>
@@ -24,7 +26,7 @@
     </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="bill && loaded">
+<ion-footer *ngIf="bill && bill.products && loaded">
     <ion-toolbar>
         <ion-title>
             <ion-grid>
