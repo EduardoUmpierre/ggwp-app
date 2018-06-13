@@ -1,7 +1,7 @@
 /**
  * Main menu
  */
-#main-menu {
+.menu {
 
     ion-list {
         margin-bottom: 0;
@@ -14,10 +14,31 @@
             padding-right: 1.6rem;
 
             > .item-inner {
-                border-bottom: 1px dashed #FFF;
+                border-bottom: 1px dashed #FFF !important;
 
                 ion-label {
-                    overflow: initial;
+                    overflow: initial !important;
+                }
+            }
+        }
+    }
+
+    &#main-menu {
+
+        ion-list {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            > button {
+
+                &:last-child {
+                    margin-top: auto;
+
+                    > .item-inner {
+                        border-bottom: none !important;
+                        border-top: 1px dashed #FFF !important;
+                    }
                 }
             }
         }

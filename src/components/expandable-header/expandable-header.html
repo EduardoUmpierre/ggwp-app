@@ -1,9 +1,15 @@
-<!-- User data -->
-<user-level [user]="user" layout="compact" *ngIf="user" (click)="goToProfile(user)"></user-level>
+<div id="header-container">
+    <button ion-button menuToggle icon-only>
+        <ion-icon name="menu"></ion-icon>
+    </button>
 
-<!-- Login button -->
-<div id="login-header-container" *ngIf="!user" (click)="loginModal()">
-    Você não está logado
+    <!-- User data -->
+    <user-level [user]="user" layout="compact" *ngIf="user" (click)="goToProfile(user)"></user-level>
 
-    <button ion-button color="light" outline>Entrar</button>
+    <!-- Login button -->
+    <div id="login-header-container" *ngIf="!user" (click)="loginModal()">
+        Você não está logado
+
+        <button ion-button color="light" outline>Entrar</button>
+    </div>
 </div>

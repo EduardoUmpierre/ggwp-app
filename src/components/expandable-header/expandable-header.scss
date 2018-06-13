@@ -1,18 +1,52 @@
 expandable-header {
-    display: block;
     background-color: map-get($colors, primary);
     overflow: hidden;
 
-    #login-header-container {
-        align-items: center;
-        color: #FFF;
-        display: flex;
-        height: 100%;
-        justify-content: space-around;
+    &,
+    > #header-container {
+        height: 90px;
+    }
 
-        > button {
-            font-style: italic;
-            padding: 1rem 2rem;
+    > #header-container {
+        align-items: center;
+        display: flex;
+
+        > .bar-buttons-md {
+            box-shadow: none;
+            margin: 0;
+            min-width: initial !important;
+            order: 0;
+            padding: 0 1.5rem;
+
+            ion-icon {
+                padding: 0;
+            }
+        }
+
+        > user-level,
+        > #login-header-container {
+            flex-grow: 1;
+        }
+
+        > #login-header-container {
+            align-items: center;
+            color: #FFF;
+            display: flex;
+            height: 100%;
+            justify-content: space-between;
+            padding: 2rem 2rem 2rem 1rem;
+
+            > button {
+                background-color: #FFF;
+                border-radius: 0;
+                color: #000;
+                font-size: 1.4rem;
+                font-style: italic;
+                font-weight: 400;
+                margin: 0 0 0 1rem;
+                padding: 1rem 2rem;
+                text-transform: none;
+            }
         }
     }
 }
