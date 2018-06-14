@@ -31,7 +31,8 @@ import { ComponentsModule } from "../components/components.module";
         SelectSearchableModule,
         ComponentsModule,
         IonicModule.forRoot(MyApp, {
-            tabsPlacement: 'top'
+            tabsPlacement: 'top',
+            tabsHideOnSubPages: false
         }),
         IonicStorageModule.forRoot({
             name: '__mydb',

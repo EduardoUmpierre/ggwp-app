@@ -21,21 +21,21 @@ export class ExpandableHeaderComponent {
     }
 
     ngOnInit() {
-        this.renderer.setStyle(this.element.nativeElement, 'height', this.headerHeight + 'px');
-
-        this.scrollArea.ionScroll.subscribe((ev) => {
-            this.resizeHeader(ev);
-        });
+        // this.renderer.setStyle(this.element.nativeElement, 'height', this.headerHeight + 'px');
+        //
+        // this.scrollArea.ionScroll.subscribe((ev) => {
+        //     this.resizeHeader(ev);
+        // });
     }
 
     ngOnChanges() {
         this.updateUserData();
     }
 
-    ionViewWillLeave() {
-        this.events.unsubscribe('user:updated');
-        console.log('unsubcribed');
-    }
+    // ionViewWillLeave() {
+    //     this.events.unsubscribe('user:updated');
+    //     console.log('unsubcribed');
+    // }
 
     /**
      * Updates the user data from local storage
@@ -56,7 +56,7 @@ export class ExpandableHeaderComponent {
      * Calls the profile page
      */
     goToProfile() {
-        const modal = this.modalCtrl.create('ProfilePage', {user: this.user});
+        const modal = this.modalCtrl.create('ProfilePage');
         modal.present();
     }
 
@@ -91,8 +91,6 @@ export class ExpandableHeaderComponent {
                 this.renderer.setStyle(contentElementRef.lastChild, 'margin-top', scrollContent + 'px');
                 this.renderer.setStyle(document.querySelector('#user-header.compact'), 'opacity', this.map(this.newHeaderHeight, 30, 90, 0, 100)/100);
                 // this.element.nativeElement.children[0]
-
-                console.log(this.map(this.newHeaderHeight, 30, 90, 0, 100)/100);
             }
         });
     }

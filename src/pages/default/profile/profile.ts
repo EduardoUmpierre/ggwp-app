@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, ViewController } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -9,13 +10,19 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 export class ProfilePage {
     private user;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {
+    constructor(private storage: Storage, private viewCtrl: ViewController) {
     }
 
-    ionViewDidLoad() {
-        this.user = this.navParams.get('user');
+    /**
+     * Loads the user data
+     */
+    ionViewWillEnter() {
+        this.storage.get('user').then((user) => this.user = user);
     }
 
+    /**
+     * Dismiss the modal
+     */
     dismiss() {
         this.viewCtrl.dismiss();
     }

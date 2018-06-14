@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Events, MenuController, ModalController, Nav, Platform } from 'ionic-angular';
+import { App, Events, MenuController, ModalController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,13 +17,11 @@ export class MyApp {
 
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = TabsPage;
-
-    // rootPage: any = 'ManagerProductsListPage';
+    rootPage: any;
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private events: Events,
                 private storage: Storage, private menu: MenuController, private authProvider: AuthProvider,
-                private modalCtrl: ModalController) {
+                private modalCtrl: ModalController, private appCtrl: App) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -43,6 +41,15 @@ export class MyApp {
      */
     openPage(page) {
         this.nav.setRoot(page);
+
+        // this.appCtrl.getRootNav().setRoo;
+    }
+
+    /**
+     * @param index
+     */
+    openTabPage(index) {
+        this.nav.push(TabsPage, {index: index});
     }
 
     /**
@@ -55,12 +62,17 @@ export class MyApp {
             this.disabledMenu = 'manager-menu';
 
             if (user) {
-                this.user = true;
+                this.user = user;
 
-                if (user.role && user.role > 1) {
+                if (user.role && user.role >= 1) {
                     this.enabledMenu = 'manager-menu';
                     this.disabledMenu = 'main-menu';
+                    this.rootPage = 'ManagerProductsListPage';
+                } else {
+                    this.rootPage = TabsPage;
                 }
+            } else {
+                this.rootPage = TabsPage;
             }
 
             this.menu.enable(true, this.enabledMenu);
@@ -78,6 +90,7 @@ export class MyApp {
         this.authProvider.loader('Saindo').logout().then(() => {
             this.authProvider.hideLoader();
             this.events.publish('user:updated', true);
+            this.rootPage = TabsPage;
         });
     }
 
@@ -86,6 +99,14 @@ export class MyApp {
      */
     login() {
         const modal = this.modalCtrl.create('LoginPage');
+        modal.present();
+    }
+
+    /**
+     * Calls the profile page
+     */
+    profile() {
+        const modal = this.modalCtrl.create('ProfilePage');
         modal.present();
     }
 }

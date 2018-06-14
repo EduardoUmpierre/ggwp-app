@@ -1,4 +1,4 @@
-<ion-menu [content]="content" class="menu" id="manager-menu">
+<ion-menu [content]="content" class="menu" id="manager-menu" *ngIf="user && user.role >= 1">
     <ion-header>
         <ion-toolbar>
             <ion-title>Menu</ion-title>
@@ -38,9 +38,11 @@
                 <ion-icon name="podium"></ion-icon>
                 Ranking
             </button>
-            <!--<button ion-item menuClose>-->
-                <!--Close Menu-->
-            <!--</button>-->
+
+            <button ion-item menuClose icon-start (click)="logout()">
+                <ion-icon name="power"></ion-icon>
+                Sair
+            </button>
         </ion-list>
     </ion-content>
 </ion-menu>
@@ -53,27 +55,27 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button ion-item menuClose icon-start (click)="openPage('ManagerProductsListPage')">
+            <button ion-item menuClose icon-start (click)="profile()" *ngIf="user">
                 <ion-icon name="contact"></ion-icon>
                 Perfil
             </button>
-            <button ion-item menuClose icon-start (click)="openPage('ManagerProductsListPage')">
+            <button ion-item menuClose icon-start (click)="openTabPage(0)">
                 <ion-icon name="beer"></ion-icon>
                 Cardápio
             </button>
-            <button ion-item menuClose icon-start (click)="openPage('ManagerBillsListPage')">
+            <button ion-item menuClose icon-start (click)="openTabPage(1)">
                 <ion-icon name="paper"></ion-icon>
                 Comanda
             </button>
-            <button ion-item menuClose icon-start (click)="openPage(newBill)">
+            <button ion-item menuClose icon-start (click)="openTabPage(2)">
                 <ion-icon name="calendar"></ion-icon>
                 Agenda
             </button>
-            <button ion-item menuClose icon-start (click)="openPage(newBill)">
+            <button ion-item menuClose icon-start (click)="openTabPage(3)">
                 <ion-icon name="musical-notes"></ion-icon>
                 Ambiente
             </button>
-            <button ion-item menuClose icon-start (click)="openPage(newBill)">
+            <button ion-item menuClose icon-start (click)="openTabPage(3)">
                 <ion-icon name="podium"></ion-icon>
                 Ranking
             </button>
