@@ -4,6 +4,9 @@
 .menu {
 
     ion-list {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         margin-bottom: 0;
 
         > button {
@@ -20,25 +23,13 @@
                     overflow: initial !important;
                 }
             }
-        }
-    }
 
-    &#main-menu {
+            &:last-child {
+                margin-top: auto;
 
-        ion-list {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-
-            > button {
-
-                &:last-child {
-                    margin-top: auto;
-
-                    > .item-inner {
-                        border-bottom: none !important;
-                        border-top: 1px dashed #FFF !important;
-                    }
+                > .item-inner {
+                    border-bottom: none !important;
+                    border-top: 1px dashed #FFF !important;
                 }
             }
         }
