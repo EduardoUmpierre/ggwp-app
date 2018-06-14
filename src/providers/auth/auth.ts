@@ -37,7 +37,7 @@ export class AuthProvider extends ApiProvider {
      * @returns {Promise<any>}
      */
     logout() {
-        return this.storage.remove('user');
+        return this.storage.remove('user').then(() => this.storage.remove('token'));
     }
 
     /**
