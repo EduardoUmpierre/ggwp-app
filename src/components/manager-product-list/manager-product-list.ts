@@ -6,16 +6,19 @@ import { ActionSheetController, AlertController, NavController } from "ionic-ang
     templateUrl: 'manager-product-list.html'
 })
 export class ManagerProductListComponent {
-    @Input('products') products: any;
+    @Input('products') products: any = [];
     @Input('layout') layout: string;
-
-    private layoutClass: string = '';
+    @Input('emptyMessage') emptyMessage: string;
 
     constructor(private navCtrl: NavController, private actionSheetCtrl: ActionSheetController,
                 private alertCtrl: AlertController) {
-        if (this.layout == 'small') {
-            this.layoutClass = 'list__content-small';
+        if (!this.emptyMessage) {
+            this.emptyMessage = 'Nenhum produto encontrado';
         }
+    }
+
+    ngOnChanges() {
+        console.log('change', this.products);
     }
 
     /**

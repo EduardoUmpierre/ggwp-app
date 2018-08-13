@@ -76,6 +76,12 @@ ion-list {
                 font-weight: 600;
                 line-height: 1.2;
                 text-transform: uppercase;
+
+                > .list__content-title__note {
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                    text-transform: none;
+                }
             }
 
             .list__content-description {
@@ -134,6 +140,21 @@ ion-list {
                         font-size: 1.4rem;
                     }
                 }
+            }
+        }
+    }
+}
+
+// Manager list
+#manager-menu.menu-enabled ~ ion-nav {
+
+    ion-list {
+
+        // List container
+        > .list__container {
+
+            &:first-child {
+                margin-top: 0;
             }
         }
     }

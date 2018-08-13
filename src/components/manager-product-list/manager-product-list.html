@@ -1,7 +1,18 @@
-<ion-list class="list__content list__content-manager" ngClass="layoutClass" *ngIf="products">
+<ion-list class="list__content list__content-manager" [ngClass]="layout == 'small' ? 'list__content-small' : ''"
+          *ngIf="products">
     <ion-item *ngFor="let product of products; let i = index" (click)="click(product.id, i)" text-wrap>
-        <div class="list__content-title">{{ product.name }}</div>
-        <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
+        <div class="list__content-title">
+            {{ product.name }}
+
+            <div class="list__content-title__note" *ngIf="product.note">
+                {{ product.note }}
+            </div>
+        </div>
+
+        <div class="list__content-side" item-end>
+            {{ product.price | currency:'BRL':'R$' }}
+        </div>
+
         <div class="list__content-side" item-end *ngIf="layout == 'small'">
             <small>X</small>
             {{ product.quantity }}
@@ -13,6 +24,6 @@
     </ion-item>
 
     <ion-item *ngIf="products.length == 0">
-        <div class="list__content-description">Nenhum produto encontrado</div>
+        <div class="list__content-description">{{ emptyMessage }}</div>
     </ion-item>
 </ion-list>

@@ -2,6 +2,7 @@
 .detail-container {
     color: #FFF;
 
+    > ion-grid,
     > .detail-container__group {
         margin-bottom: 2rem;
     }
