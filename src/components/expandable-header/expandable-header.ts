@@ -65,39 +65,39 @@ export class ExpandableHeaderComponent {
      *
      * @param ev
      */
-    resizeHeader(ev) {
-        ev.domWrite(() => {
-            this.newHeaderHeight = this.headerHeight - Math.floor(ev.scrollTop * 0.5);
-
-            if (this.newHeaderHeight < 0) {
-                this.newHeaderHeight = 0;
-            }
-
-            if (this.newHeaderHeight > 0) {
-                const contentElementRef = this.scrollArea._elementRef.nativeElement;
-                const contentTabsRef = this.scrollArea._tabs;
-                let tabRefHeight = this.newHeaderHeight;
-                const tabYMargin = this.newHeaderHeight - this.headerHeight;
-
-                if (contentTabsRef) {
-                    this.renderer.setStyle(contentTabsRef._tabbar.nativeElement, 'transform', 'translate3d(0, ' + tabYMargin + 'px, 0)');
-
-                    tabRefHeight = this.newHeaderHeight + 56;
-                }
-
-                const scrollContent = tabRefHeight;
-
-                // this.renderer.setStyle(this.element.nativeElement, 'height', tabHeight + 'px');
-                this.renderer.setStyle(contentElementRef.lastChild, 'margin-top', scrollContent + 'px');
-                this.renderer.setStyle(document.querySelector('#user-header.compact'), 'opacity', this.map(this.newHeaderHeight, 30, 90, 0, 100)/100);
-                // this.element.nativeElement.children[0]
-            }
-        });
-    }
-
-    private map(num, in_min, in_max, out_min, out_max) {
-        let result = (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-
-        return result < 0 ? 0 : result;
-    }
+    // resizeHeader(ev) {
+    //     ev.domWrite(() => {
+    //         this.newHeaderHeight = this.headerHeight - Math.floor(ev.scrollTop * 0.5);
+    //
+    //         if (this.newHeaderHeight < 0) {
+    //             this.newHeaderHeight = 0;
+    //         }
+    //
+    //         if (this.newHeaderHeight > 0) {
+    //             const contentElementRef = this.scrollArea._elementRef.nativeElement;
+    //             const contentTabsRef = this.scrollArea._tabs;
+    //             let tabRefHeight = this.newHeaderHeight;
+    //             const tabYMargin = this.newHeaderHeight - this.headerHeight;
+    //
+    //             if (contentTabsRef) {
+    //                 this.renderer.setStyle(contentTabsRef._tabbar.nativeElement, 'transform', 'translate3d(0, ' + tabYMargin + 'px, 0)');
+    //
+    //                 tabRefHeight = this.newHeaderHeight + 56;
+    //             }
+    //
+    //             const scrollContent = tabRefHeight;
+    //
+    //             // this.renderer.setStyle(this.element.nativeElement, 'height', tabHeight + 'px');
+    //             this.renderer.setStyle(contentElementRef.lastChild, 'margin-top', scrollContent + 'px');
+    //             this.renderer.setStyle(document.querySelector('#user-header.compact'), 'opacity', this.map(this.newHeaderHeight, 30, 90, 0, 100)/100);
+    //             // this.element.nativeElement.children[0]
+    //         }
+    //     });
+    // }
+    //
+    // private map(num, in_min, in_max, out_min, out_max) {
+    //     let result = (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    //
+    //     return result < 0 ? 0 : result;
+    // }
 }

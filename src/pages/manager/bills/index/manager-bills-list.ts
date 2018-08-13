@@ -9,6 +9,7 @@ import { ApiProvider } from "../../../../providers/api/api";
 })
 export class ManagerBillsListPage {
     private bills = [];
+    private filteredItems = [];
     private loaded: boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private apiProvider: ApiProvider) {
@@ -20,8 +21,22 @@ export class ManagerBillsListPage {
     ionViewWillEnter() {
         this.apiProvider.builder('bills').loader().get().subscribe(res => {
             this.bills = res;
+            this.filteredItems = res;
             this.loaded = true;
         });
+    }
+
+    /**
+     * @param ev
+     * @returns {any[]}
+     */
+    filterItems(ev: any) {
+        let val = ev.target.value;
+        this.filteredItems = this.bills;
+
+        if (val && val.trim() !== '') {
+            this.filteredItems = this.filteredItems.filter((item) => item.number.toString().indexOf(val) > -1);
+        }
     }
 
     /**

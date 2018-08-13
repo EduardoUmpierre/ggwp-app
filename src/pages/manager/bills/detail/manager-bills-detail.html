@@ -17,36 +17,40 @@
 </ion-header>
 
 <ion-content padding>
-    <div class="detail-container" *ngIf="bill">
-        <ion-grid>
-            <ion-row>
-                <ion-col col-8>
-                    <div class="detail-container__group">
-                        <div class="detail-container__label">Cliente</div>
-                        <div class="detail-container__text">{{ bill.user.name }}</div>
-                    </div>
-                </ion-col>
+    <div class="container" *ngIf="bill">
+        <div class="detail-container">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-8>
+                        <div class="detail-container__group">
+                            <div class="detail-container__label">Cliente</div>
+                            <div class="detail-container__text">{{ bill.user.name }}</div>
+                        </div>
+                    </ion-col>
 
-                <ion-col col-4>
-                    <div class="detail-container__group">
-                        <div class="detail-container__label">Cartão</div>
-                        <div class="detail-container__text">#{{ bill.card.number }}</div>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+                    <ion-col col-4>
+                        <div class="detail-container__group">
+                            <div class="detail-container__label">Cartão</div>
+                            <div class="detail-container__text">#{{ bill.card.number }}</div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
 
-        <div class="detail-container__group">
-            <ion-list>
-                <ion-item class="list__container">
-                    <div class="list__header">
-                        <span>Produtos</span>
-                    </div>
+            <div class="detail-container__group">
+                <ion-list>
+                    <ion-item class="list__container">
+                        <div class="list__header">
+                            <span>Produtos</span>
+                        </div>
 
-                    <manager-product-list [products]="bill.products" layout="small"></manager-product-list>
-                </ion-item>
-            </ion-list>
+                        <manager-product-list [products]="bill.products" layout="small"></manager-product-list>
+                    </ion-item>
+                </ion-list>
+            </div>
         </div>
+
+        <button ion-button color="danger" block>Fechar comanda</button>
     </div>
 </ion-content>
 

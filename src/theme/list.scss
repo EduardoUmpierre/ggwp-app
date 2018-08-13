@@ -145,6 +145,15 @@ ion-list {
     }
 }
 
+// Styles
+.list-md .item-block .item-inner {
+    border-bottom: 1px dashed #FFF;
+}
+
+.list-md .item-input:last-child {
+    border-bottom: none;
+}
+
 // Manager list
 #manager-menu.menu-enabled ~ ion-nav {
 
@@ -158,4 +167,9 @@ ion-list {
             }
         }
     }
+}
+
+// Searchbar
+ion-searchbar {
+    padding: 0 0 1.5rem !important;
 }

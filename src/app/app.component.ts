@@ -41,8 +41,6 @@ export class MyApp {
      */
     openPage(page) {
         this.nav.setRoot(page);
-
-        // this.appCtrl.getRootNav().setRoo;
     }
 
     /**
@@ -77,9 +75,6 @@ export class MyApp {
 
             this.menu.enable(true, this.enabledMenu);
             this.menu.enable(false, this.disabledMenu);
-
-            console.log('Menu ativado', this.enabledMenu);
-            console.log('Menu desativado', this.disabledMenu);
         })
     }
 

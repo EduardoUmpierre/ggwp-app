@@ -17,10 +17,6 @@ export class ManagerProductListComponent {
         }
     }
 
-    ngOnChanges() {
-        console.log('change', this.products);
-    }
-
     /**
      * @param {number} id
      * @param {number} key
