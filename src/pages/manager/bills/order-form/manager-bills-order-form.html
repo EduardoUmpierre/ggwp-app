@@ -1,6 +1,15 @@
 <ion-header>
     <ion-navbar>
         <ion-title>Novo pedido</ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-start (click)="goToProductForm()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+            <button ion-button icon-only [disabled]="products.length == 0" (click)="submit()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -13,7 +22,8 @@
                         <span>Produtos</span>
                     </div>
 
-                    <manager-product-list [products]="products" layout="small"></manager-product-list>
+                    <manager-product-list [products]="products" layout="small"
+                                          emptyMessage="Nenhum produto adicionado"></manager-product-list>
                 </ion-item>
             </ion-list>
         </div>
