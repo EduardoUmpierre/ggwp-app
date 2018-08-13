@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Novo pedido</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="detail-container">
+        <div class="detail-container__group">
+            <ion-list>
+                <ion-item class="list__container">
+                    <div class="list__header">
+                        <span>Produtos</span>
+                    </div>
+
+                    <manager-product-list [products]="products" layout="small"></manager-product-list>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons>
+            <button ion-button icon-start (click)="goToProductForm()">
+                <ion-icon name="add"></ion-icon>
+                Adicionar produto
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

@@ -4,12 +4,14 @@ import { ExpandableHeaderComponent } from "./expandable-header/expandable-header
 import { UserLevelComponent } from './user-level/user-level';
 import { IonicModule } from "ionic-angular";
 import { LoaderComponent } from './loader/loader';
+import { ManagerProductListComponent } from './manager-product-list/manager-product-list';
 
 @NgModule({
     declarations: [
         ExpandableHeaderComponent,
         UserLevelComponent,
-        LoaderComponent
+        LoaderComponent,
+        ManagerProductListComponent
     ],
     imports: [
         CommonModule,
@@ -18,7 +20,8 @@ import { LoaderComponent } from './loader/loader';
     exports: [
         ExpandableHeaderComponent,
         UserLevelComponent,
-        LoaderComponent
+        LoaderComponent,
+        ManagerProductListComponent
     ]
 })
 export class ComponentsModule {

@@ -15,14 +15,5 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list class="list__content list__content-manager">
-        <ion-item *ngFor="let product of products" (click)="goToForm(product.id)">
-            <div class="list__content-title">{{ product.name }}</div>
-            <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
-        </ion-item>
-
-        <ion-item *ngIf="products.length == 0 && loaded">
-            <div class="list__content-description">Nenhum produto encontrado</div>
-        </ion-item>
-    </ion-list>
+    <manager-product-list [products]="products"></manager-product-list>
 </ion-content>

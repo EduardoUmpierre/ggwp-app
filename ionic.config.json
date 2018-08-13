@@ -1,8 +1,8 @@
 {
   "name": "ggwp-app",
-  "app_id": "b23669e9",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "pro_id": "b23669e9"
 }

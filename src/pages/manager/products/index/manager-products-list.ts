@@ -23,13 +23,4 @@ export class ManagerProductsListPage {
             this.loaded = true;
         });
     }
-
-    /**
-     * Push to the form page
-     *
-     * @param {number} id
-     */
-    goToForm(id: number = null) {
-        this.navCtrl.push('ManagerProductsFormPage', {id: id});
-    }
 }

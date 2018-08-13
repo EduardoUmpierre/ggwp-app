@@ -6,7 +6,6 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import { HttpNativeProvider } from "./http/http-native";
 import { HttpAngularProvider } from "./http/http-angular";
-import { HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Storage } from "@ionic/storage";
 
@@ -54,6 +53,8 @@ export class ApiProvider {
      * @returns {ApiProvider}
      */
     loader(message: string = 'Carregando') {
+        this.hideLoader();
+
         this.loading = this.loadingCtrl.create({
             content: message
         });
@@ -220,6 +221,6 @@ export class ApiProvider {
      * @returns {boolean}
      */
     public isApp() {
-        return this.platform.is('core') || this.platform.is('cordova');
+        return this.platform.is('cordova');
     }
 }

@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-    ActionSheetController, AlertController, IonicPage, ModalController, NavController,
-    NavParams
-} from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from "../../../../providers/api/api";
 
 @IonicPage()
@@ -17,8 +14,7 @@ export class ManagerBillsDetailPage {
     private loaded;
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private apiProvider: ApiProvider,
-                private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController,
-                private modalCtrl: ModalController) {
+                private alertCtrl: AlertController) {
         this.id = this.navParams.get('id');
     }
 
@@ -49,6 +45,13 @@ export class ManagerBillsDetailPage {
     }
 
     /**
+     * @param {number} id
+     */
+    goToOrderForm(id: number) {
+        this.navCtrl.push('ManagerBillsOrderFormPage', {id: id});
+    }
+
+    /**
      *
      * @param {number} id
      */
@@ -75,68 +78,5 @@ export class ManagerBillsDetailPage {
         });
 
         confirm.present();
-    }
-
-    /**
-     *
-     * @param {number} id
-     * @param {number} key
-     */
-    showOptions(id: number, key: number) {
-        let actionSheet = this.actionSheetCtrl.create({
-            title: 'Opções',
-            buttons: [
-                {
-                    text: 'Editar',
-                    handler: () => {
-                        // let productModal = this.modalCtrl.create(OrderProductModalPage, {product: this.order[key]});
-                        //
-                        // productModal.onDidDismiss(data => {
-                        //     if (data instanceof Product) {
-                        //         this.order[key] = data;
-                        //         this.updateTotal();
-                        //     }
-                        // });
-                        //
-                        // productModal.present();
-                    }
-                },
-                {
-                    text: 'Remover',
-                    role: 'destructive',
-                    handler: () => {
-                        let alert = this.alertCtrl.create({
-                            title: 'Confirmar exclusão',
-                            message: 'Deseja remover esse produto da comanda?',
-                            buttons: [
-                                {
-                                    text: 'Não',
-                                    role: 'cancel'
-                                },
-                                {
-                                    text: 'Sim',
-                                    handler: () => {
-                                        this.removeProduct(id);
-                                    }
-                                }
-                            ]
-                        });
-
-                        alert.present();
-                    }
-                },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel'
-                }
-            ]
-        });
-
-        actionSheet.present();
-    }
-
-    //
-    removeProduct(id: number) {
-
     }
 }

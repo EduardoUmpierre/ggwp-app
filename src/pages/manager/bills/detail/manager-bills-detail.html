@@ -9,6 +9,9 @@
             <button ion-button icon-only (click)="goToForm(bill.id)">
                 <ion-icon name="create"></ion-icon>
             </button>
+            <button ion-button icon-only (click)="goToOrderForm(bill.id)">
+                <ion-icon name="add"></ion-icon>
+            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -40,25 +43,7 @@
                         <span>Produtos</span>
                     </div>
 
-                    <ion-list class="list__content list__content-small list__content-manager">
-                        <ion-item *ngFor="let product of bill.products; let i = index" text-wrap
-                                  (click)="showOptions(product.id, i)">
-                            <div class="list__content-title">{{ product.name }}</div>
-                            <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
-                            <div class="list__content-side" item-end>
-                                <small>X</small>
-                                {{ product.quantity }}
-                            </div>
-
-                            <button ion-button type="button" clear item-end icon-only class="options-button">
-                                <ion-icon name="more"></ion-icon>
-                            </button>
-                        </ion-item>
-
-                        <ion-item *ngIf="bill.products.length == 0 && loaded">
-                            <div class="list__content-description">Nenhum produto adicionado</div>
-                        </ion-item>
-                    </ion-list>
+                    <manager-product-list [products]="bill.products" layout="small"></manager-product-list>
                 </ion-item>
             </ion-list>
         </div>
