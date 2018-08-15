@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActionSheetController, AlertController, NavController } from "ionic-angular";
 
 @Component({
@@ -9,6 +9,9 @@ export class ManagerProductListComponent {
     @Input('products') products: any = [];
     @Input('layout') layout: string;
     @Input('emptyMessage') emptyMessage: string;
+    @Input('options') options: boolean = true;
+
+    @Output() onRemove: EventEmitter<any> = new EventEmitter();
 
     constructor(private navCtrl: NavController, private actionSheetCtrl: ActionSheetController,
                 private alertCtrl: AlertController) {
@@ -21,25 +24,15 @@ export class ManagerProductListComponent {
      * @param {number} id
      * @param {number} key
      */
-    click(id: number, key?: number) {
-        if (this.layout) {
+    click(id: number, key: number) {
+        if (this.options) {
             this.showOptions(id, key);
         } else {
-            this.goToForm(id);
+            this.navCtrl.push('ManagerProductsFormPage', {id: id})
         }
     }
 
     /**
-     * Push to the form page
-     *
-     * @param {number} id
-     */
-    private goToForm(id: number = null) {
-        this.navCtrl.push('ManagerProductsFormPage', {id: id});
-    }
-
-    /**
-     *
      * @param {number} id
      * @param {number} key
      */
@@ -50,16 +43,7 @@ export class ManagerProductListComponent {
                 {
                     text: 'Editar',
                     handler: () => {
-                        // let productModal = this.modalCtrl.create(OrderProductModalPage, {product: this.order[key]});
-                        //
-                        // productModal.onDidDismiss(data => {
-                        //     if (data instanceof Product) {
-                        //         this.order[key] = data;
-                        //         this.updateTotal();
-                        //     }
-                        // });
-                        //
-                        // productModal.present();
+                        this.navCtrl.push('ManagerProductsFormPage', {id: id})
                     }
                 },
                 {
@@ -68,7 +52,7 @@ export class ManagerProductListComponent {
                     handler: () => {
                         let alert = this.alertCtrl.create({
                             title: 'Confirmar exclusão',
-                            message: 'Deseja remover esse produto da comanda?',
+                            message: 'Deseja remover este produto?',
                             buttons: [
                                 {
                                     text: 'Não',
@@ -77,7 +61,7 @@ export class ManagerProductListComponent {
                                 {
                                     text: 'Sim',
                                     handler: () => {
-                                        this.removeProduct(id);
+                                        this.onRemove.emit([id, key]);
                                     }
                                 }
                             ]
@@ -94,12 +78,5 @@ export class ManagerProductListComponent {
         });
 
         actionSheet.present();
-    }
-
-    /**
-     * @param {number} id
-     */
-    private removeProduct(id: number) {
-
     }
 }

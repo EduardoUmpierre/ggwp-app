@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from "../../../../providers/api/api";
-import { Product } from "../../../../models/Product";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Ingredient } from "../../../../models/Ingredient";
+import { Product } from "../../../../models/Product";
+import { DecimalPipe } from "@angular/common";
 
 @IonicPage()
 @Component({
@@ -15,9 +17,11 @@ export class ManagerProductsFormPage {
     private product: Product;
     private categories = [];
     private ingredients = [];
+    private selectedIngredients = [];
     private form: FormGroup;
 
-    constructor(private viewCtrl: ViewController, public navParams: NavParams, private apiProvider: ApiProvider, private formBuilder: FormBuilder) {
+    constructor(private navCtrl: NavController, private navParams: NavParams, private apiProvider: ApiProvider,
+                private formBuilder: FormBuilder, private decimalPipe: DecimalPipe) {
         this.id = this.navParams.get('id');
 
         if (this.id) {
@@ -27,7 +31,7 @@ export class ManagerProductsFormPage {
         this.form = this.formBuilder.group({
             name: new FormControl('', Validators.required),
             price: new FormControl('', Validators.required),
-            experience: new FormControl('', Validators.required),
+            experience: new FormControl(0, Validators.required),
             categories_id: new FormControl('', Validators.required)
         });
     }
@@ -39,27 +43,65 @@ export class ManagerProductsFormPage {
         this.apiProvider.builder('categories').loader().get().subscribe(categories => {
             this.categories = categories;
 
-            if (this.id) {
-                this.apiProvider.builder('products/' + this.id).loader().get().subscribe(product => this.product = product);
-            }
+            this.apiProvider.builder('ingredients').loader().get().subscribe(ingredients => {
+                this.ingredients = ingredients;
+
+                if (this.id) {
+                    this.apiProvider.builder('products/' + this.id).loader().get().subscribe(product => {
+                        console.log(product);
+
+                        this.form.controls['name'].setValue(product.name);
+                        this.form.controls['price'].setValue(this.decimalPipe.transform(product.price, '1.2-2', 'pt-BR'));
+                        this.form.controls['experience'].setValue(product.experience);
+                        this.form.controls['categories_id'].setValue(product.categories_id);
+
+                        let ingredients = product.ingredients;
+
+                        ingredients.forEach((e, i) => {
+                            ingredients[i] = e.id;
+                        });
+
+                        this.selectedIngredients = ingredients;
+                    });
+                }
+            });
         });
     }
 
     /**
-     * Dismiss the modal
+     * Submits the form data to server
      */
-    dismiss() {
-        this.viewCtrl.dismiss();
+    submit() {
+        const ingredients = {
+            ingredients: this.selectedIngredients
+        };
+
+        let data = Object.assign({}, this.form.value, ingredients);
+
+        if (this.id) {
+            data = Object.assign(data, {id: this.id});
+
+            this.apiProvider.builder('products/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+        } else {
+            this.apiProvider.builder('products').loader().post(data).subscribe((res) => this.dismiss());
+        }
     }
 
     /**
+     * Update experience value according to price
      *
+     * @param ev
      */
-    submit() {
-        if (this.id) {
-            this.apiProvider.builder('produtcts/' + this.id).loader().put(Object.assign({}, {id: this.id}, this.form.value)).subscribe((res) => this.dismiss());
-        } else {
-            this.apiProvider.builder('produtcts').loader().post(this.form.value).subscribe((res) => this.dismiss());
-        }
+    updateExperience(ev: any) {
+        const value = Math.ceil(ev.target.value.replace(/,/g, '.') * 0.75);
+
+        this.form.controls['experience'].setValue(value);
+    }
+
+    /**
+     * Dismiss the current page
+     */
+    private dismiss() {
+        this.navCtrl.pop();
     }
 }

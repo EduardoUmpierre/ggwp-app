@@ -15,5 +15,7 @@
 </ion-header>
 
 <ion-content padding>
-    <manager-product-list [products]="products"></manager-product-list>
+    <ion-searchbar (ionInput)="filterItems($event)" placeholder="Pesquisar"></ion-searchbar>
+
+    <manager-product-list [products]="filteredItems" (onRemove)="remove($event[0], $event[1])"></manager-product-list>
 </ion-content>

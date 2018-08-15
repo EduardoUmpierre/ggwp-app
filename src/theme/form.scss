@@ -2,13 +2,11 @@ form {
 
     > ion-item {
         background-color: transparent !important;
+        border-bottom: 0 !important;
         padding-left: 0 !important;
 
         > .item-inner {
-            border-bottom-style: dashed !important;
-            box-shadow: none !important;
 
-            ion-label,
             ion-input,
             ion-select,
             ion-textarea {
@@ -25,8 +23,22 @@ form {
     }
 }
 
-// Select searchable
-.select-searchable-label {
-    color: #FFF !important;
+form > ion-item,
+form > ion-item > .item-inner,
+.item-select-searchable,
+.item-select-searchable > .item-inner {
+    border-bottom-style: dashed !important;
+    box-shadow: none !important;
+}
+
+.item-select-searchable {
+    border: none !important;
+}
+
+// Select searchable label
+.item-select-searchable ion-label,
+form > ion-item > .item-inner ion-label {
+    color: #9e9e9e !important;
     font-size: 1.2rem;
+    font-style: italic;
 }
