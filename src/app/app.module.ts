@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -18,6 +18,10 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
 import { IonicStorageModule } from "@ionic/storage";
 import { AuthProvider } from "../providers/auth/auth";
 import { ComponentsModule } from "../components/components.module";
+import { DecimalPipe, registerLocaleData } from "@angular/common";
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
     declarations: [
@@ -45,6 +49,7 @@ import { ComponentsModule } from "../components/components.module";
         TabsPage,
     ],
     providers: [
+        DecimalPipe,
         StatusBar,
         SplashScreen,
         ApiProvider,
@@ -53,6 +58,7 @@ import { ComponentsModule } from "../components/components.module";
         HttpAngularProvider,
         HttpNativeProvider,
         HTTP,
+        {provide: LOCALE_ID, useValue: "pt-BR"},
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

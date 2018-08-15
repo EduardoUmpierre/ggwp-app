@@ -18,7 +18,9 @@ export class ProductsDetailPage {
      * Loads the product data on page load
      */
     ionViewDidLoad() {
-        this.apiProvider.builder('products/' + this.navParams.get('id')).loader().get().subscribe(res => this.product = res);
+        this.apiProvider.builder('products/' + this.navParams.get('id')).loader().get().subscribe(res => {
+            this.product = new Product(res.id, res.name, res.price, res.experience, res.categories_id, '', res.ingredients);
+        });
     }
 
     /**

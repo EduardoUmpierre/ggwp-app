@@ -51,6 +51,12 @@ export class ManagerBillsDetailPage {
         this.navCtrl.push('ManagerBillsOrderFormPage', {id: id});
     }
 
+    doCheckout(id: number) {
+        this.apiProvider.builder('bills/checkout').loader().post({id: id}).subscribe(res => {
+            this.navCtrl.pop();
+        });
+    }
+
     /**
      *
      * @param {number} id

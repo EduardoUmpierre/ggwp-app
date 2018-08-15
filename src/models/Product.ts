@@ -5,14 +5,16 @@ export class Product {
     private _experience: number;
     private _categories_id: number;
     private _note: string;
+    private _ingredients: Array<object>;
 
-    constructor(id?: number, name?: string, price?: number, experience?: number, categories_id?: number, note?: string) {
+    constructor(id?: number, name?: string, price?: number, experience?: number, categories_id?: number, note?: string, ingredients?: Array<object>) {
         this._id = id;
         this._name = name;
         this._price = price;
         this._experience = experience;
         this._categories_id = categories_id;
         this._note = note;
+        this._ingredients = ingredients;
     }
 
     get id(): number {
@@ -61,5 +63,13 @@ export class Product {
 
     set note(value: string) {
         this._note = value;
+    }
+
+    get ingredients(): Array<object> {
+        return this._ingredients;
+    }
+
+    set ingredients(value: Array<object>) {
+        this._ingredients = value;
     }
 }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ApiProvider } from "../../../../providers/api/api";
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ApiProvider} from "../../../../providers/api/api";
 
 @IonicPage()
 @Component({
@@ -25,10 +25,8 @@ export class ManagerBillsListPage {
             this.loaded = true;
         });
     }
-
     /**
-     * @param ev
-     * @returns {any[]}
+     * @param {any} ev
      */
     filterItems(ev: any) {
         let val = ev.target.value;
