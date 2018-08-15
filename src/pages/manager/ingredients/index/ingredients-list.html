@@ -15,13 +15,19 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-searchbar (ionInput)="filterItems($event)" placeholder="Pesquisar"></ion-searchbar>
+
     <ion-list class="list__content list__content-manager">
-        <ion-item *ngFor="let ingredient of ingredients" (click)="goToForm(ingredient.id)">
+        <ion-item *ngFor="let ingredient of filteredItems; let i = index" (click)="showOptions(ingredient.id, i)">
             <div class="list__content-title">{{ ingredient.name }}</div>
             <div class="list__content-side" item-end *ngIf="ingredient.allergenic">Alergênico</div>
+
+            <button ion-button type="button" clear item-end icon-only class="options-button">
+                <ion-icon name="more"></ion-icon>
+            </button>
         </ion-item>
 
-        <ion-item *ngIf="ingredients.length == 0 && loaded">
+        <ion-item *ngIf="filteredItems.length == 0 && loaded">
             <div class="list__content-description">Nenhum ingrediente encontrado</div>
         </ion-item>
     </ion-list>
