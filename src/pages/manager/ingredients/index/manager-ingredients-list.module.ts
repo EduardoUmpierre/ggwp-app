@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { IngredientsListPage } from './ingredients-list';
+import { ManagerIngredientsListPage } from './manager-ingredients-list';
 
 @NgModule({
     declarations: [
-        IngredientsListPage,
+        ManagerIngredientsListPage,
     ],
     imports: [
-        IonicPageModule.forChild(IngredientsListPage),
+        IonicPageModule.forChild(ManagerIngredientsListPage),
     ],
 })
 export class IngredientsListPageModule {

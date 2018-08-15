@@ -5,10 +5,10 @@ import {ApiProvider} from "../../../../providers/api/api";
 
 @IonicPage()
 @Component({
-    selector: 'page-ingredients-list',
-    templateUrl: 'ingredients-list.html',
+    selector: 'page-manager-ingredients-list',
+    templateUrl: 'manager-ingredients-list.html',
 })
-export class IngredientsListPage {
+export class ManagerIngredientsListPage {
     private ingredients = [];
     filteredItems = [];
     loaded: boolean = false;

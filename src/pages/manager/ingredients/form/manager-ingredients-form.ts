@@ -9,9 +9,9 @@ import { ApiProvider } from "../../../../providers/api/api";
     templateUrl: 'manager-ingredients-form.html',
 })
 export class ManagerIngredientsFormPage {
-    private title = 'Novo ingrediente';
     private id: number;
-    private form: FormGroup;
+    title = 'Novo ingrediente';
+    form: FormGroup;
 
     constructor(private viewCtrl: ViewController, public navParams: NavParams, private apiProvider: ApiProvider,
                 private formBuilder: FormBuilder) {
