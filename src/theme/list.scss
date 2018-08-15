@@ -148,15 +148,41 @@ ion-list {
             }
         }
     }
+
+    // Select searchable
+    > .select-searchable-group {
+
+        > .select-searchable-item {
+            align-items: center;
+            background-color: transparent;
+
+            div[item-right] {
+                font-size: 1.2rem;
+            }
+
+            &,
+            > .icon-md-primary {
+                color: #FFF;
+            }
+        }
+    }
+
+    > .item-divider-md {
+        background-color: #19191b;
+        border-bottom: 1px solid #2d2d2d;
+        color: #FFF;
+        font-size: 1.4rem;
+        padding-left: 16px;
+    }
 }
 
 // Styles
-.list-md .item-block .item-inner {
-    border-bottom: 1px dashed #FFF;
-}
-
 .list-md .item-input:last-child {
     border-bottom: none;
+}
+
+.list-md .item-block .item-inner {
+    border-bottom: 1px dashed #FFF;
 }
 
 .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
@@ -182,4 +208,16 @@ ion-list {
 // Searchbar
 ion-searchbar {
     padding: 0 0 1.5rem !important;
+}
+
+// Searchable page
+select-searchable-page {
+
+    > ion-content {
+        color: #FFF !important;
+
+        .select-searchable-add-item-template {
+            background-color: #19191b;
+        }
+    }
 }

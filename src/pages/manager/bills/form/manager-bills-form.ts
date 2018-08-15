@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ApiProvider } from "../../../../providers/api/api";
+import {SelectSearchableComponent} from 'ionic-select-searchable';
 
 @IonicPage()
 @Component({
@@ -9,12 +10,23 @@ import { ApiProvider } from "../../../../providers/api/api";
     templateUrl: 'manager-bills-form.html',
 })
 export class ManagerBillsFormPage {
-    private title = 'Nova comanda';
     private id: number;
-    private cards = [];
-    private users = [];
-    private form: FormGroup;
+    title = 'Nova comanda';
+    cards = [];
+    users = [];
+    activeUsers = [];
+    form: FormGroup;
+    userForm: FormGroup;
+    @ViewChild('userComponent') userComponent: SelectSearchableComponent;
 
+    /**
+     * Constructor
+     * 
+     * @param {ViewController} privateviewCtrl
+     * @param {NavParams} publicnavParams
+     * @param {ApiProvider} privateapiProvider
+     * @param {FormBuilder} privateformBuilder
+     */
     constructor(private viewCtrl: ViewController, public navParams: NavParams, private apiProvider: ApiProvider, private formBuilder: FormBuilder) {
         this.id = this.navParams.get('id');
 
@@ -22,9 +34,18 @@ export class ManagerBillsFormPage {
             this.title = 'Editar comanda';
         }
 
+        // Bill form
         this.form = this.formBuilder.group({
             cards_id: new FormControl('', Validators.required),
             users_id: new FormControl('', Validators.required)
+        });
+
+        // User form
+        this.userForm = this.formBuilder.group({
+            name: new FormControl('', Validators.required),
+            email: new FormControl('', Validators.required),
+            cpf: new FormControl('', Validators.required),
+            phone: new FormControl('')
         });
     }
 
@@ -32,11 +53,13 @@ export class ManagerBillsFormPage {
      * Loads the cards, users and bill data
      */
     ionViewWillLoad() {
-        this.apiProvider.builder('cards').loader().get().subscribe(cards => {
+        this.apiProvider.builder('cards').loader().get({active: true}).subscribe(cards => {
             this.cards = cards;
 
-            this.apiProvider.builder('users').loader().get().subscribe(users => {
+            this.apiProvider.builder('users').loader().get({active: true}).subscribe(users => {
                 this.users = users;
+
+                this.activeUsers = users.filter((item) => item.is_active == 1);
 
                 if (this.id) {
                     this.apiProvider.builder('bills/' + this.id).loader().get().subscribe(bill => {
@@ -69,10 +92,55 @@ export class ManagerBillsFormPage {
     /**
      * @returns object
      */
-    dataNormalizer() {
+    private dataNormalizer() {
         return {
             'cards_id': this.form.get('cards_id').value.id,
             'users_id': this.form.get('users_id').value.id
         };
+    }
+
+    /**
+     * @param {{component:SelectSearchableComponent}} event
+     */
+    onAddUser(event: {component: SelectSearchableComponent}) {
+        this.resetUserForm();
+
+        // Copy search text to port name field, so
+        // user doesn't have to type again
+        const search = event.component.searchText;
+
+        if (/\d/.test(search.charAt(0))) {
+            this.userForm.controls['cpf'].setValue(search);
+        } else {
+            this.userForm.controls['name'].setValue(search);
+        }
+
+        // Show form
+        event.component.showAddItemTemplate();
+    }
+
+    /**
+     */
+    addUser() {
+        this.apiProvider.builder('users/quick').loader().post(this.userForm.value).subscribe((res) => {
+            this.userComponent.addItem(res).then(() => {
+                this.userComponent.search(res.name);
+            });
+
+            // Clean form
+            this.resetUserForm();
+
+            // Show list
+            this.userComponent.hideAddItemTemplate();
+        });
+    }
+
+    /**
+     */
+    private resetUserForm() {
+        this.userForm.controls['name'].reset();
+        this.userForm.controls['email'].reset();
+        this.userForm.controls['cpf'].reset();
+        this.userForm.controls['phone'].reset();
     }
 }

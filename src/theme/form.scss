@@ -23,6 +23,10 @@ form {
     }
 }
 
+.select-searchable-value {
+    color: #FFF;
+}
+
 form > ion-item,
 form > ion-item > .item-inner,
 .item-select-searchable,
@@ -32,7 +36,7 @@ form > ion-item > .item-inner,
 }
 
 .item-select-searchable {
-    border: none !important;
+    border-bottom-width: 1px !important;
 }
 
 // Select searchable label

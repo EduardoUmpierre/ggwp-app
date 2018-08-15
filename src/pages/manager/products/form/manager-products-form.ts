@@ -12,13 +12,13 @@ import { DecimalPipe } from "@angular/common";
     templateUrl: 'manager-products-form.html',
 })
 export class ManagerProductsFormPage {
-    private title = 'Novo produto';
     private id: number;
     private product: Product;
-    private categories = [];
-    private ingredients = [];
-    private selectedIngredients = [];
-    private form: FormGroup;
+    title = 'Novo produto';
+    categories = [];
+    ingredients = [];
+    selectedIngredients = [];
+    form: FormGroup;
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private apiProvider: ApiProvider,
                 private formBuilder: FormBuilder, private decimalPipe: DecimalPipe) {
@@ -48,8 +48,6 @@ export class ManagerProductsFormPage {
 
                 if (this.id) {
                     this.apiProvider.builder('products/' + this.id).loader().get().subscribe(product => {
-                        console.log(product);
-
                         this.form.controls['name'].setValue(product.name);
                         this.form.controls['price'].setValue(this.decimalPipe.transform(product.price, '1.2-2', 'pt-BR'));
                         this.form.controls['experience'].setValue(product.experience);

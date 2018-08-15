@@ -14,26 +14,87 @@
     <ion-list>
         <form [formGroup]="form" (ngSubmit)="submit()">
             <ion-item>
+                <ion-label>Usuário</ion-label>
                 <select-searchable
+                        #userComponent
+                        item-content
                         formControlName="users_id"
                         itemValueField="id"
                         itemTextField="name"
+                        addButtonText="Adicionar"
+                        searchPlaceholder="Pesquisar"
+                        [searchFailText]="'Nenhum usuário encontrado'"
                         title="Usuários"
-                        [items]="users"
-                        [canSearch]="true">
+                        [(items)]="users"
+                        [disabledItems]="activeUsers"
+                        [canSearch]="true"
+                        [canAddItem]="true"
+                        (onAddItem)="onAddUser($event)">
                     <ng-template selectSearchableLabelTemplate>
                         Usuário
+                    </ng-template>
+                    <ng-template selectSearchableItemTemplate let-user="item">
+                        {{ user.name }}
+                    </ng-template>
+                    <ng-template selectSearchableItemRightTemplate let-user="item">
+                        {{ user.cpf }}
+                    </ng-template>
+                    <ng-template selectSearchableAddItemTemplate let-port="item" let-isAdd="isAdd">
+                        <ion-list>
+                            <ion-item-divider>Adicionar cliente</ion-item-divider>
+
+                            <form [formGroup]="userForm" novalidate padding>
+                                <ion-item>
+                                    <ion-label>Nome</ion-label>
+                                    <ion-input type="text" formControlName="name" autocorrect="off" autocapitalize="none">
+                                    </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label>E-mail</ion-label>
+                                    <ion-input type="email" formControlName="email" autocorrect="off" autocapitalize="none">
+                                    </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label>CPF</ion-label>
+                                    <ion-input type="text" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" autocorrect="off" autocapitalize="none">
+                                    </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label>Celular</ion-label>
+                                    <ion-input type="text" formControlName="phone" [brmasker]="{phone: true}" autocorrect="off" autocapitalize="none">
+                                    </ion-input>
+                                </ion-item>
+                            </form>
+                        </ion-list>
+                        <ion-footer>
+                            <ion-toolbar>
+                                <ion-row>
+                                    <ion-col col-6>
+                                        <button ion-button full no-margin (click)="userComponent.hideAddItemTemplate()">
+                                            Cancelar
+                                        </button>
+                                    </ion-col>
+                                    <ion-col col-6>
+                                        <button ion-button full no-margin (click)="addUser()" [disabled]="!userForm.valid">
+                                            Salvar
+                                        </button>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-toolbar>
+                        </ion-footer>
                     </ng-template>
                 </select-searchable>
             </ion-item>
 
             <ion-item>
+                <ion-label>Cartão</ion-label>
                 <select-searchable
+                        item-content
                         formControlName="cards_id"
                         itemValueField="id"
                         itemTextField="number"
                         title="Cartões"
-                        [items]="cards"
+                        [(items)]="cards"
                         [canSearch]="true">
                     <ng-template selectSearchableLabelTemplate>
                         Cartão
