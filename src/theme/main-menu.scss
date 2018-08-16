@@ -16,6 +16,10 @@
             min-height: 5rem;
             padding-right: 1.6rem;
 
+            &.activated {
+                background-color: #000 !important;
+            }
+
             > .item-inner {
                 border-bottom: 1px dashed #FFF !important;
 

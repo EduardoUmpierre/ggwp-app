@@ -22,8 +22,8 @@
                         <span>Produtos</span>
                     </div>
 
-                    <manager-product-list [products]="products" layout="small"
-                                          emptyMessage="Nenhum produto adicionado"></manager-product-list>
+                    <manager-product-list [products]="products" layout="small" (onRemove)="remove($event[0], $event[1])"
+                    (onEdit)="edit($event[0], $event[1])" emptyMessage="Nenhum produto adicionado"></manager-product-list>
                 </ion-item>
             </ion-list>
         </div>

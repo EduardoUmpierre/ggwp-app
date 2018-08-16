@@ -8,10 +8,11 @@ import { ApiProvider } from "../../../../providers/api/api";
     templateUrl: 'manager-bills-detail.html',
 })
 export class ManagerBillsDetailPage {
-    private title;
-    private bill;
     private id;
-    private loaded;
+    total: number = 0.00;
+    title: string = 'Comanda #';
+    loaded: boolean = false;
+    bill;
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private apiProvider: ApiProvider,
                 private alertCtrl: AlertController) {
@@ -22,12 +23,11 @@ export class ManagerBillsDetailPage {
      * Loads the bill data
      */
     ionViewWillEnter() {
-        this.title = 'Comanda #';
-
         if (this.id) {
             this.apiProvider.builder('bills/' + this.id).loader().get().subscribe(res => {
                 this.bill = res;
                 this.title = this.title + res.card.number;
+                this.total = parseFloat(res.total);
                 this.loaded = true;
             });
         } else {
@@ -51,10 +51,28 @@ export class ManagerBillsDetailPage {
         this.navCtrl.push('ManagerBillsOrderFormPage', {id: id});
     }
 
+    /**
+     * @param {number} id
+     */
     doCheckout(id: number) {
-        this.apiProvider.builder('bills/checkout').loader().post({id: id}).subscribe(res => {
-            this.navCtrl.pop();
+        const confirm = this.alertCtrl.create({
+            title: 'Confirmação',
+            message: 'Deseja fechar esta comanda?',
+            buttons: [
+                {
+                    text: 'Não',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Sim',
+                    handler: () => {
+                        this.apiProvider.builder('bills/checkout').loader().post({id: id}).subscribe(res => this.navCtrl.pop());
+                    }
+                }
+            ]
         });
+
+        confirm.present();
     }
 
     /**
@@ -73,16 +91,25 @@ export class ManagerBillsDetailPage {
                 {
                     text: 'Sim',
                     handler: () => {
-                        this.apiProvider.builder('bills/' + this.id).loader().delete().subscribe(res => {
-                            this.navCtrl.push('ManagerBillsListPage').then(() => {
-                                this.navCtrl.remove(this.navCtrl.getActive().index - 2, 2);
-                            });
-                        });
+                        this.apiProvider.builder('bills/' + id).loader().delete().subscribe(res => this.navCtrl.pop());
                     }
                 }
             ]
         });
 
         confirm.present();
+    }
+
+    /**
+     * Removes a product
+     *
+     * @param {number} id
+     * @param {number} key
+     */
+    remove(id: number, key: number) {
+        this.apiProvider.builder('bills/' + this.id + '/products/' + id).loader().delete().subscribe((res) => {
+            this.bill.products.splice(key, 1);
+            this.total = parseFloat(res.total);
+        });
     }
 }

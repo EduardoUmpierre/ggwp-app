@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Product } from "../../../../models/Product";
 import { ManagerBillsProductOrderFormPage } from "../product-order-form/manager-bills-product-order-form";
 import { ApiProvider } from "../../../../providers/api/api";
@@ -14,7 +14,7 @@ export class ManagerBillsOrderFormPage {
     private id: number;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
-                private apiProvider: ApiProvider) {
+                private apiProvider: ApiProvider, private alertCtrl: AlertController) {
         this.id = this.navParams.get('id');
     }
 
@@ -37,12 +37,29 @@ export class ManagerBillsOrderFormPage {
      * Performs the HTTP post request
      */
     submit() {
-        let data = {
-            'bills_id': this.id,
-            'products': this.normalizeData()
-        };
+        let alert = this.alertCtrl.create({
+            title: 'Confirmar pedido',
+            message: 'Deseja finalizar este pedido?',
+            buttons: [
+                {
+                    text: 'Não',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Sim',
+                    handler: () => {
+                        let data = {
+                            'bills_id': this.id,
+                            'products': this.normalizeData()
+                        };
 
-        this.apiProvider.builder('bills/products').loader().post(data).subscribe(res => this.navCtrl.pop());
+                        this.apiProvider.builder('bills/products').loader().post(data).subscribe(res => this.navCtrl.pop());
+                    }
+                }
+            ]
+        });
+
+        alert.present();
     }
 
     /**
@@ -61,5 +78,33 @@ export class ManagerBillsOrderFormPage {
         });
 
         return data;
+    }
+
+    /**
+     * Removes a product
+     *
+     * @param {number} id
+     * @param {number} key
+     */
+    remove(id: number, key: number) {
+        this.products.splice(key, 1);
+    }
+
+    /**
+     * Removes a product
+     *
+     * @param {number} id
+     * @param {number} key
+     */
+    edit(id: number, key: number) {
+        let productModal = this.modalCtrl.create('ManagerBillsProductOrderFormPage', {product: this.products[key]});
+
+        productModal.onDidDismiss(data => {
+            if (data instanceof Product) {
+                this.products[key] = data;
+            }
+        });
+
+        productModal.present();
     }
 }

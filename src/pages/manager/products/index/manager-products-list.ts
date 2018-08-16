@@ -58,4 +58,14 @@ export class ManagerProductsListPage {
             this.products.splice(key, 1);
         });
     }
+
+    /**
+     * Edits a product
+     *
+     * @param {number} id
+     * @param {number} key
+     */
+    edit(id: number, key: number) {
+        this.goToForm(id);
+    }
 }

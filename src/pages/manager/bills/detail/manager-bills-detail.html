@@ -44,7 +44,8 @@
                             <span>Produtos</span>
                         </div>
 
-                        <manager-product-list [products]="bill.products" layout="small"></manager-product-list>
+                        <manager-product-list [products]="bill.products" layout="small" 
+                        (onRemove)="remove($event[0], $event[1])"></manager-product-list>
                     </ion-item>
                 </ion-list>
             </div>
@@ -63,7 +64,7 @@
                         Total:
                     </ion-col>
                     <ion-col>
-                        <div class="total">{{ bill.total | currency:'BRL':'R$' }}</div>
+                        <div class="total">{{ total | currency:'BRL':'R$' }}</div>
                     </ion-col>
                 </ion-row>
             </ion-grid>

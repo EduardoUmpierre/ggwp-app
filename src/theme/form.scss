@@ -23,6 +23,16 @@ form {
     }
 }
 
+// Toggle
+.toggle-md.toggle-checked .toggle-inner {
+    background-color: #32db64 !important;
+}
+
+.toggle-md.toggle-checked .toggle-icon {
+    background-color: #496f54 !important;
+}
+
+// Select searchable
 .select-searchable-value {
     color: #FFF;
 }
@@ -39,10 +49,10 @@ form > ion-item > .item-inner,
     border: none !important;
 }
 
-// Select searchable label
-.item-select-searchable ion-label,
-form > ion-item > .item-inner ion-label {
-    color: #9e9e9e !important;
-    font-size: 1.2rem;
-    font-style: italic;
-}
+    // Select searchable label
+    .item-select-searchable ion-label,
+    form > ion-item > .item-inner ion-label {
+        color: #9e9e9e !important;
+        font-size: 1.2rem;
+        font-style: italic;
+    }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Product } from "../../../../models/Product";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormControl, Validators, FormGroup } from "@angular/forms";
 import { ApiProvider } from "../../../../providers/api/api";
 
 @IonicPage()
@@ -10,12 +10,16 @@ import { ApiProvider } from "../../../../providers/api/api";
     templateUrl: 'manager-bills-product-order-form.html',
 })
 export class ManagerBillsProductOrderFormPage {
-    private product: Product;
-    private products: Product[] = [];
-    private form;
+    product: Product;
+    products: Product[] = [];
+    form: FormGroup;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
+    constructor(private navParams: NavParams, private viewCtrl: ViewController,
                 private formBuilder: FormBuilder, private apiProvider: ApiProvider) {
+        if (this.navParams.get('product')) {
+            this.product = this.navParams.get('product');
+        }
+
         this.form = this.formBuilder.group({
             note: new FormControl('')
         });

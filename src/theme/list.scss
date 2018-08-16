@@ -181,8 +181,8 @@ ion-list {
     border-bottom: none;
 }
 
-.list-md .item-block .item-inner {
-    border-bottom: 1px dashed #FFF;
+.item-select-searchable > .item-inner {
+    border-bottom: 1px dashed #FFF !important;
 }
 
 .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,

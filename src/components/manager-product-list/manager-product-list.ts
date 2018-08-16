@@ -12,6 +12,7 @@ export class ManagerProductListComponent {
     @Input('options') options: boolean = true;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
+    @Output() onEdit: EventEmitter<any> = new EventEmitter();
 
     constructor(private navCtrl: NavController, private actionSheetCtrl: ActionSheetController,
                 private alertCtrl: AlertController) {
@@ -43,7 +44,7 @@ export class ManagerProductListComponent {
                 {
                     text: 'Editar',
                     handler: () => {
-                        this.navCtrl.push('ManagerProductsFormPage', {id: id})
+                        this.onEdit.emit([id, key]);
                     }
                 },
                 {
