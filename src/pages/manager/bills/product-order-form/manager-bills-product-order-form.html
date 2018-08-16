@@ -21,12 +21,13 @@
         <ion-item>
             <ion-label>Produto</ion-label>
             <select-searchable
+                     item-content
                     [(ngModel)]="product"
                     itemValueField="id"
                     itemTextField="name"
                     searchPlaceholder="Pesquisar"
                     title="Produtos"
-                    [items]="products"
+                    [(items)]="products"
                     [canSearch]="true">
                 <ng-template selectSearchableLabelTemplate>
                     Produto

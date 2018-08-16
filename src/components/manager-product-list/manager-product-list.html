@@ -13,7 +13,7 @@
             {{ product.price | currency:'BRL':'R$' }}
         </div>
 
-        <div class="list__content-side" item-end *ngIf="layout == 'small'">
+        <div class="list__content-side" item-end *ngIf="product.quantity">
             <small>X</small>
             {{ product.quantity }}
         </div>
