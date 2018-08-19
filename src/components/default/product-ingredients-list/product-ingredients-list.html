@@ -1,0 +1,8 @@
+<ul [ngClass]="class ? class : ''" *ngIf="ingredients.length > 0">
+    <li *ngFor="let ingredient of ingredients; let i = index">
+        {{ i == ingredients.length - 1 && i != 0 ? ' e ' : '' }}<!--
+        -->{{ ingredient.name }}{{ ingredient.allergenic ? ' (Alergênico)' : '' }}<!--
+        -->{{ i < ingredients.length - 2 ? ',' : '' }}<!--
+        -->{{ i == ingredients.length - 1 ? '.' : '' }}
+    </li>
+</ul>

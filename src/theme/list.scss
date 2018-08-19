@@ -51,6 +51,8 @@ ion-list {
             background-color: #FFF;
             display: inline-block;
             line-height: 3rem;
+            margin-bottom: -1px;
+            min-height: 3rem;
             min-width: 12rem;
             padding: 0 1rem;
             text-align: center;
@@ -92,6 +94,20 @@ ion-list {
             .list__content-description {
                 font-size: 1rem;
                 font-weight: 300;
+                list-style: none;
+                margin: 0.5rem 0 0;
+                padding: 0;
+
+                > li {
+                    display: inline;
+                    line-height: 1;
+                }
+
+                &.list__content-description--text-wrap {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
             }
 
             .list__content-side {

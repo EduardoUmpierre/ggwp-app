@@ -14,7 +14,9 @@
             <ion-list class="list__content">
                 <ion-item *ngFor="let product of category.list" (click)="showModal(product.id)" text-wrap>
                     <div class="list__content-title">{{ product.name }}</div>
-                    <div class="list__content-description">{{ product.name }}</div>
+
+                    <product-ingredients-list customClass="list__content-description list__content-description--text-wrap"
+                                              [ingredients]="product.ingredients"></product-ingredients-list>
 
                     <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
                 </ion-item>

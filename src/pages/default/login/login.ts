@@ -3,6 +3,7 @@ import { AlertController, IonicPage, NavParams, ViewController, Events } from 'i
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../../providers/auth/auth";
 import { Storage } from "@ionic/storage";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @IonicPage()
 @Component({
@@ -46,26 +47,21 @@ export class LoginPage {
                     })
                 })
             })
-            .catch((err) => {
+            .catch((res: HttpErrorResponse) => {
                 this.AuthProvider.hideLoader();
 
+                // Default message
                 let title = 'Erro';
-                let message = 'Erro no servidor, informe o erro ' + err.status + ' ao administrador.';
+                let message = 'Ocorreu um erro no servidor. Tente novamente em breve.';
 
-                if (err.status === 401) {
-                    let error = JSON.parse(err._body) || {};
-
-                    if (error.error == 'invalid_credentials') {
+                // Unauthorized
+                if (res.status === 401) {
+                    // Invalid credentials status
+                    if (res.error.error == 'invalid_credentials') {
                         title = 'Atenção';
                         message = 'Usuário e/ou senha inválidos';
                     }
-                }
-
-                if (err.status === 422) {
-                    message = 'Falha de validação, verifique os campos';
-                }
-
-                if (err.status === 404) {
+                } else if (res.status === 404) {
                     message = 'Não foi possível conectar-se ao servidor. Verifique a sua conexão ou tente novamente em breve.';
                 }
 
@@ -79,7 +75,7 @@ export class LoginPage {
 
                 alert.present();
 
-                return err;
+                return res;
             });
     }
 }
