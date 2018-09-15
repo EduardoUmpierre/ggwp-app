@@ -93,15 +93,20 @@ export class MyApp {
      * Calls the login page
      */
     login() {
-        const modal = this.modalCtrl.create('LoginPage');
-        modal.present();
+        this.modalCtrl.create('LoginPage').present();
+    }
+
+    /**
+     * Calls the registration page
+     */
+    register() {
+        this.modalCtrl.create('RegisterPage').present();
     }
 
     /**
      * Calls the profile page
      */
     profile() {
-        const modal = this.modalCtrl.create('ProfilePage');
-        modal.present();
+        this.modalCtrl.create('ProfilePage').present();
     }
 }

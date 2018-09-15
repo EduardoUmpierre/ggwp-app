@@ -44,8 +44,8 @@ export class LoginPage {
                             this.events.publish('user:updated', true);
                             this.dismiss();
                         });
-                    })
-                })
+                    });
+                });
             })
             .catch((res: HttpErrorResponse) => {
                 this.AuthProvider.hideLoader();

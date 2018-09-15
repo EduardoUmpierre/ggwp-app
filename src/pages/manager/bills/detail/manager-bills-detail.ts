@@ -10,7 +10,7 @@ import { ApiProvider } from "../../../../providers/api/api";
 export class ManagerBillsDetailPage {
     private id;
     total: number = 0.00;
-    title: string = 'Comanda #';
+    title: string;
     loaded: boolean = false;
     bill;
 
@@ -26,7 +26,7 @@ export class ManagerBillsDetailPage {
         if (this.id) {
             this.apiProvider.builder('bills/' + this.id).loader().get().subscribe(res => {
                 this.bill = res;
-                this.title = this.title + res.card.number;
+                this.title = 'Comanda #' + res.card.number;
                 this.total = parseFloat(res.total);
                 this.loaded = true;
             });

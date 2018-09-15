@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button color="light" (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Cadastro</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="form" (submit)="register($event)" class="list-item">
+        <ion-list>
+            <ion-item>
+                <ion-input type="text" formControlName="name" placeholder="Nome completo"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" formControlName="username" placeholder="Nome de usuário"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" formControlName="email" placeholder="E-mail"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" placeholder="CPF"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" formControlName="phone" [brmasker]="{phone: true}" placeholder="Telefone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="text" formControlName="birthday" [brmasker]="{mask:'00/00/0000', len:10}" placeholder="Data de nascimento"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-input type="password" formControlName="password" placeholder="Senha"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <button ion-button large color="light" full [disabled]="form && !form.valid">Cadastrar-se</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>
