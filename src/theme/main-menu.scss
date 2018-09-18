@@ -28,8 +28,11 @@
                 }
             }
 
-            &:last-child {
-                margin-top: auto;
+            &.end-list {
+
+                &.end-list__alignment {
+                    margin-top: auto;
+                }
 
                 > .item-inner {
                     border-bottom: none !important;

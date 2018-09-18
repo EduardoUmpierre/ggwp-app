@@ -54,17 +54,6 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-grid *ngIf="!user">
-            <ion-row>
-                <ion-col>
-                    <button ion-button (click)="login()">Entrar</button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button (click)="register()">Cadastre-se</button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-
         <ion-list>
             <button ion-item menuClose icon-start (click)="profile()" *ngIf="user">
                 <ion-icon name="contact"></ion-icon>
@@ -91,13 +80,17 @@
                 Ranking
             </button>
 
-            <button ion-item menuClose icon-start (click)="logout()" *ngIf="user">
+            <button class="end-list end-list__alignment" ion-item menuClose icon-start (click)="logout()" *ngIf="user">
                 <ion-icon name="power"></ion-icon>
                 Sair
             </button>
-            <button ion-item menuClose icon-start (click)="login()" *ngIf="!user">
+            <button class="end-list end-list__alignment" ion-item menuClose icon-start (click)="register()" *ngIf="!user">
+                <ion-icon name="person-add"></ion-icon>
+                Cadastrar-se
+            </button>
+            <button class="end-list" ion-item menuClose icon-start (click)="login()" *ngIf="!user">
                 <ion-icon name="log-in"></ion-icon>
-                Login
+                Entrar
             </button>
         </ion-list>
     </ion-content>
