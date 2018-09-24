@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ title }}</ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-only [disabled]="!form.valid" (click)="submit()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Nome de usuário</ion-label>
+                <ion-input type="text" formControlName="username"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>E-mail</ion-label>
+                <ion-input type="text" formControlName="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Tipo de usuário</ion-label>
+                <ion-select formControlName="role">
+                    <ion-option value="0">Padrão</ion-option>
+                    <ion-option value="1">Administrador</ion-option>
+                </ion-select>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>

@@ -26,6 +26,10 @@
                 <ion-icon name="pizza"></ion-icon>
                 Ingredientes
             </button>
+            <button ion-item menuClose icon-start (click)="openPage('ManagerUsersListPage')">
+                <ion-icon name="people"></ion-icon>
+                Usuários
+            </button>
             <button ion-item menuClose icon-start (click)="openPage(newBill)">
                 <ion-icon name="calendar"></ion-icon>
                 Agenda
@@ -39,7 +43,7 @@
                 Ranking
             </button>
 
-            <button ion-item menuClose icon-start (click)="logout()">
+            <button class="end-list end-list__alignment" ion-item menuClose icon-start (click)="logout()">
                 <ion-icon name="power"></ion-icon>
                 Sair
             </button>
