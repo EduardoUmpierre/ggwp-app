@@ -8,7 +8,6 @@
     <ion-list class="list__content" *ngIf="bill && loaded">
         <ion-item *ngFor="let item of bill.products" (click)="showModal(item.id)" text-wrap>
             <div class="list__content-title">{{ item.name }}</div>
-            <div class="list__content-description">{{ item.name }}</div>
 
             <div class="list__content-side" item-end>{{ item.price | currency:'BRL':'R$' }}</div>
             <div class="list__content-side" item-end><small>X</small>{{ item.quantity }}</div>
