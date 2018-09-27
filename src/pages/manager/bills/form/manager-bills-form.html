@@ -51,13 +51,17 @@
                                 </ion-item>
                                 <ion-item>
                                     <ion-label>E-mail</ion-label>
-                                    <ion-input type="email" formControlName="email" autocorrect="off" autocapitalize="none">
+                                    <ion-input type="email" formControlName="email" autocorrect="off" autocapitalize="none" autocapitalize="none">
                                     </ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label>CPF</ion-label>
                                     <ion-input type="text" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}" autocorrect="off" autocapitalize="none">
                                     </ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label>Data de nascimento</ion-label>
+                                    <ion-input type="text" formControlName="birthday" [brmasker]="{mask:'00/00/0000', len:10}" autocapitalize="none"></ion-input>
                                 </ion-item>
                                 <ion-item>
                                     <ion-label>Celular</ion-label>

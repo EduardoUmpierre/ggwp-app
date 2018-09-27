@@ -21,11 +21,11 @@ export class ManagerBillsFormPage {
 
     /**
      * Constructor
-     * 
-     * @param {ViewController} privateviewCtrl
-     * @param {NavParams} publicnavParams
-     * @param {ApiProvider} privateapiProvider
-     * @param {FormBuilder} privateformBuilder
+     *
+     * @param {ViewController} viewCtrl
+     * @param {NavParams} navParams
+     * @param {ApiProvider} apiProvider
+     * @param {FormBuilder} formBuilder
      */
     constructor(private viewCtrl: ViewController, public navParams: NavParams, private apiProvider: ApiProvider, private formBuilder: FormBuilder) {
         this.id = this.navParams.get('id');
@@ -45,6 +45,7 @@ export class ManagerBillsFormPage {
             name: new FormControl('', Validators.required),
             email: new FormControl('', Validators.required),
             cpf: new FormControl('', Validators.required),
+            birthday: new FormControl('', Validators.required),
             phone: new FormControl('')
         });
     }
@@ -141,6 +142,7 @@ export class ManagerBillsFormPage {
         this.userForm.controls['name'].reset();
         this.userForm.controls['email'].reset();
         this.userForm.controls['cpf'].reset();
+        this.userForm.controls['birthday'].reset();
         this.userForm.controls['phone'].reset();
     }
 }
