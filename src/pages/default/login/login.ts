@@ -56,8 +56,18 @@ export class LoginPage {
 
                 // Unauthorized
                 if (res.status === 401) {
+                    console.log(res.error);
+
+                    let error;
+
+                    if (res.error.hasOwnProperty('error')) {
+                        error = res.error.error;
+                    } else {
+                        error = JSON.parse(res.error).error;
+                    }
+
                     // Invalid credentials status
-                    if (res.error.error == 'invalid_credentials') {
+                    if (error == 'invalid_credentials') {
                         title = 'Atenção';
                         message = 'Usuário e/ou senha inválidos';
                     }
