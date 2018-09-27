@@ -29,11 +29,13 @@ export class BillsPage {
                 this.loaded = true;
             } else {
                 this.apiProvider.builder('bills/' + res.id, false).get().subscribe(res => {
-                    if (res instanceof HttpErrorResponse) {
+                    if (res instanceof HttpErrorResponse || res.status === 404) {
                         this.bill = null;
                     } else {
                         this.bill = res;
                     }
+
+                    console.log(res);
 
                     this.loaded = true;
                 });
