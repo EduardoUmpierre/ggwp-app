@@ -14,26 +14,49 @@
     <ion-list>
         <form [formGroup]="form" (ngSubmit)="submit()">
             <ion-item>
-                <ion-label stacked>Nome</ion-label>
+                <ion-label stacked>Nome*</ion-label>
                 <ion-input type="text" formControlName="name"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label stacked>Nome de usuário</ion-label>
-                <ion-input type="text" formControlName="username"></ion-input>
+                <ion-label stacked>Nome de usuário*</ion-label>
+                <ion-input type="text" formControlName="username" autocapitalize="none"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label stacked>E-mail</ion-label>
-                <ion-input type="text" formControlName="email"></ion-input>
+                <ion-label stacked>E-mail*</ion-label>
+                <ion-input type="text" formControlName="email" autocapitalize="none"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label>Tipo de usuário</ion-label>
+                <ion-label stacked>CPF*</ion-label>
+                <ion-input type="text" formControlName="cpf" [brmasker]="{mask: '000.000.000-00', len: 14}"
+                           autocapitalize="none"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Telefone</ion-label>
+                <ion-input type="text" formControlName="phone" [brmasker]="{phone: true}"
+                           autocapitalize="none"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Data de nascimento*</ion-label>
+                <ion-input type="text" formControlName="birthday" [brmasker]="{mask: '00/00/0000', len: 10}"
+                           autocapitalize="none"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Tipo de usuário*</ion-label>
                 <ion-select formControlName="role">
                     <ion-option value="0">Padrão</ion-option>
                     <ion-option value="1">Administrador</ion-option>
                 </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Senha</ion-label>
+                <ion-input type="password" formControlName="password" autocapitalize="none"></ion-input>
             </ion-item>
         </form>
     </ion-list>

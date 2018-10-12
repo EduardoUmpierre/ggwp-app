@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ManagerUsersFormPage } from './manager-users-form';
+import { BrMaskerModule } from "brmasker-ionic-3";
 
 @NgModule({
     declarations: [
@@ -8,6 +9,7 @@ import { ManagerUsersFormPage } from './manager-users-form';
     ],
     imports: [
         IonicPageModule.forChild(ManagerUsersFormPage),
+        BrMaskerModule
     ],
 })
 export class ManagerUsersFormPageModule {
