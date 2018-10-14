@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, NavController } from 'ionic-angular';
 import { ApiProvider } from "../../../../providers/api/api";
 
 @IonicPage()
@@ -88,12 +88,12 @@ export class ManagerLevelsListPage {
         this.filteredItems = this.levels;
 
         if (val && val.trim() !== '') {
-            this.filteredItems = this.filteredItems.filter((item) => item.number.indexOf(val) > -1);
+            this.filteredItems = this.filteredItems.filter((item) => item.number.toString().indexOf(val.toString()) > -1);
         }
     }
 
     /**
-     * Removes a ingredient
+     * Removes a level
      *
      * @param {number} id
      * @param {number} key
