@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title>Recompensas</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToForm()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar (ionInput)="filterItems($event)" placeholder="Pesquisar"></ion-searchbar>
+
+    <ion-list class="list__content list__content-manager">
+        <ion-item *ngFor="let drop of filteredItems; let i = index" (click)="showOptions(drop.id, i)">
+            <div class="list__content-title">{{ drop.description }}</div>
+
+            <button ion-button type="button" clear item-end icon-only class="options-button">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-item>
+
+        <ion-item *ngIf="filteredItems.length == 0 && loaded">
+            <div class="list__content-description">Nenhuma recompensa encontrada</div>
+        </ion-item>
+    </ion-list>
+</ion-content>

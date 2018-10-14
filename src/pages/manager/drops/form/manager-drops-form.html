@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ title }}</ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-only [disabled]="!form.valid" (click)="submit()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <ion-item>
+                <ion-label stacked>Descrição</ion-label>
+                <ion-input type="text" formControlName="description"></ion-input>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>
