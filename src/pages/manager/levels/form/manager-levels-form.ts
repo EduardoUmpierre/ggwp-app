@@ -35,13 +35,13 @@ export class ManagerLevelsFormPage {
     }
 
     /**
-     * Loads the ingredient data
+     * Loads the level data
      */
     ionViewWillLoad() {
         if (this.id) {
-            this.apiProvider.builder('levels/' + this.id).loader().get().subscribe(ingredient => {
-                this.form.controls['number'].setValue(ingredient.number);
-                this.form.controls['experience'].setValue(ingredient.experience);
+            this.apiProvider.builder('levels/' + this.id).loader().get().subscribe(level => {
+                this.form.controls['number'].setValue(level.number);
+                this.form.controls['experience'].setValue(level.experience);
             });
         }
     }

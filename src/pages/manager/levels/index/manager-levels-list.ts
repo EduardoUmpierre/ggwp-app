@@ -88,7 +88,7 @@ export class ManagerLevelsListPage {
         this.filteredItems = this.levels;
 
         if (val && val.trim() !== '') {
-            this.filteredItems = this.filteredItems.filter((item) => item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            this.filteredItems = this.filteredItems.filter((item) => item.number.indexOf(val) > -1);
         }
     }
 
