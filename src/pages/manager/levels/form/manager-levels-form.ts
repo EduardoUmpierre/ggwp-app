@@ -56,4 +56,8 @@ export class ManagerLevelsFormPage {
             this.apiProvider.builder('levels').loader().post(this.form.value).subscribe((res) => this.dismiss());
         }
     }
+
+    private submitDrops() {
+
+    }
 }

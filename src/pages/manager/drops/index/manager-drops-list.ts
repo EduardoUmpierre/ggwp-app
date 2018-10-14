@@ -93,7 +93,7 @@ export class ManagerDropsListPage {
     }
 
     /**
-     * Removes a ingredient
+     * Removes a drop
      *
      * @param {number} id
      * @param {number} key
