@@ -190,6 +190,27 @@ ion-list {
         font-size: 1.4rem;
         padding-left: 16px;
     }
+
+    // Full width
+    > .full-width  {
+
+        .input-wrapper {
+            flex-direction: column;
+
+            > ion-label {
+                margin-bottom: 0;
+            }
+
+            > select-searchable {
+                max-width: 100%;
+
+                > .select-searchable-value {
+                    min-height: 42px;
+                    padding-left: 0 !important;
+                }
+            }
+        }
+    }
 }
 
 // Styles

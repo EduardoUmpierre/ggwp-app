@@ -22,25 +22,25 @@
                 <ion-label stacked>Experiência</ion-label>
                 <ion-input type="text" formControlName="experience"></ion-input>
             </ion-item>
-
-            <ion-item>
-                <ion-label>Recompensas</ion-label>
-                <select-searchable
-                        item-content
-                        [(ngModel)]="selectedDrops"
-                        itemValueField="id"
-                        itemTextField="description"
-                        searchPlaceholder="Pesquisar"
-                        title="Recompensas"
-                        [(items)]="drops"
-                        [canSearch]="true"
-                        [isMultiple]="true"
-                        [shouldStoreItemValue]="true">
-                    <ng-template selectSearchableLabelTemplate>
-                        Recompensas
-                    </ng-template>
-                </select-searchable>
-            </ion-item>
         </form>
+
+        <ion-item class="full-width">
+            <ion-label>Recompensas</ion-label>
+            <select-searchable
+                    item-content
+                    [(ngModel)]="selectedDrops"
+                    itemValueField="id"
+                    itemTextField="description"
+                    searchPlaceholder="Pesquisar"
+                    title="Recompensas"
+                    [(items)]="drops"
+                    [canSearch]="true"
+                    [isMultiple]="true"
+                    [shouldStoreItemValue]="true">
+                <ng-template selectSearchableLabelTemplate>
+                    Recompensas
+                </ng-template>
+            </select-searchable>
+        </ion-item>
     </ion-list>
 </ion-content>
