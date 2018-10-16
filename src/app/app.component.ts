@@ -65,7 +65,7 @@ export class MyApp {
                 if (user.role && user.role >= 1) {
                     this.enabledMenu = 'manager-menu';
                     this.disabledMenu = 'main-menu';
-                    this.rootPage = 'ManagerProductsListPage';
+                    this.rootPage = 'ManagerDashboardPage';
                 } else {
                     this.rootPage = TabsPage;
                 }

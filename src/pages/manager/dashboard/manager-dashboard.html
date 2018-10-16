@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title>Dashboard</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="container">
+        <div class="detail-container">
+            <div class="detail-container__group" *ngIf="sum">
+                <ion-list>
+                    <ion-item class="list__container">
+                        <div class="list__header">
+                            <span>Clientes no estabelecimento</span>
+                        </div>
+
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-8>
+                                    <div class="detail-container__group">
+                                        <div class="detail-container__label">Quantidade</div>
+                                        <div class="detail-container__text">{{ sum.quantity }}</div>
+                                    </div>
+                                </ion-col>
+
+                                <ion-col col-4>
+                                    <div class="detail-container__group">
+                                        <div class="detail-container__label">Consumo atual</div>
+                                        <div class="detail-container__text">{{ sum.total | currency:'BRL':'R$' }}</div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </div>
+</ion-content>
