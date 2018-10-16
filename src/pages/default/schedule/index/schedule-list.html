@@ -1,0 +1,19 @@
+<ion-header>
+    <expandable-header [scrollArea]="mycontent" headerHeight="90"></expandable-header>
+</ion-header>
+
+<ion-content padding #mycontent>
+    <loader [loading]="loaded"></loader>
+
+    <ion-list class="list__content" *ngIf="schedule && loaded">
+        <ion-item *ngFor="let event of schedule" (click)="showModal(event.id)" text-wrap>
+            <div class="list__content-title">{{ event.title }}</div>
+
+            <div class="list__content-side" item-end>{{ event.date | date: "dd/MM/yyyy"  }}</div>
+        </ion-item>
+
+        <ion-item *ngIf="schedule && schedule.length == 0">
+            <div class="list__content-description">Nenhum evento encontrado</div>
+        </ion-item>
+    </ion-list>
+</ion-content>

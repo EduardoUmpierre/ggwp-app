@@ -6,7 +6,7 @@ import { NavParams } from "ionic-angular";
 })
 export class TabsPage {
     private menu = 'ProductsPage';
-    private schedule = 'BillsPage';
+    private schedule = 'SchedulePage';
     private bill = 'BillsPage';
     private music = 'BillsPage';
     private index;

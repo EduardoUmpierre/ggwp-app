@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button color="light" (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title *ngIf="event">Evento</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngIf="event">
+        <div class="title">{{ event.title }}</div>
+        <div class="subtitle">{{ event.date | date: "dd/MM/yyyy" }}</div>
+
+        <div class="description">
+            {{ event.description }}
+        </div>
+    </div>
+</ion-content>
