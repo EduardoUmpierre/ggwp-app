@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ title }}</ion-title>
+
+        <ion-buttons right>
+            <button ion-button icon-only [disabled]="!form.valid" (click)="submit()">
+                <ion-icon name="checkmark"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <ion-item>
+                <ion-label>Categoria</ion-label>
+                <ion-select formControlName="category">
+                    <ion-option value="0">Consumo</ion-option>
+                    <ion-option value="1">Interação</ion-option>
+                </ion-select>
+            </ion-item>
+        </form>
+
+        <ion-item *ngIf="form.controls.category.value === '0'">
+            <ion-label>Produto</ion-label>
+            <select-searchable
+                    item-content
+                    [(ngModel)]="product"
+                    itemValueField="id"
+                    itemTextField="name"
+                    searchPlaceholder="Pesquisar"
+                    title="Produto"
+                    [(items)]="products"
+                    [canSearch]="true"
+                    [shouldStoreItemValue]="true">
+                <ng-template selectSearchableLabelTemplate>
+                    Produto
+                </ng-template>
+            </select-searchable>
+        </ion-item>
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <ion-item *ngIf="form.controls.category.value === '1'">
+                <ion-label stacked>Tipo</ion-label>
+                <ion-input type="text" formControlName="entity"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Valor necessário</ion-label>
+                <ion-input type="text" formControlName="value"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Nome</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Experiência</ion-label>
+                <ion-input type="text" formControlName="experience"></ion-input>
+            </ion-item>
+        </form>
+
+        <ion-item>
+            <ion-label>Recompensa</ion-label>
+            <select-searchable
+                    item-content
+                    [(ngModel)]="drop"
+                    itemValueField="id"
+                    itemTextField="description"
+                    searchPlaceholder="Pesquisar"
+                    title="Recompensa"
+                    [(items)]="drops"
+                    [canSearch]="true"
+                    [shouldStoreItemValue]="true">
+                <ng-template selectSearchableLabelTemplate>
+                    Recompensa
+                </ng-template>
+            </select-searchable>
+        </ion-item>
+    </ion-list>
+</ion-content>
