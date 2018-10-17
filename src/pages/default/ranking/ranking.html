@@ -1,0 +1,18 @@
+<ion-header>
+    <expandable-header [scrollArea]="mycontent" headerHeight="90"></expandable-header>
+</ion-header>
+
+<ion-content padding #mycontent>
+    <loader [loading]="loaded"></loader>
+
+    <ion-list class="list__content" *ngIf="ranking && loaded">
+        <ion-item *ngFor="let user of ranking; let i = index" text-wrap>
+            <div class="list__content-title">{{ user.username }}</div>
+        </ion-item>
+
+        <ion-item *ngIf="ranking && ranking.length == 0">
+            <div class="list__content-description">Nenhum usuário no ranking</div>
+        </ion-item>
+    </ion-list>
+</ion-content>
+

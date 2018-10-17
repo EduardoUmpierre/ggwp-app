@@ -9,6 +9,8 @@ export class TabsPage {
     private schedule = 'SchedulePage';
     private bill = 'BillsPage';
     private music = 'BillsPage';
+    private ranking = 'RankingPage';
+
     private index;
 
     constructor(navParams: NavParams) {
