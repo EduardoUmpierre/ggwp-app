@@ -50,7 +50,7 @@ export class ManagerAchievementsFormPage {
                         this.form.controls['category'].setValue(achievement.category);
                         this.form.controls['value'].setValue(achievement.value);
 
-                        if (achievement.category === '0') {
+                        if (achievement.category == '0') {
                             this.product = achievement.entity;
                         }
 
