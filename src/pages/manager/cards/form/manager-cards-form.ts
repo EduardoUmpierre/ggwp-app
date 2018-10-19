@@ -34,9 +34,7 @@ export class ManagerCardsFormPage {
      */
     ionViewWillLoad() {
         if (this.id) {
-            this.apiProvider.builder('cards/' + this.id).loader().get().subscribe(card => {
-                this.form.controls['number'].setValue(card.number);
-            });
+            this.apiProvider.builder(`cards/${this.id}`).loader().get().subscribe(card => this.form.controls['number'].setValue(card.number));
         }
     }
 
@@ -49,7 +47,7 @@ export class ManagerCardsFormPage {
         if (this.id) {
             data = Object.assign(data, {id: this.id});
 
-            this.apiProvider.builder('cards/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`cards/${this.id}`).loader().put(data).subscribe((res) => this.dismiss());
         } else {
             this.apiProvider.builder('cards').loader().post(data).subscribe((res) => this.dismiss());
         }

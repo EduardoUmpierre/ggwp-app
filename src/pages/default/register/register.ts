@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Events, IonicPage, ViewController } from 'ionic-angular';
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ApiProvider } from "../../../providers/api/api";
-import { AuthProvider } from "../../../providers/auth/auth";
-import { Storage } from "@ionic/storage";
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiProvider } from '../../../providers/api/api';
+import { AuthProvider } from '../../../providers/auth/auth';
+import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
 

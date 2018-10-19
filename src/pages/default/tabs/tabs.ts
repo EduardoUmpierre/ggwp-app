@@ -5,13 +5,12 @@ import { NavParams } from "ionic-angular";
     templateUrl: 'tabs.html'
 })
 export class TabsPage {
-    private menu = 'ProductsPage';
-    private schedule = 'SchedulePage';
-    private bill = 'BillsPage';
-    private music = 'BillsPage';
-    private ranking = 'RankingPage';
-
     private index;
+    menu = 'ProductsPage';
+    schedule = 'SchedulePage';
+    bill = 'BillsPage';
+    music = 'BillsPage';
+    ranking = 'RankingPage';
 
     constructor(navParams: NavParams) {
         this.index = navParams.get('index')

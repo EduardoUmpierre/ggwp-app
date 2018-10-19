@@ -5,10 +5,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
-import { HttpNativeProvider } from "./http/http-native";
-import { HttpAngularProvider } from "./http/http-angular";
-import { Observable } from "rxjs/Observable";
-import { Storage } from "@ionic/storage";
+import { HttpNativeProvider } from './http/http-native';
+import { HttpAngularProvider } from './http/http-angular';
+import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class ApiProvider {
@@ -34,7 +34,7 @@ export class ApiProvider {
      * @returns {this}
      */
     builder(controller: string, resolve: boolean = true) {
-        this.url = this.urlBase + 'api/v1/' + controller;
+        this.url = `${this.urlBase}api/v1/${controller}`;
         this.resolveError = resolve;
 
         return this;
@@ -96,7 +96,7 @@ export class ApiProvider {
     get(params = {}) {
         return this.resolve(this.getApiToken().flatMap((res) => {
             const headers = {
-                'Authorization': 'Bearer ' + res
+                'Authorization': `Bearer ${res}`
             };
 
             return this.http.get(this.buildUrlParams(params), headers);
@@ -112,7 +112,7 @@ export class ApiProvider {
     post(params) {
         return this.resolve(this.getApiToken().flatMap(res => {
             const headers = {
-                'Authorization': 'Bearer ' + res,
+                'Authorization': `Bearer ${res}`,
                 'Content-Type': 'application/json'
             };
 
@@ -129,7 +129,7 @@ export class ApiProvider {
     put(params) {
         return this.resolve(this.getApiToken().flatMap(res => {
             const headers = {
-                'Authorization': 'Bearer ' + res,
+                'Authorization': `Bearer ${res}`,
                 'Content-Type': 'application/json'
             };
 
@@ -144,7 +144,7 @@ export class ApiProvider {
      */
     delete() {
         return this.resolve(this.getApiToken().flatMap(res => this.http.delete(this.url, {
-            'Authorization': 'Bearer ' + res
+            'Authorization': `Bearer ${res}`
         })));
     }
 
@@ -228,28 +228,19 @@ export class ApiProvider {
      * @param {object} error
      */
     private generateUniqueValidationErrorItems(error: object) {
+        const textFields = {
+            cpf: 'CPF',
+            email: 'e-mail',
+            phone: 'celular'
+        };
+
         let message = '<ul>';
 
         for (let item in error) {
-            let itemText;
-
-            switch (item) {
-                case 'cpf':
-                    itemText = 'CPF';
-                    break;
-                case 'email':
-                    itemText = 'e-mail'
-                    break;
-                case 'phone':
-                    itemText = 'celular';
-                    break;
-                default:
-                    itemText = item;
-                    break;
-            }
+            const itemText = textFields[item] || item;
 
             if (error[item].indexOf('validation.unique') !== -1) {
-                message += '<li>O ' + itemText + ' já está em uso.</li>';
+                message += `<li>O ${itemText} já está em uso.</li>`;
             }
         }
 

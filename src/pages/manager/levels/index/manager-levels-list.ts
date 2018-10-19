@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPage, NavController } from 'ionic-angular';
-import { ApiProvider } from "../../../../providers/api/api";
+import { IonicPage, NavController } from 'ionic-angular';
+import { ApiProvider } from '../../../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -12,8 +12,15 @@ export class ManagerLevelsListPage {
     filteredItems = [];
     loaded: boolean = false;
 
-    constructor(private navCtrl: NavController, private apiProvider: ApiProvider,
-                private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController) {
+    data = {
+        titleKey: 'number',
+        titleDecoration: 'Nível ',
+        subtitle: true,
+        subtitleKey: 'experience',
+        subtitleDecoration: 'XP '
+    };
+
+    constructor(private navCtrl: NavController, private apiProvider: ApiProvider) {
     }
 
     /**
@@ -21,8 +28,7 @@ export class ManagerLevelsListPage {
      */
     ionViewWillEnter() {
         this.apiProvider.builder('levels').loader().get().subscribe(res => {
-            this.levels = res;
-            this.filteredItems = res;
+            this.filteredItems = this.levels = res;
             this.loaded = true;
         });
     }
@@ -37,50 +43,6 @@ export class ManagerLevelsListPage {
     }
 
     /**
-     * @param {number} id
-     * @param {number} key
-     */
-    showOptions(id: number, key: number) {
-        let actionSheet = this.actionSheetCtrl.create({
-            title: 'Opções',
-            buttons: [
-                {
-                    text: 'Editar',
-                    handler: () => this.goToForm(id)
-                },
-                {
-                    text: 'Remover',
-                    role: 'destructive',
-                    handler: () => {
-                        let alert = this.alertCtrl.create({
-                            title: 'Confirmar exclusão',
-                            message: 'Deseja remover este nível?',
-                            buttons: [
-                                {
-                                    text: 'Não',
-                                    role: 'cancel'
-                                },
-                                {
-                                    text: 'Sim',
-                                    handler: () => this.remove(id, key)
-                                }
-                            ]
-                        });
-
-                        alert.present();
-                    }
-                },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel'
-                }
-            ]
-        });
-
-        actionSheet.present();
-    }
-
-    /**
      * @param {any} ev
      */
     filterItems(ev: any) {
@@ -88,7 +50,7 @@ export class ManagerLevelsListPage {
         this.filteredItems = this.levels;
 
         if (val && val.trim() !== '') {
-            this.filteredItems = this.filteredItems.filter((item) => item.number.toString().indexOf(val.toString()) > -1);
+            this.filteredItems = this.filteredItems.filter(item => item.number.toString().indexOf(val.toString()) > -1);
         }
     }
 
@@ -98,9 +60,16 @@ export class ManagerLevelsListPage {
      * @param {number} id
      * @param {number} key
      */
-    private remove(id: number, key: number) {
-        this.apiProvider.builder('levels/' + id).loader().delete().subscribe((res) => {
-            this.levels.splice(key, 1);
-        });
+    remove(id: number, key: number) {
+        this.apiProvider.builder(`levels/${id}`).loader().delete().subscribe(() => this.levels.splice(key, 1));
+    }
+
+    /**
+     * Edits a level
+     *
+     * @param {number} id
+     */
+    edit(id: number) {
+        this.goToForm(id);
     }
 }

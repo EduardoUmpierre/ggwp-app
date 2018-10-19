@@ -1,8 +1,8 @@
 <ion-header>
-    <expandable-header [scrollArea]="mycontent" headerHeight="90"></expandable-header>
+    <expandable-header></expandable-header>
 </ion-header>
 
-<ion-content padding #mycontent>
+<ion-content padding>
     <loader [loading]="loaded"></loader>
 
     <ion-list *ngIf="categories && loaded">
@@ -15,8 +15,9 @@
                 <ion-item *ngFor="let product of category.list" (click)="showModal(product.id)" text-wrap>
                     <div class="list__content-title">{{ product.name }}</div>
 
-                    <product-ingredients-list customClass="list__content-description list__content-description--text-wrap"
-                                              [ingredients]="product.ingredients"></product-ingredients-list>
+                    <product-ingredients-list
+                            customClass="list__content-description list__content-description--text-wrap"
+                            [ingredients]="product.ingredients"></product-ingredients-list>
 
                     <div class="list__content-side" item-end>{{ product.price | currency:'BRL':'R$' }}</div>
                 </ion-item>

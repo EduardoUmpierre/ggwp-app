@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController } from 'ionic-angular';
-import { ApiProvider } from "../../../../providers/api/api";
+import { ApiProvider } from '../../../../providers/api/api';
 
 @IonicPage()
 @Component({

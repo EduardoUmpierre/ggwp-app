@@ -1,0 +1,19 @@
+<ion-list class="list__content list__content-manager">
+    <ion-item *ngFor="let item of items; let i = index" (click)="showOptions(item.id, i)">
+        <div class="list__content-title">
+            {{ data.titleDecoration }}{{ item[data.titleKey] }}
+        </div>
+
+        <div class="list__content-side" item-end *ngIf="data.subtitle">
+            {{ data.subtitleDecoration }}{{ getSubtitle(item[data.subtitleKey]) }}
+        </div>
+
+        <button ion-button type="button" clear item-end icon-only class="options-button">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-item>
+
+    <ion-item *ngIf="items.length == 0 && loaded">
+        <div class="list__content-description">{{ emptyMessage }}</div>
+    </ion-item>
+</ion-list>

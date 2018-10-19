@@ -38,43 +38,27 @@ export class ManagerProductListComponent {
      * @param {number} key
      */
     private showOptions(id: number, key: number) {
-        let actionSheet = this.actionSheetCtrl.create({
+        const actionSheet = this.actionSheetCtrl.create({
             title: 'Opções',
             buttons: [
-                {
-                    text: 'Editar',
-                    handler: () => {
-                        this.onEdit.emit([id, key]);
-                    }
-                },
+                {text: 'Editar', handler: () => this.onEdit.emit([id, key])},
                 {
                     text: 'Remover',
                     role: 'destructive',
                     handler: () => {
-                        let alert = this.alertCtrl.create({
+                        const alert = this.alertCtrl.create({
                             title: 'Confirmar exclusão',
                             message: 'Deseja remover este produto?',
                             buttons: [
-                                {
-                                    text: 'Não',
-                                    role: 'cancel'
-                                },
-                                {
-                                    text: 'Sim',
-                                    handler: () => {
-                                        this.onRemove.emit([id, key]);
-                                    }
-                                }
+                                {text: 'Não', role: 'cancel'},
+                                {text: 'Sim', handler: () => this.onRemove.emit([id, key])}
                             ]
                         });
 
                         alert.present();
                     }
                 },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel'
-                }
+                {text: 'Cancelar', role: 'cancel'}
             ]
         });
 

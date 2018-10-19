@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, AlertController, IonicPage, NavController } from 'ionic-angular';
-import { ApiProvider } from "../../../../providers/api/api";
+import { IonicPage, NavController } from 'ionic-angular';
+import { ApiProvider } from '../../../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -12,8 +12,11 @@ export class ManagerDropsListPage {
     filteredItems = [];
     loaded: boolean = false;
 
-    constructor(private navCtrl: NavController, private apiProvider: ApiProvider,
-                private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController) {
+    data = {
+        titleKey: 'description'
+    };
+
+    constructor(private navCtrl: NavController, private apiProvider: ApiProvider) {
     }
 
     /**
@@ -21,8 +24,7 @@ export class ManagerDropsListPage {
      */
     ionViewWillEnter() {
         this.apiProvider.builder('drops').loader().get().subscribe(res => {
-            this.drops = res;
-            this.filteredItems = res;
+            this.filteredItems = this.drops = res;
             this.loaded = true;
         });
     }
@@ -37,50 +39,6 @@ export class ManagerDropsListPage {
     }
 
     /**
-     * @param {number} id
-     * @param {number} key
-     */
-    showOptions(id: number, key: number) {
-        let actionSheet = this.actionSheetCtrl.create({
-            title: 'Opções',
-            buttons: [
-                {
-                    text: 'Editar',
-                    handler: () => this.goToForm(id)
-                },
-                {
-                    text: 'Remover',
-                    role: 'destructive',
-                    handler: () => {
-                        let alert = this.alertCtrl.create({
-                            title: 'Confirmar exclusão',
-                            message: 'Deseja remover esta recompensa?',
-                            buttons: [
-                                {
-                                    text: 'Não',
-                                    role: 'cancel'
-                                },
-                                {
-                                    text: 'Sim',
-                                    handler: () => this.remove(id, key)
-                                }
-                            ]
-                        });
-
-                        alert.present();
-                    }
-                },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel'
-                }
-            ]
-        });
-
-        actionSheet.present();
-    }
-
-    /**
      * @param {any} ev
      */
     filterItems(ev: any) {
@@ -88,7 +46,7 @@ export class ManagerDropsListPage {
         this.filteredItems = this.drops;
 
         if (val && val.trim() !== '') {
-            this.filteredItems = this.filteredItems.filter((item) => item.description.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            this.filteredItems = this.filteredItems.filter(item => item.description.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
     }
 
@@ -98,9 +56,16 @@ export class ManagerDropsListPage {
      * @param {number} id
      * @param {number} key
      */
-    private remove(id: number, key: number) {
-        this.apiProvider.builder('drops/' + id).loader().delete().subscribe((res) => {
-            this.drops.splice(key, 1);
-        });
+    remove(id: number, key: number) {
+        this.apiProvider.builder(`drops/${id}`).loader().delete().subscribe(() => this.drops.splice(key, 1));
+    }
+
+    /**
+     * Edits a drop
+     *
+     * @param {number} id
+     */
+    edit(id: number) {
+        this.goToForm(id);
     }
 }

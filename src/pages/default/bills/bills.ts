@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController } from 'ionic-angular';
-import { ApiProvider } from "../../../providers/api/api";
-import { Storage } from "@ionic/storage";
-import { HttpErrorResponse } from "@angular/common/http";
+import { ApiProvider } from '../../../providers/api/api';
+import { Storage } from '@ionic/storage';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @IonicPage()
 @Component({
@@ -28,14 +28,12 @@ export class BillsPage {
                 this.bill = null;
                 this.loaded = true;
             } else {
-                this.apiProvider.builder('bills/' + res.id, false).get().subscribe(res => {
+                this.apiProvider.builder(`bills/${res.id}`, false).get().subscribe(res => {
                     if (res instanceof HttpErrorResponse || res.status === 404) {
                         this.bill = null;
                     } else {
                         this.bill = res;
                     }
-
-                    console.log(res);
 
                     this.loaded = true;
                 });

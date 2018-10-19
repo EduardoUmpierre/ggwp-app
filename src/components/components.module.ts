@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExpandableHeaderComponent } from "./default/expandable-header/expandable-header";
+import { ExpandableHeaderComponent } from './default/expandable-header/expandable-header';
 import { UserLevelComponent } from './default/user-level/user-level';
-import { IonicModule } from "ionic-angular";
+import { IonicModule } from 'ionic-angular';
 import { LoaderComponent } from './loader/loader';
-import { ManagerProductListComponent } from './manager-product-list/manager-product-list';
+import { ManagerProductListComponent } from './manager/product-list/manager-product-list';
 import { ProductIngredientsListComponent } from './default/product-ingredients-list/product-ingredients-list';
+import { ManagerGenericListComponent } from './manager/generic-list/manager-generic-list';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { ProductIngredientsListComponent } from './default/product-ingredients-l
         UserLevelComponent,
         LoaderComponent,
         ManagerProductListComponent,
-        ProductIngredientsListComponent
+        ProductIngredientsListComponent,
+        ManagerGenericListComponent
     ],
     imports: [
         CommonModule,
@@ -24,7 +26,8 @@ import { ProductIngredientsListComponent } from './default/product-ingredients-l
         UserLevelComponent,
         LoaderComponent,
         ManagerProductListComponent,
-        ProductIngredientsListComponent
+        ProductIngredientsListComponent,
+        ManagerGenericListComponent
     ]
 })
 export class ComponentsModule {

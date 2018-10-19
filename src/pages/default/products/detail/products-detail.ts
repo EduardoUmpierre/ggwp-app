@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
-import { ApiProvider } from "../../../../providers/api/api";
-import { Product } from "../../../../models/Product";
+import { ApiProvider } from '../../../../providers/api/api';
+import { Product } from '../../../../models/Product';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,7 @@ export class ProductsDetailPage {
      * Loads the product data on page load
      */
     ionViewDidLoad() {
-        this.apiProvider.builder('products/' + this.navParams.get('id')).loader().get().subscribe(res => {
+        this.apiProvider.builder(`products/${this.navParams.get('id')}`).loader().get().subscribe(res => {
             this.product = new Product(res.id, res.name, res.price, res.experience, res.categories_id, '', res.ingredients);
         });
     }

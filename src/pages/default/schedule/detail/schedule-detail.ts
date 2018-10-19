@@ -17,9 +17,7 @@ export class ScheduleDetailPage {
      * Loads the event data on page load
      */
     ionViewDidLoad() {
-        this.apiProvider.builder('schedule/' + this.navParams.get('id')).loader().get().subscribe(res => {
-            this.event = res;
-        });
+        this.apiProvider.builder(`schedule/${this.navParams.get('id')}`).loader().get().subscribe(res => this.event = res);
     }
 
     /**
