@@ -17,18 +17,7 @@
 <ion-content padding>
     <ion-searchbar (ionInput)="filterItems($event)" placeholder="Pesquisar"></ion-searchbar>
 
-    <ion-list class="list__content list__content-manager">
-        <ion-item *ngFor="let user of filteredItems; let i = index" (click)="showOptions(user.id, i)">
-            <div class="list__content-title">{{ user.name }}</div>
-            <div class="list__content-side" item-end>{{ user.cpf }}</div>
-
-            <button ion-button type="button" clear item-end icon-only class="options-button">
-                <ion-icon name="more"></ion-icon>
-            </button>
-        </ion-item>
-
-        <ion-item *ngIf="filteredItems.length == 0 && loaded">
-            <div class="list__content-description">Nenhum usuário encontrado</div>
-        </ion-item>
-    </ion-list>
+    <manager-generic-list [items]="filteredItems" [data]="data" (onRemove)="remove($event[0], $event[1])"
+                          (onEdit)="edit($event[0])" [loaded]="loaded"
+                          emptyMessage="Nenhum usuário encontrado"></manager-generic-list>
 </ion-content>

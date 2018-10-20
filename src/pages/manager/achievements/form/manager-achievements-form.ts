@@ -44,7 +44,7 @@ export class ManagerAchievementsFormPage {
                 this.products = products;
 
                 if (this.id) {
-                    this.apiProvider.builder('achievements/' + this.id).loader().get().subscribe(achievement => {
+                    this.apiProvider.builder(`achievements/${this.id}`).loader().get().subscribe(achievement => {
                         this.form.controls['name'].setValue(achievement.name);
                         this.form.controls['experience'].setValue(achievement.experience);
                         this.form.controls['category'].setValue(achievement.category);
@@ -79,9 +79,9 @@ export class ManagerAchievementsFormPage {
         if (this.id) {
             data = Object.assign(data, {id: this.id});
 
-            this.apiProvider.builder('achievements/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`achievements/${this.id}`).loader().put(data).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('achievements').loader().post(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('achievements').loader().post(data).subscribe(() => this.dismiss());
         }
     }
 

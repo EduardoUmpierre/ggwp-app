@@ -23,7 +23,7 @@
         </button>
     </ion-item>
 
-    <ion-item *ngIf="products.length == 0">
+    <ion-item *ngIf="products.length == 0 && loaded">
         <div class="list__content-description">{{ emptyMessage }}</div>
     </ion-item>
 </ion-list>

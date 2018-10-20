@@ -63,7 +63,7 @@ export class ManagerBillsFormPage {
                 this.activeUsers = users.filter((item) => item.is_active == 1);
 
                 if (this.id) {
-                    this.apiProvider.builder('bills/' + this.id).loader().get().subscribe(bill => {
+                    this.apiProvider.builder(`bills/${this.id}`).loader().get().subscribe(bill => {
                         this.form.controls['users_id'].setValue(bill.user);
                         this.form.controls['cards_id'].setValue(bill.card);
                     });
@@ -84,9 +84,9 @@ export class ManagerBillsFormPage {
      */
     submit() {
         if (this.id) {
-            this.apiProvider.builder('bills/' + this.id).loader().put(Object.assign({}, {id: this.id}, this.dataNormalizer())).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`bills/${this.id}`).loader().put(Object.assign({}, {id: this.id}, this.dataNormalizer())).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('bills').loader().post(this.dataNormalizer()).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('bills').loader().post(this.dataNormalizer()).subscribe(() => this.dismiss());
         }
     }
 

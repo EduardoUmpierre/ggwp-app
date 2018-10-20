@@ -10,6 +10,7 @@ export class ManagerProductListComponent {
     @Input('layout') layout: string;
     @Input('emptyMessage') emptyMessage: string;
     @Input('options') options: boolean = true;
+    @Input('loaded') loaded: boolean = false;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
     @Output() onEdit: EventEmitter<any> = new EventEmitter();

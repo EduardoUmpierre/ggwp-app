@@ -24,9 +24,9 @@ export class ManagerBillsDetailPage {
      */
     ionViewWillEnter() {
         if (this.id) {
-            this.apiProvider.builder('bills/' + this.id).loader().get().subscribe(res => {
+            this.apiProvider.builder(`bills/${this.id}`).loader().get().subscribe(res => {
                 this.bill = res;
-                this.title = 'Comanda #' + res.card.number;
+                this.title = `Comanda #${res.card.number}`;
                 this.total = parseFloat(res.total);
                 this.loaded = true;
             });
@@ -66,7 +66,7 @@ export class ManagerBillsDetailPage {
                 {
                     text: 'Sim',
                     handler: () => {
-                        this.apiProvider.builder('bills/checkout').loader().post({id: id}).subscribe(res => this.navCtrl.pop());
+                        this.apiProvider.builder('bills/checkout').loader().post({id: id}).subscribe(() => this.navCtrl.pop());
                     }
                 }
             ]
@@ -82,7 +82,7 @@ export class ManagerBillsDetailPage {
     delete(id: number) {
         const confirm = this.alertCtrl.create({
             title: 'Excluir comanda',
-            message: 'Você confirma a exclusão da comanda #' + this.bill.card.number + '?',
+            message: `Você confirma a exclusão da comanda #${this.bill.card.number}?`,
             buttons: [
                 {
                     text: 'Não',
@@ -91,7 +91,7 @@ export class ManagerBillsDetailPage {
                 {
                     text: 'Sim',
                     handler: () => {
-                        this.apiProvider.builder('bills/' + id).loader().delete().subscribe(res => this.navCtrl.pop());
+                        this.apiProvider.builder(`bills/${id}`).loader().delete().subscribe(() => this.navCtrl.pop());
                     }
                 }
             ]
@@ -107,7 +107,7 @@ export class ManagerBillsDetailPage {
      * @param {number} key
      */
     remove(id: number, key: number) {
-        this.apiProvider.builder('bills/' + this.id + '/products/' + id).loader().delete().subscribe((res) => {
+        this.apiProvider.builder(`bills/${this.id}/products/${id}`).loader().delete().subscribe((res) => {
             this.bill.products.splice(key, 1);
             this.total = parseFloat(res.total);
         });

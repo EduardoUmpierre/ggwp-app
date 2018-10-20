@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActionSheetController, AlertController } from 'ionic-angular';
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 
 @Component({
     selector: 'manager-generic-list',
@@ -9,6 +11,7 @@ export class ManagerGenericListComponent {
     @Input('items') items: any[];
     @Input('data') data: any;
     @Input('emptyMessage') emptyMessage: string;
+    @Input('loaded') loaded: boolean = false;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
     @Output() onEdit: EventEmitter<any> = new EventEmitter();
@@ -57,6 +60,12 @@ export class ManagerGenericListComponent {
     getSubtitle(subtitle: any) {
         if (this.data.subtitleMap) {
             return this.data.subtitleMap[subtitle];
+        }
+
+        if (this.data.subtitleFormat) {
+            if (this.data.subtitleFormat === 'date') {
+                return moment(this.data.subtitleFormat, 'YYYY-MM-DD').format('DD/MM/YYYY');
+            }
         }
 
         return subtitle;

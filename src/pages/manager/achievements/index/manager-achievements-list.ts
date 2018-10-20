@@ -12,6 +12,10 @@ export class ManagerAchievementsListPage {
     filteredItems = [];
     loaded: boolean = false;
 
+    data = {
+        titleKey: 'name'
+    };
+
     constructor(private navCtrl: NavController, private apiProvider: ApiProvider,
                 private actionSheetCtrl: ActionSheetController, private alertCtrl: AlertController) {
     }
@@ -21,8 +25,7 @@ export class ManagerAchievementsListPage {
      */
     ionViewWillEnter() {
         this.apiProvider.builder('achievements').loader().get().subscribe(res => {
-            this.achievements = res;
-            this.filteredItems = res;
+            this.filteredItems = this.achievements = res;
             this.loaded = true;
         });
     }
@@ -99,8 +102,6 @@ export class ManagerAchievementsListPage {
      * @param {number} key
      */
     private remove(id: number, key: number) {
-        this.apiProvider.builder('achievements/' + id).loader().delete().subscribe((res) => {
-            this.achievements.splice(key, 1);
-        });
+        this.apiProvider.builder(`achievements/${id}`).loader().delete().subscribe(() => this.achievements.splice(key, 1));
     }
 }

@@ -3,11 +3,12 @@ import { IonicPageModule } from 'ionic-angular';
 import { ManagerScheduleFormPage } from './manager-schedule-form';
 
 @NgModule({
-  declarations: [
-    ManagerScheduleFormPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(ManagerScheduleFormPage),
-  ],
+    declarations: [
+        ManagerScheduleFormPage,
+    ],
+    imports: [
+        IonicPageModule.forChild(ManagerScheduleFormPage),
+    ],
 })
-export class ManagerScheduleFormPageModule {}
+export class ManagerScheduleFormPageModule {
+}

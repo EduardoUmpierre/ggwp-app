@@ -53,7 +53,7 @@ export class ManagerBillsOrderFormPage {
                             'products': this.normalizeData()
                         };
 
-                        this.apiProvider.builder('bills/products').loader().post(data).subscribe(res => this.navCtrl.pop());
+                        this.apiProvider.builder('bills/products').loader().post(data).subscribe(() => this.navCtrl.pop());
                     }
                 }
             ]

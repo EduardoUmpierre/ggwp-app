@@ -13,7 +13,7 @@ import { DecimalPipe } from "@angular/common";
 })
 export class ManagerProductsFormPage {
     private id: number;
-    private product: Product;
+    product: Product;
     title = 'Novo produto';
     categories = [];
     ingredients = [];
@@ -47,7 +47,7 @@ export class ManagerProductsFormPage {
                 this.ingredients = ingredients;
 
                 if (this.id) {
-                    this.apiProvider.builder('products/' + this.id).loader().get().subscribe(product => {
+                    this.apiProvider.builder(`products/${this.id}`).loader().get().subscribe(product => {
                         this.form.controls['name'].setValue(product.name);
                         this.form.controls['price'].setValue(this.decimalPipe.transform(product.price, '1.2-2', 'pt-BR'));
                         this.form.controls['experience'].setValue(product.experience);
@@ -79,9 +79,9 @@ export class ManagerProductsFormPage {
         if (this.id) {
             data = Object.assign(data, {id: this.id});
 
-            this.apiProvider.builder('products/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`products/${this.id}`).loader().put(data).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('products').loader().post(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('products').loader().post(data).subscribe(() => this.dismiss());
         }
     }
 

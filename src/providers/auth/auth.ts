@@ -28,7 +28,7 @@ export class AuthProvider extends ApiProvider {
         data = this.buildAuthForm(data);
         data.grant_type = 'password';
 
-        return this.http.post(this.urlBase + 'oauth/token', data).toPromise().then(res => res);
+        return this.http.post(`${this.urlBase}oauth/token`, data).toPromise().then(res => res);
     }
 
     /**
@@ -50,7 +50,7 @@ export class AuthProvider extends ApiProvider {
         data = this.buildAuthForm(data);
         data.grant_type = 'refresh_token';
 
-        let observable = this.http.post(this.urlBase + 'oauth/token', data);
+        let observable = this.http.post(`${this.urlBase}oauth/token`, data);
         return this.resolve(observable);
     }
 

@@ -30,7 +30,7 @@ export class ManagerScheduleFormPage {
 
     ionViewWillLoad() {
         if (this.id) {
-            this.apiProvider.builder('schedule/' + this.id).loader().get().subscribe(schedule => {
+            this.apiProvider.builder(`schedule/${this.id}`).loader().get().subscribe(schedule => {
                 this.form.controls['title'].setValue(schedule.title);
                 this.form.controls['description'].setValue(schedule.description);
                 this.form.controls['date'].setValue(schedule.date);
@@ -47,9 +47,9 @@ export class ManagerScheduleFormPage {
         if (this.id) {
             data = Object.assign(data, {id: this.id});
 
-            this.apiProvider.builder('schedule/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`schedule/${this.id}`).loader().put(data).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('schedule').loader().post(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('schedule').loader().post(data).subscribe(() => this.dismiss());
         }
     }
 

@@ -18,5 +18,6 @@
     <ion-searchbar (ionInput)="filterItems($event)" placeholder="Pesquisar"></ion-searchbar>
 
     <manager-generic-list [items]="filteredItems" [data]="data" (onRemove)="remove($event[0], $event[1])"
-                          (onEdit)="edit($event[0])" emptyMessage="Nenhum cartão encontrado"></manager-generic-list>
+                          (onEdit)="edit($event[0])" emptyMessage="Nenhum cartão encontrado"
+                          [loaded]="loaded"></manager-generic-list>
 </ion-content>

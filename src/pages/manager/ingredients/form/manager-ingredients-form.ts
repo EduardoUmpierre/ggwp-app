@@ -39,7 +39,7 @@ export class ManagerIngredientsFormPage {
      */
     ionViewWillLoad() {
         if (this.id) {
-            this.apiProvider.builder('ingredients/' + this.id).loader().get().subscribe(ingredient => {
+            this.apiProvider.builder(`ingredients/${this.id}`).loader().get().subscribe(ingredient => {
                 this.form.controls['name'].setValue(ingredient.name);
                 this.form.controls['allergenic'].setValue(ingredient.allergenic);
             });
@@ -51,9 +51,9 @@ export class ManagerIngredientsFormPage {
      */
     submit() {
         if (this.id) {
-            this.apiProvider.builder('ingredients/' + this.id).loader().put(Object.assign({}, {id: this.id}, this.form.value)).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`ingredients/${this.id}`).loader().put(Object.assign({}, {id: this.id}, this.form.value)).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('ingredients').loader().post(this.form.value).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('ingredients').loader().post(this.form.value).subscribe(() => this.dismiss());
         }
     }
 }

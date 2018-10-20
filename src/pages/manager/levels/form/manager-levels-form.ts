@@ -44,7 +44,7 @@ export class ManagerLevelsFormPage {
             this.drops = drops;
 
             if (this.id) {
-                this.apiProvider.builder('levels/' + this.id).loader().get().subscribe(level => {
+                this.apiProvider.builder(`levels/${this.id}`).loader().get().subscribe(level => {
                     this.form.controls['number'].setValue(level.number);
                     this.form.controls['experience'].setValue(level.experience);
 
@@ -72,7 +72,7 @@ export class ManagerLevelsFormPage {
         if (this.id) {
             data = Object.assign({}, {id: this.id}, data);
 
-            this.apiProvider.builder('levels/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`levels/${this.id}`).loader().put(data).subscribe((res) => this.dismiss());
         } else {
             this.apiProvider.builder('levels').loader().post(data).subscribe((res) => this.dismiss());
         }

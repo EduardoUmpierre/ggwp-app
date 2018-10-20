@@ -37,7 +37,7 @@ export class ManagerUsersFormPage {
 
     ionViewWillLoad() {
         if (this.id) {
-            this.apiProvider.builder('users/' + this.id).loader().get().subscribe(user => {
+            this.apiProvider.builder(`users/${this.id}`).loader().get().subscribe(user => {
                 this.form.controls['name'].setValue(user.name);
                 this.form.controls['username'].setValue(user.username);
                 this.form.controls['email'].setValue(user.email);
@@ -59,9 +59,9 @@ export class ManagerUsersFormPage {
         if (this.id) {
             data = Object.assign(data, {id: this.id});
 
-            this.apiProvider.builder('users/' + this.id).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`users/${this.id}`).loader().put(data).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('users').loader().post(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('users').loader().post(data).subscribe(() => this.dismiss());
         }
     }
 

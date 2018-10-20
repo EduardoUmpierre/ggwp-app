@@ -47,9 +47,9 @@ export class ManagerCardsFormPage {
         if (this.id) {
             data = Object.assign(data, {id: this.id});
 
-            this.apiProvider.builder(`cards/${this.id}`).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`cards/${this.id}`).loader().put(data).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('cards').loader().post(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('cards').loader().post(data).subscribe(() => this.dismiss());
         }
     }
 
