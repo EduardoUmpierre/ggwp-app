@@ -20,6 +20,9 @@ import { AuthProvider } from "../providers/auth/auth";
 import { ComponentsModule } from "../components/components.module";
 import { DecimalPipe, registerLocaleData } from "@angular/common";
 import localePt from '@angular/common/locales/pt';
+import { OneSignal } from "@ionic-native/onesignal";
+import { Autostart } from "@ionic-native/autostart";
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 registerLocaleData(localePt);
 
@@ -58,6 +61,9 @@ registerLocaleData(localePt);
         HttpAngularProvider,
         HttpNativeProvider,
         HTTP,
+        OneSignal,
+        Autostart,
+        BackgroundMode,
         {provide: LOCALE_ID, useValue: "pt-BR"},
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]

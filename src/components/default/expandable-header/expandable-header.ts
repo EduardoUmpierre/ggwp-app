@@ -10,7 +10,14 @@ export class ExpandableHeaderComponent {
     private user = null;
 
     constructor(private storage: Storage, private modalCtrl: ModalController, private events: Events) {
-        events.subscribe('user:updated', (user) => this.updateUserData());
+        events.subscribe('user:updated', () => this.updateUserData());
+    }
+
+    /**
+     * Update user object
+     */
+    ngOnInit() {
+        this.updateUserData();
     }
 
     /**
@@ -31,15 +38,13 @@ export class ExpandableHeaderComponent {
      * Calls the login page
      */
     loginModal() {
-        const modal = this.modalCtrl.create('LoginPage');
-        modal.present();
+        this.modalCtrl.create('LoginPage').present();
     }
 
     /**
      * Calls the profile page
      */
     goToProfile() {
-        const modal = this.modalCtrl.create('ProfilePage');
-        modal.present();
+        this.modalCtrl.create('ProfilePage').present();
     }
 }

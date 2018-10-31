@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { App, Events, MenuController, ModalController, Nav, Platform } from 'ionic-angular';
+import { AlertController, App, Events, MenuController, ModalController, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/default/tabs/tabs';
-import { Storage } from "@ionic/storage";
-import { AuthProvider } from "../providers/auth/auth";
+import { Storage } from '@ionic/storage';
+import { AuthProvider } from '../providers/auth/auth';
+import { OneSignal } from "@ionic-native/onesignal";
+import { Autostart } from "@ionic-native/autostart";
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 @Component({
     templateUrl: 'app.html'
@@ -19,20 +22,45 @@ export class MyApp {
 
     rootPage: any;
 
-    constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private events: Events,
-                private storage: Storage, private menu: MenuController, private authProvider: AuthProvider,
-                private modalCtrl: ModalController, private appCtrl: App) {
+    constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+                private events: Events, private storage: Storage, private menu: MenuController,
+                private authProvider: AuthProvider, private modalCtrl: ModalController, private appCtrl: App,
+                private oneSignal: OneSignal, autoStart: Autostart, backgroundMode: BackgroundMode,
+                private alertCtrl: AlertController) {
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-        });
 
-        this.updateActiveMenu();
+            if (this.authProvider.isApp()) {
+                autoStart.enable();
+                backgroundMode.enable();
 
-        events.subscribe('user:updated', (user, time) => {
-            this.updateActiveMenu();
+                this.oneSignal.startInit('2758eb87-0840-4921-8003-53f01423a71c', '179976682819');
+
+                this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+                this.oneSignal.handleNotificationReceived().subscribe((data) => {
+                    // do something when notification is received
+                    console.log('Notification received', data);
+                    this.handleNotification(data);
+                });
+
+                this.oneSignal.handleNotificationOpened().subscribe((data) => {
+                    // do something when a notification is opened
+                    console.log('Notification opened', data);
+                    this.handleNotification(data);
+                });
+
+                this.oneSignal.endInit();
+            }
+
+            events.subscribe('user:updated', (user, time) => {
+                this.updateActiveMenu();
+            });
+
+            this.events.publish('user:updated', true);
         });
     }
 
@@ -40,14 +68,14 @@ export class MyApp {
      * @param page
      */
     openPage(page) {
-        this.nav.setRoot(page);
+        this.nav.setRoot(page).then(() => this.events.publish('user:updated', true));
     }
 
     /**
      * @param index
      */
     openTabPage(index) {
-        this.nav.push(TabsPage, {index: index});
+        this.nav.push(TabsPage, {index: index}).then(() => this.events.publish('user:updated', true));
     }
 
     /**
@@ -60,6 +88,10 @@ export class MyApp {
             this.disabledMenu = 'manager-menu';
 
             if (user) {
+                if (this.authProvider.isApp()) {
+                    this.oneSignal.sendTags({user_id: user.id, user_email: user.email});
+                }
+
                 this.user = user;
 
                 if (user.role && user.role >= 1) {
@@ -75,7 +107,7 @@ export class MyApp {
 
             this.menu.enable(true, this.enabledMenu);
             this.menu.enable(false, this.disabledMenu);
-        })
+        });
     }
 
     /**
@@ -108,5 +140,33 @@ export class MyApp {
      */
     profile() {
         this.modalCtrl.create('ProfilePage').present();
+    }
+
+    /**
+     * Calls the level up modal
+     *
+     * @param data
+     */
+    handleNotification(data) {
+        const payload = data.notification.payload;
+
+        const alert = this.alertCtrl.create({
+            title: payload.title,
+            message: payload.body,
+            buttons: [
+                {
+                    text: 'Fechar',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Ver recompensa',
+                    handler: () => {
+                        this.profile();
+                    }
+                }
+            ]
+        });
+
+        alert.present();
     }
 }
