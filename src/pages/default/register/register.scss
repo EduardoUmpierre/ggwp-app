@@ -1,3 +1,20 @@
 page-register {
 
+    form {
+
+        > ion-list {
+            margin-bottom: 0 !important;
+
+            > ion-item {
+
+                ion-label {
+                    margin-bottom: 0 !important;
+
+                    > button {
+                        margin: 1rem 0 0 !important;
+                    }
+                }
+            }
+        }
+    }
 }

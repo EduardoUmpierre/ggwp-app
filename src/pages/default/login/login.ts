@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, NavParams, ViewController, Events } from 'ionic-angular';
+import { AlertController, IonicPage, NavParams, ViewController, Events, ModalController } from 'ionic-angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../../providers/auth/auth";
 import { Storage } from "@ionic/storage";
@@ -15,18 +15,15 @@ export class LoginPage {
 
     constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public navParams: NavParams,
                 private AuthProvider: AuthProvider, private formBuilder: FormBuilder, private storage: Storage,
-                private events: Events) {
+                private events: Events, private modalCtrl: ModalController) {
         this.form = this.formBuilder.group({
             username: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
         });
     }
 
-    dismiss() {
-        this.viewCtrl.dismiss();
-    }
-
     /**
+     * Performs the login
      *
      * @param e
      */
@@ -87,5 +84,21 @@ export class LoginPage {
 
                 return res;
             });
+    }
+
+    /**
+     * Calls the registration page
+     */
+    register() {
+        const modal = this.modalCtrl.create('RegisterPage');
+        modal.onDidDismiss(() => this.dismiss());
+        modal.present();
+    }
+
+    /**
+     * Dismiss the modal
+     */
+    dismiss() {
+        this.viewCtrl.dismiss();
     }
 }

@@ -14,3 +14,7 @@ ion-tabs > .tabbar {
         }
     }
 }
+
+a[disabled], button[disabled], [ion-button][disabled] {
+    opacity: 0.2 !important;
+}
