@@ -21,11 +21,11 @@
             </div>
 
             <ion-list class="list__content">
-                <ion-item *ngFor="let badge of badges" text-wrap>
+                <ion-item *ngFor="let badge of profile.badges" text-wrap>
                     <div class="list__content-title">{{ badge.name }}</div>
                 </ion-item>
 
-                <ion-item *ngIf="badges && badges.length == 0">
+                <ion-item *ngIf="profile.badges && profile.badges.length == 0">
                     <div class="list__content-description">Nenhuma medalha</div>
                 </ion-item>
             </ion-list>
@@ -38,11 +38,11 @@
             </div>
 
             <ion-list class="list__content">
-                <ion-item *ngFor="let drop of drops" text-wrap>
+                <ion-item *ngFor="let drop of profile.drops" text-wrap>
                     <div class="list__content-title">{{ drop.description }}</div>
                 </ion-item>
 
-                <ion-item *ngIf="drops && drops.length == 0">
+                <ion-item *ngIf="profile.drops && profile.drops.length == 0">
                     <div class="list__content-description">Nenhuma recompensa</div>
                 </ion-item>
             </ion-list>
@@ -55,12 +55,12 @@
             </div>
 
             <ion-list class="list__content">
-                <ion-item *ngFor="let achievement of achievements" text-wrap>
+                <ion-item *ngFor="let achievement of profile.achievements" text-wrap>
                     <div class="list__content-title">{{ achievement.name }}</div>
                     <div class="list__content-side" item-end>{{ achievement.created_at | date: 'dd/MM/yyyy' }}</div>
                 </ion-item>
 
-                <ion-item *ngIf="achievements && achievements.length == 0">
+                <ion-item *ngIf="profile.achievements && profile.achievements.length == 0">
                     <div class="list__content-description">Nenhuma conquista</div>
                 </ion-item>
             </ion-list>

@@ -10,9 +10,11 @@ import { ApiProvider } from '../../../providers/api/api';
 })
 export class ProfilePage {
     private user;
-    private achievements;
-    private badges;
-    private drops;
+    private profile = {
+        drops: [],
+        badges: [],
+        achievements: []
+    };
 
     constructor(private storage: Storage, private apiProvider: ApiProvider, private viewCtrl: ViewController) {
     }
@@ -24,17 +26,7 @@ export class ProfilePage {
         this.storage.get('user').then((user) => {
             this.user = user;
 
-            this.apiProvider.builder(`users/${user.id}/badges`).get().subscribe(badges => {
-                this.badges = badges;
-
-                this.apiProvider.builder(`users/${user.id}/drops`).get().subscribe(drops => {
-                    this.drops = drops;
-
-                    this.apiProvider.builder(`users/${user.id}/achievements`).get().subscribe(achievements => {
-                        this.achievements = achievements;
-                    });
-                });
-            });
+            this.apiProvider.builder(`users/${user.id}/profile`).get().subscribe(profile => this.profile = profile);
         });
     }
 
