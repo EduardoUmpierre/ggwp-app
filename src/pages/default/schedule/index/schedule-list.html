@@ -2,18 +2,28 @@
     <expandable-header></expandable-header>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <loader [loading]="loaded"></loader>
 
-    <ion-list class="list__content" *ngIf="schedule && loaded">
-        <ion-item *ngFor="let event of schedule" (click)="showModal(event.id)" text-wrap>
-            <div class="list__content-title">{{ event.title }}</div>
+    <div *ngIf="schedule && loaded">
+        <ion-card *ngFor="let event of schedule" (click)="showModal(event.id)" text-wrap class="event">
+            <img src="../assets/imgs/party.png"/>
 
-            <div class="list__content-side" item-end>{{ event.date | date: "dd/MM/yyyy" }}</div>
-        </ion-item>
+            <ion-card-content>
+                <ion-card-title class="event--title">
+                    {{ event.title }}
 
-        <ion-item *ngIf="schedule && schedule.length == 0">
-            <div class="list__content-description">Nenhum evento encontrado</div>
-        </ion-item>
-    </ion-list>
+                    <p class="event--date">{{ event.date | date: "dd/MM/yyyy" }}</p>
+                </ion-card-title>
+
+                <p class="event--description">{{ event.description }}</p>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-list class="list__content">
+            <ion-item *ngIf="schedule && schedule.length == 0">
+                <div class="list__content-description">Nenhum evento encontrado</div>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>

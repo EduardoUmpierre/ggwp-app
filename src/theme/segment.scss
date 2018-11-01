@@ -21,6 +21,7 @@ ion-tabs > .tabbar > a {
 
     > .tab-button-text {
         font-size: 1rem;
+        font-weight: 600;
         transform: none !important;
     }
 
@@ -33,7 +34,6 @@ ion-tabs > .tabbar > a {
 
         > .tab-button-text {
             color: map-get($colors, secondary) !important;
-            font-weight: 700;
         }
     }
 }

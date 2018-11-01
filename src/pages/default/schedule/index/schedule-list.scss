@@ -1,3 +1,41 @@
 page-schedule-list {
+    .scroll-content > div {
+        padding: 5px;
+    }
 
+    ion-card {
+        margin-bottom: 0 !important;
+        margin-top: 2rem !important;
+    }
+
+    .event {
+
+        > ion-card-content {
+            padding: 1.5rem;
+
+            > .event--title {
+                align-items: baseline;
+                display: flex;
+                font-size: 1.6rem;
+                font-weight: 600;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+                margin-top: 0;
+                padding: 0;
+                text-transform: uppercase;
+
+                > .event--date {
+                    font-style: italic;
+                    line-height: 1;
+                    margin: 0 0 0 1rem;
+                }
+            }
+
+            > .event--description {
+                font-size: 1.2rem;
+                line-height: 1.5;
+                margin: 0;
+            }
+        }
+    }
 }

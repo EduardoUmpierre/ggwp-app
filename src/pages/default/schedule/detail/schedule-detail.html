@@ -10,13 +10,18 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <div *ngIf="event">
-        <div class="title">{{ event.title }}</div>
-        <div class="subtitle">{{ event.date | date: "dd/MM/yyyy" }}</div>
+<ion-content>
+    <ion-card *ngIf="event" class="event">
+        <img src="../assets/imgs/party.png"/>
 
-        <div class="description">
-            {{ event.description }}
-        </div>
-    </div>
+        <ion-card-content>
+            <p class="event--date">{{ event.date | date: "dd/MM/yyyy" }}</p>
+
+            <ion-card-title class="event--title">
+                {{ event.title }}
+            </ion-card-title>
+
+            <p class="event--description">{{ event.description }}</p>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
