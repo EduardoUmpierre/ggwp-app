@@ -91,7 +91,11 @@ export class LoginPage {
      */
     register() {
         const modal = this.modalCtrl.create('RegisterPage');
-        modal.onDidDismiss(() => this.dismiss());
+        modal.onDidDismiss((data) => {
+            if (data.dismiss) {
+                this.dismiss();
+            }
+        });
         modal.present();
     }
 

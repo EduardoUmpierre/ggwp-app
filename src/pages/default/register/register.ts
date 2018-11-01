@@ -31,8 +31,8 @@ export class RegisterPage {
     /**
      * Dismiss the view
      */
-    dismiss() {
-        this.viewCtrl.dismiss();
+    dismiss(dismiss: boolean = false) {
+        this.viewCtrl.dismiss({dismiss: dismiss});
     }
 
     /**
@@ -55,7 +55,7 @@ export class RegisterPage {
                         this.authProvider.getUser().subscribe((user) => {
                             this.storage.set('user', user).then(() => {
                                 this.events.publish('user:updated', true);
-                                this.dismiss();
+                                this.dismiss(true);
                             });
                         });
                     });
