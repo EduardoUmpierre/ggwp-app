@@ -25,4 +25,14 @@ export class RankingPage {
             this.loaded = true;
         });
     }
+
+    /**
+     * Verifies if the user is in the podium
+     *
+     * @param i
+     * @returns {boolean}
+     */
+    private isInPodium(i) {
+        return i < 3;
+    }
 }

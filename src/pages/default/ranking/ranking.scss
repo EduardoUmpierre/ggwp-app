@@ -1,3 +1,36 @@
 page-ranking {
 
+    ion-item {
+
+        > [item-start] {
+            margin: 0 10px 0 0 !important;
+            min-width: 4rem !important;
+            text-align: center;
+        }
+
+        > ion-icon[item-start] + .item-inner {
+            margin: 0 !important;
+        }
+
+        &:nth-child(1) {
+            color: #ffdc3a;
+        }
+
+        &:nth-of-type(2) {
+            color: #d5d5d5;
+        }
+
+        &:nth-of-type(3) {
+            color: #d78645;
+        }
+
+        > .item-inner {
+            padding: 1rem !important;
+        }
+
+        .list__content-subtitle {
+            font-size: 1.2rem !important;
+            font-style: italic;
+        }
+    }
 }
