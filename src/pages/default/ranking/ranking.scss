@@ -2,6 +2,12 @@ page-ranking {
 
     ion-item {
 
+        &.current {
+            color: #be4a44;
+            font-style: italic;
+            font-weight: 700;
+        }
+
         > [item-start] {
             margin: 0 10px 0 0 !important;
             min-width: 4rem !important;

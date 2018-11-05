@@ -6,7 +6,7 @@
     <loader [loading]="loaded"></loader>
 
     <ion-list class="list__content" *ngIf="ranking && loaded">
-        <ion-item *ngFor="let user of ranking; let i = index" text-wrap>
+        <ion-item *ngFor="let user of ranking; let i = index" text-wrap [ngClass]="{current: isTheCurrentUser(user.id)}">
             <ion-icon name="trophy" item-start *ngIf="isInPodium(i)"></ion-icon>
             <div item-start *ngIf="!isInPodium(i)">{{ i + 1 }}º</div>
 

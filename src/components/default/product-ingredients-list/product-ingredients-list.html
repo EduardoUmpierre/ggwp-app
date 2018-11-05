@@ -2,7 +2,6 @@
     <li *ngFor="let ingredient of ingredients; let i = index">
         {{ i == ingredients.length - 1 && i != 0 ? ' e ' : '' }}<!--
         -->{{ ingredient.name }}{{ ingredient.allergenic ? ' (Alergênico)' : '' }}<!--
-        -->{{ i < ingredients.length - 2 ? ',' : '' }}<!--
-        -->{{ i == ingredients.length - 1 ? '.' : '' }}
+        -->{{ i < ingredients.length - 2 ? ',' : '' }}
     </li>
 </ul>
