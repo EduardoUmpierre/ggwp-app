@@ -9,7 +9,7 @@ export class TabsPage {
     menu = 'ProductsPage';
     schedule = 'SchedulePage';
     bill = 'BillsPage';
-    music = 'BillsPage';
+    music = 'MusicPage';
     ranking = 'RankingPage';
 
     constructor(navParams: NavParams) {

@@ -92,5 +92,12 @@
     <plugin name="onesignal-cordova-plugin" spec="^2.4.4" />
     <plugin name="cordova-plugin-autostart" spec="^2.3.0" />
     <plugin name="cordova-plugin-background-mode" spec="^0.7.2" />
+    <plugin name="cordova-spotify-oauth" spec="^0.1.11" />
+    <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
+        <variable name="URL_SCHEME" value="underdogsspotify" />
+        <variable name="ANDROID_SCHEME" value=" " />
+        <variable name="ANDROID_HOST" value=" " />
+        <variable name="ANDROID_PATHPREFIX" value="/" />
+    </plugin>
     <engine name="android" spec="6.3.0" />
 </widget>

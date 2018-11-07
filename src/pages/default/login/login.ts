@@ -39,7 +39,7 @@ export class LoginPage {
                     this.AuthProvider.getUser().subscribe((user) => {
                         this.storage.set('user', user).then(() => {
                             this.events.publish('user:updated', true);
-                            this.dismiss();
+                            this.dismiss({update: true});
                         });
                     });
                 });
@@ -102,7 +102,7 @@ export class LoginPage {
     /**
      * Dismiss the modal
      */
-    dismiss() {
-        this.viewCtrl.dismiss();
+    dismiss(data: object = {}) {
+        this.viewCtrl.dismiss(data);
     }
 }

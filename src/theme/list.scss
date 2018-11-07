@@ -193,7 +193,7 @@ ion-list {
     }
 
     // Full width
-    > .full-width  {
+    > .full-width {
 
         .input-wrapper {
             flex-direction: column;
@@ -258,4 +258,14 @@ select-searchable-page {
             background-color: #19191b;
         }
     }
+
+    ion-searchbar {
+        padding: 0 1rem 1.5rem !important;
+    }
+}
+
+.infinite-loading-spinner .spinner-ios line,
+.infinite-loading-spinner .spinner-ios-small line,
+.infinite-loading-spinner .spinner-crescent circle {
+    stroke: #FFF !important;
 }
