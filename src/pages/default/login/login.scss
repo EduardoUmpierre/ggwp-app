@@ -18,6 +18,17 @@ page-login {
         }
     }
 
+    .facebook-btn {
+        background-color: #4267b2 !important;
+        color: #FFF;
+
+        &:link,
+        &:hover,
+        &:active {
+            background-color: #36589c !important;
+        }
+    }
+
     .separator {
         color: rgba(255, 255, 255, 0.8);
         font-size: 1.6rem;
