@@ -1,5 +1,4 @@
-<ion-list class="list__content list__content-manager" [ngClass]="layout == 'small' ? 'list__content-small' : ''"
-          *ngIf="products">
+<ion-list class="list__content list__content-manager" [ngClass]="layout == 'small' ? 'list__content-small' : ''">
     <ion-item *ngFor="let product of products; let i = index" (click)="click(product.id, i)" text-wrap>
         <div class="list__content-title">
             {{ product.name }}
@@ -23,7 +22,7 @@
         </button>
     </ion-item>
 
-    <ion-item *ngIf="products.length == 0 && loaded">
+    <ion-item *ngIf="products.length == 0">
         <div class="list__content-description">{{ emptyMessage }}</div>
     </ion-item>
 </ion-list>

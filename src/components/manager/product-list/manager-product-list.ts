@@ -20,6 +20,8 @@ export class ManagerProductListComponent {
         if (!this.emptyMessage) {
             this.emptyMessage = 'Nenhum produto encontrado';
         }
+
+        console.log(this.products);
     }
 
     /**
