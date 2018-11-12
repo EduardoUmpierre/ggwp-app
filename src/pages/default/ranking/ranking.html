@@ -11,7 +11,7 @@
             <div item-start *ngIf="!isInPodium(i)">{{ i + 1 }}º</div>
 
             <div class="list__content-title">{{ user.username }}</div>
-            <div class="list__content-subtitle" item-end>XP {{ user.experience }}</div>
+            <div class="list__content-subtitle" item-end>Nv. {{ user.number }}</div>
         </ion-item>
 
         <ion-item *ngIf="ranking && ranking.length == 0">
