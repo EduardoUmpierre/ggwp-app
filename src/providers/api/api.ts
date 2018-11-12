@@ -198,7 +198,7 @@ export class ApiProvider {
     /**
      * @param {HttpErrorResponse} res
      */
-    private generateErrorMessage(res: HttpErrorResponse) {
+    public generateErrorMessage(res: HttpErrorResponse) {
         let title = 'Erro';
         let message = 'Ocorreu um erro no servidor. Tente novamente em breve.';
 
@@ -206,10 +206,18 @@ export class ApiProvider {
             title = 'Atenção';
             message = '<p>Falha na validação, verifique os campos:</p>';
 
-            if (res.error) {
-                console.error(res.status, res.error);
+            let error;
 
-                message += this.generateUniqueValidationErrorItems(res.error);
+            try {
+                error = JSON.parse(res.error);
+            } catch(e) {
+                error = res.error;
+            }
+
+            if (error) {
+                console.error(res.status, error);
+
+                message += this.generateUniqueValidationErrorItems(error);
             }
         }
 

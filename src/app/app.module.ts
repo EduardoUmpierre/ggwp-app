@@ -23,6 +23,7 @@ import localePt from '@angular/common/locales/pt';
 import { OneSignal } from "@ionic-native/onesignal";
 import { Autostart } from "@ionic-native/autostart";
 import { BackgroundMode } from "@ionic-native/background-mode";
+import { Facebook } from "@ionic-native/facebook";
 
 registerLocaleData(localePt);
 
@@ -64,6 +65,7 @@ registerLocaleData(localePt);
         OneSignal,
         Autostart,
         BackgroundMode,
+        Facebook,
         {provide: LOCALE_ID, useValue: "pt-BR"},
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]

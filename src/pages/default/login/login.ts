@@ -4,6 +4,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 import { AuthProvider } from "../../../providers/auth/auth";
 import { Storage } from "@ionic/storage";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 
 @IonicPage()
 @Component({
@@ -14,8 +17,8 @@ export class LoginPage {
     private form: FormGroup;
 
     constructor(public viewCtrl: ViewController, public alertCtrl: AlertController, public navParams: NavParams,
-                private AuthProvider: AuthProvider, private formBuilder: FormBuilder, private storage: Storage,
-                private events: Events, private modalCtrl: ModalController) {
+                private authProvider: AuthProvider, private formBuilder: FormBuilder, private storage: Storage,
+                private events: Events, private modalCtrl: ModalController, private fb: Facebook) {
         this.form = this.formBuilder.group({
             username: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
@@ -30,13 +33,13 @@ export class LoginPage {
     login(e) {
         e.preventDefault();
 
-        this.AuthProvider.loader('Validando dados')
+        this.authProvider.loader('Validando dados')
             .login(this.form.value)
             .then((res) => {
-                this.AuthProvider.hideLoader();
+                this.authProvider.hideLoader();
 
                 this.storage.set('token', res.access_token).then(() => {
-                    this.AuthProvider.getUser().subscribe((user) => {
+                    this.authProvider.getUser().subscribe((user) => {
                         this.storage.set('user', user).then(() => {
                             this.events.publish('user:updated', true);
                             this.dismiss({update: true});
@@ -45,7 +48,7 @@ export class LoginPage {
                 });
             })
             .catch((res: HttpErrorResponse) => {
-                this.AuthProvider.hideLoader();
+                this.authProvider.hideLoader();
 
                 // Default message
                 let title = 'Erro';
@@ -53,8 +56,6 @@ export class LoginPage {
 
                 // Unauthorized
                 if (res.status === 401) {
-                    console.log(res.error);
-
                     let error;
 
                     if (res.error.hasOwnProperty('error')) {
@@ -91,11 +92,13 @@ export class LoginPage {
      */
     register() {
         const modal = this.modalCtrl.create('RegisterPage');
+
         modal.onDidDismiss((data) => {
-            if (data.dismiss) {
+            if (data instanceof Object && data.hasOwnProperty('dismiss') && data.dismiss) {
                 this.dismiss();
             }
         });
+
         modal.present();
     }
 
@@ -104,5 +107,99 @@ export class LoginPage {
      */
     dismiss(data: object = {}) {
         this.viewCtrl.dismiss(data);
+    }
+
+    /**
+     *
+     */
+    facebookLogin() {
+        this.authProvider.loader();
+
+        // Makes the facebook dialog login
+        this.fb.login(['public_profile', 'email', 'user_birthday'])
+            .then((res: FacebookLoginResponse) => {
+                if (res.status === 'connected') {
+                    const userID = res.authResponse.userID;
+
+                    // Verifies if the connected user has an account
+                    this.authProvider.getUserByFacebookId(userID)
+                        .then(res => {
+                            // Login to user's account
+                            this.authProvider.loader('Entrando')
+                                .login({'username': res['facebook_id'], 'password': res['facebook_id']})
+                                .then((res) => {
+                                    this.storage.set('token', res.access_token).then(() => {
+                                        this.authProvider.getUser().subscribe((user) => {
+                                            this.storage.set('user', user).then(() => {
+                                                this.events.publish('user:updated', true);
+                                                this.authProvider.hideLoader();
+                                                this.dismiss();
+                                            });
+                                        });
+                                    });
+                                });
+                        })
+                        .catch(error => {
+                            this.authProvider.loader('Criando conta');
+
+                            // User not registered
+                            // Get facebook user data
+                            this.fb.api(`${userID}/?fields=name,email,birthday`, ['user_birthday'])
+                                .then(res => {
+                                    // Creates an account
+                                    this.authProvider.createFacebookUser(this.normalizeFacebookUserData(res))
+                                        .then(user => {
+                                            // Account created, now redirects to the next step
+                                            const modal = this.modalCtrl.create('FacebookRegisterPage', {user: user});
+
+                                            modal.onDidDismiss((data) => {
+                                                if (data instanceof Object && data.hasOwnProperty('dismiss') && data.dismiss) {
+                                                    this.dismiss();
+                                                }
+                                            });
+
+                                            modal.present().then(() => this.authProvider.hideLoader());
+                                        })
+                                        .catch(error => {
+                                            this.alertCtrl.create(this.authProvider.generateErrorMessage(error)).present().then(() => this.authProvider.hideLoader());
+                                        });
+                                })
+                                .catch(error => {
+                                    this.authProvider.hideLoader();
+                                    console.log('Error', error);
+                                });
+                        });
+                }
+            })
+            .catch(error => {
+                this.authProvider.hideLoader();
+                console.log('Error at login', error);
+            });
+    }
+
+    /**
+     *
+     * @param {object} res
+     */
+    normalizeFacebookUserData(res: object) {
+        let response = {};
+
+        for (let key in res) {
+            if (key) {
+                let item = res[key];
+
+                if (key === 'birthday') {
+                    item = moment(res[key], 'DD/MM/YYYY').format('YYYY-MM-DD');
+                }
+
+                if (key === 'id') {
+                    key = 'facebook_id';
+                }
+
+                response[key] = item;
+            }
+        }
+
+        return response;
     }
 }

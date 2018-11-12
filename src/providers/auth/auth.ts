@@ -23,6 +23,7 @@ export class AuthProvider extends ApiProvider {
      * Do the login request
      *
      * @param data
+     * @returns {Promise<T>}
      */
     login(data) {
         data = this.buildAuthForm(data);
@@ -52,6 +53,24 @@ export class AuthProvider extends ApiProvider {
 
         let observable = this.http.post(`${this.urlBase}oauth/token`, data);
         return this.resolve(observable);
+    }
+
+    /**
+     *
+     * @param {string} userId
+     * @returns {Promise<HTTPResponse> | Promise<Object>}
+     */
+    getUserByFacebookId(userId: string) {
+        return this.http.get(`${this.urlBase}api/v1/users/facebook/${userId}`).toPromise();
+    }
+
+    /**
+     *
+     * @param {object} data
+     * @returns {Promise<HTTPResponse> | Promise<Object>}
+     */
+    createFacebookUser(data: object) {
+        return this.http.post(`${this.urlBase}api/v1/users/facebook`, data).toPromise();
     }
 
     /**

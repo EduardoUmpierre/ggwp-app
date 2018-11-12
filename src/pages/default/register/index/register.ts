@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Events, IonicPage, ViewController } from 'ionic-angular';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ApiProvider } from '../../../providers/api/api';
-import { AuthProvider } from '../../../providers/auth/auth';
+import { ApiProvider } from '../../../../providers/api/api';
+import { AuthProvider } from '../../../../providers/auth/auth';
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
@@ -22,7 +22,7 @@ export class RegisterPage {
             username: new FormControl('', Validators.required),
             email: new FormControl('', Validators.required),
             cpf: new FormControl('', Validators.required),
-            phone: new FormControl('', Validators.required),
+            phone: new FormControl(''),
             birthday: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
         });
@@ -44,7 +44,6 @@ export class RegisterPage {
         form.birthday = birthday;
 
         this.apiProvider.builder('users').loader().post(form).subscribe((e) => {
-
             // Authorizes the registered user
             this.authProvider.loader('Entrando')
                 .login({'username': e.username, 'password': this.form.controls['password'].value})
