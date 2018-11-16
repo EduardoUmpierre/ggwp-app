@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-title>Categorias</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goToForm()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar (ionInput)="filterItems($event)" placeholder="Pesquisar"></ion-searchbar>
+
+    <manager-generic-list [items]="filteredItems" [data]="data" (onRemove)="remove($event[0], $event[1])"
+                          (onEdit)="edit($event[0])" [loaded]="loaded"
+                          emptyMessage="Nenhuma categoria encontrada"></manager-generic-list>
+</ion-content>
