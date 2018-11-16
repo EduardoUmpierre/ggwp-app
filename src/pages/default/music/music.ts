@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Events, IonicPage, ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { Storage } from "@ionic/storage";
 import { SelectSearchableComponent } from "ionic-select-searchable";
@@ -26,8 +26,9 @@ export class MusicPage {
     trackSubscription: Subscription;
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private storage: Storage,
-                private toastCtrl: ToastController, private modalCtrl: ModalController) {
+                private toastCtrl: ToastController, private modalCtrl: ModalController, private events: Events) {
         this.spotifyApi = new SpotifyWebApi();
+        events.subscribe('user:updated', () => this.getUserData());
     }
 
     /**

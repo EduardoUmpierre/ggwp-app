@@ -14,7 +14,7 @@ import { ApiProvider } from "../../../../providers/api/api";
 export class FacebookRegisterPage {
     private user: any;
     private form: FormGroup;
-    private permittedFields: Array<string> = ['name', 'email', 'birthday'];
+    private permittedFields: Array<string> = ['name', 'email'];
 
     constructor(private viewCtrl: ViewController, private formBuilder: FormBuilder, private apiProvider: ApiProvider,
                 private authProvider: AuthProvider, private storage: Storage, private events: Events,
@@ -39,10 +39,6 @@ export class FacebookRegisterPage {
             for (let key in this.user) {
                 if (this.permittedFields.indexOf(key) > -1) {
                     let value = this.user[key];
-
-                    if (key === 'birthday') {
-                        value = moment(this.user[key], 'YYYY-MM-DD').format('DD/MM/YYYY')
-                    }
 
                     this.form.controls[key].setValue(value);
                 }

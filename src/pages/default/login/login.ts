@@ -5,8 +5,6 @@ import { AuthProvider } from "../../../providers/auth/auth";
 import { Storage } from "@ionic/storage";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Facebook, FacebookLoginResponse } from "@ionic-native/facebook";
-import * as moment from 'moment';
-import 'moment/locale/pt-br';
 
 @IonicPage()
 @Component({
@@ -116,7 +114,7 @@ export class LoginPage {
         this.authProvider.loader();
 
         // Makes the facebook dialog login
-        this.fb.login(['public_profile', 'email', 'user_birthday'])
+        this.fb.login(['public_profile', 'email'])
             .then((res: FacebookLoginResponse) => {
                 if (res.status === 'connected') {
                     const userID = res.authResponse.userID;
@@ -144,7 +142,7 @@ export class LoginPage {
 
                             // User not registered
                             // Get facebook user data
-                            this.fb.api(`${userID}/?fields=name,email,birthday`, ['user_birthday'])
+                            this.fb.api(`${userID}/?fields=name,email`, [])
                                 .then(res => {
                                     // Creates an account
                                     this.authProvider.createFacebookUser(this.normalizeFacebookUserData(res))
@@ -187,10 +185,6 @@ export class LoginPage {
         for (let key in res) {
             if (key) {
                 let item = res[key];
-
-                if (key === 'birthday') {
-                    item = moment(res[key], 'DD/MM/YYYY').format('YYYY-MM-DD');
-                }
 
                 if (key === 'id') {
                     key = 'facebook_id';
