@@ -64,7 +64,7 @@ export class ManagerGenericListComponent {
 
         if (this.data.subtitleFormat) {
             if (this.data.subtitleFormat === 'date') {
-                return moment(this.data.subtitleFormat, 'YYYY-MM-DD').format('DD/MM/YYYY');
+                return moment(subtitle, 'YYYY-MM-DD').format('DD/MM/YYYY');
             }
         }
 
