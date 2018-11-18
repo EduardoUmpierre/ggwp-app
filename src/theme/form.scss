@@ -62,7 +62,8 @@ page-login,
 page-register,
 page-facebook-register {
 
-    .item-input {
+    .item-input,
+    .item-datetime {
 
         > .item-inner {
             border-bottom: 1px dashed rgba(255, 255, 255, .35) !important;
@@ -79,6 +80,10 @@ page-facebook-register {
                     }
                 }
             }
+        }
+
+        .datetime-md {
+           padding: 13px 8px;
         }
     }
 

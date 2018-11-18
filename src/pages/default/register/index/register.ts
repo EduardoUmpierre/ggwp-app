@@ -39,11 +39,7 @@ export class RegisterPage {
      * Sends the register request
      */
     register() {
-        const birthday: string = moment(this.form.controls['birthday'].value, 'DD/MM/YYYY').format('YYYY-MM-DD');
-        let form: any = this.form.value;
-        form.birthday = birthday;
-
-        this.apiProvider.builder('users').loader().post(form).subscribe((e) => {
+        this.apiProvider.builder('users').loader().post(this.form.value).subscribe((e) => {
             // Authorizes the registered user
             this.authProvider.loader('Entrando')
                 .login({'username': e.username, 'password': this.form.controls['password'].value})

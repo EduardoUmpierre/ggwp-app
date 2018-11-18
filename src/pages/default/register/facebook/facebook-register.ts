@@ -57,9 +57,7 @@ export class FacebookRegisterPage {
      * Sends the register request
      */
     register() {
-        const birthday: string = moment(this.form.controls['birthday'].value, 'DD/MM/YYYY').format('YYYY-MM-DD');
         let form: any = this.form.value;
-        form.birthday = birthday;
         form.facebook_id = this.user['facebook_id'];
 
         this.apiProvider.builder(`users/facebook/${this.user.id}`).loader().put(form).subscribe(() => {
