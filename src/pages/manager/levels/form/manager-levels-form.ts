@@ -72,9 +72,9 @@ export class ManagerLevelsFormPage {
         if (this.id) {
             data = Object.assign({}, {id: this.id}, data);
 
-            this.apiProvider.builder(`levels/${this.id}`).loader().put(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder(`levels/${this.id}`).loader().put(data).subscribe(() => this.dismiss());
         } else {
-            this.apiProvider.builder('levels').loader().post(data).subscribe((res) => this.dismiss());
+            this.apiProvider.builder('levels').loader().post(data).subscribe(() => this.dismiss());
         }
     }
 }
