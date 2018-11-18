@@ -16,7 +16,7 @@ export class ApiProvider {
     private resolveError: boolean;
     protected urlBase = this.isApp() ? 'https://underdogs-app.herokuapp.com/' : 'http://localhost:8000/';
     protected loading;
-    protected http: HttpNativeProvider | HttpAngularProvider;
+    public http: HttpNativeProvider | HttpAngularProvider;
 
     constructor(private platform: Platform, public loadingCtrl: LoadingController, public alertCtrl: AlertController,
                 private httpAngular: HttpAngularProvider, private httpNative: HttpNativeProvider,

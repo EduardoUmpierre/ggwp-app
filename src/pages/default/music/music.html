@@ -6,34 +6,52 @@
     <loader [loading]="loaded"></loader>
 
     <div *ngIf="user && loaded">
-        <div *ngIf="playlist">
-            <ion-list class="list__content">
-                <div class="list__header">
-                    <span>Adicionar na playlist</span>
-                </div>
+        <ion-list class="list__content">
+            <div class="list__header">
+                <span>Tocando agora</span>
+            </div>
 
-                <ion-item>
-                    <select-searchable item-content [(ngModel)]="selectedTrack" itemValueField="id" itemTextField="name"
-                                       searchPlaceholder="Procurar música" placeholder="Procurar música"
-                                       title="Selecionar música"
-                                       [searchDebounce]="1000" [canSearch]="true" (onSearch)="searchTracks($event)"
-                                       [searchFailText]="'Nenhuma música encontrada.'">
-                        <ng-template selectSearchableTitleTemplate>Selecionar música</ng-template>
-                        <ng-template selectSearchableItemRightTemplate let-track="item">
-                            {{ track.artists[0].name }}
-                        </ng-template>
-                    </select-searchable>
+            <loader [loading]="currentTrack"></loader>
 
-                    <button ion-button item-end color="light" [disabled]="selectedTrack === null"
-                            (click)="addTrackToPlaylist()">
-                        Adicionar
-                    </button>
-                </ion-item>
+            <ion-item text-wrap *ngIf="currentTrack">
+                <ion-thumbnail item-start>
+                    <img [src]="currentTrack.album.images[2].url" [height]="currentTrack.album.images[2].height"
+                         [width]="currentTrack.album.images[2].width">
+                </ion-thumbnail>
 
-                <div class="list__header">
-                    <span>Playlist</span>
-                </div>
+                <div class="list__content-title">{{ currentTrack.name }}</div>
+                <div class="list__content-description">{{currentTrack.artists[0].name }}</div>
+            </ion-item>
 
+            <div class="list__header">
+                <span>Adicionar na playlist</span>
+            </div>
+
+            <ion-item>
+                <select-searchable item-content [(ngModel)]="selectedTrack" itemValueField="id" itemTextField="name"
+                                   searchPlaceholder="Procurar música" placeholder="Procurar música"
+                                   title="Selecionar música"
+                                   [searchDebounce]="1000" [canSearch]="true" (onSearch)="searchTracks($event)"
+                                   [searchFailText]="'Nenhuma música encontrada.'">
+                    <ng-template selectSearchableTitleTemplate>Selecionar música</ng-template>
+                    <ng-template selectSearchableItemRightTemplate let-track="item">
+                        {{ track.artists[0].name }}
+                    </ng-template>
+                </select-searchable>
+
+                <button ion-button item-end color="light" [disabled]="selectedTrack === null"
+                        (click)="addTrackToPlaylist()">
+                    Adicionar
+                </button>
+            </ion-item>
+
+            <div class="list__header">
+                <span>Playlist</span>
+            </div>
+
+            <loader [loading]="playlist"></loader>
+
+            <div *ngIf="playlist">
                 <ion-item *ngFor="let item of playlist" text-wrap>
                     <ion-thumbnail item-start>
                         <img [src]="item.track.album.images[2].url" [height]="item.track.album.images[2].height"
@@ -47,14 +65,8 @@
                 <ion-item *ngIf="playlist.length == 0">
                     <div class="list__content-description">Nenhuma música adicionada na playlist</div>
                 </ion-item>
-            </ion-list>
-        </div>
-
-        <div *ngIf="!playlist">
-            <p>Para recomendar músicas, você deve</p>
-
-            <button ion-button large full color="light" (click)="authWithSpotify()">Conectar-se ao Spotify</button>
-        </div>
+            </div>
+        </ion-list>
     </div>
 
     <div *ngIf="!user && loaded">

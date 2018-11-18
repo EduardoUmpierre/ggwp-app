@@ -8,12 +8,12 @@ ion-list {
     }
 
     &,
-    > ion-item.item-md {
+    ion-item.item-md {
         background-color: transparent;
         color: #FFF;
     }
 
-    > ion-item.item-md {
+    ion-item.item-md {
         padding-left: 0;
     }
 
@@ -40,7 +40,7 @@ ion-list {
 
     // List header
     .list__header {
-        border-bottom: 1px solid #FFF;
+        border-bottom: 1px solid #FFF !important;
         color: map-get($colors, primary);
         font-size: 1.2rem;
         font-style: italic;
@@ -73,7 +73,7 @@ ion-list {
             padding: 2rem 1rem;
         }
 
-        > ion-item {
+        ion-item {
             > .item-inner {
                 border-bottom: 1px dashed #FFF !important;
             }

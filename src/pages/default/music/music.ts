@@ -6,6 +6,7 @@ import { SelectSearchableComponent } from "ionic-select-searchable";
 import { Subscription } from "rxjs/Subscription";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/fromPromise';
+import { ApiProvider } from "../../../providers/api/api";
 
 declare var cordova: any;
 
@@ -16,9 +17,11 @@ declare var cordova: any;
 })
 export class MusicPage {
     private playlistId: string = '14Ty9bpg6EEjya0elN61N7';
+    private spotifyAppUrl: string = 'https://underdogs-app-spotify.herokuapp.com';
 
     result = {};
     playlist: any = null;
+    currentTrack: any = null;
     spotifyApi: any;
     loaded: boolean = false;
     user: any = null;
@@ -26,7 +29,8 @@ export class MusicPage {
     trackSubscription: Subscription;
 
     constructor(private navCtrl: NavController, private navParams: NavParams, private storage: Storage,
-                private toastCtrl: ToastController, private modalCtrl: ModalController, private events: Events) {
+                private toastCtrl: ToastController, private modalCtrl: ModalController, private events: Events,
+                private apiProvider: ApiProvider) {
         this.spotifyApi = new SpotifyWebApi();
         events.subscribe('user:updated', () => this.getUserData());
     }
@@ -36,25 +40,16 @@ export class MusicPage {
      */
     ionViewWillEnter() {
         this.getUserData();
+        this.authWithSpotify();
     }
 
     /**
      *
      */
     private getUserData() {
-        this.storage.get('user').then(res => this.user = res);
-    }
-
-    /**
-     *
-     */
-    ionViewDidLoad() {
-        this.storage.get('music_logged_in').then(res => {
-            if (res) {
-                this.authWithSpotify();
-            } else {
-                this.loaded = true;
-            }
+        this.storage.get('user').then(res => {
+            this.user = res;
+            this.loaded = true;
         });
     }
 
@@ -62,39 +57,34 @@ export class MusicPage {
      *
      */
     authWithSpotify() {
-        const config = {
-            clientId: '853c3119d29344d8b473068b3383d91c',
-            redirectUrl: 'underdogsspotify://callback',
-            scopes: ['playlist-modify-public'],
-            tokenExchangeUrl: 'https://underdogs-app-spotify.herokuapp.com/exchange',
-            tokenRefreshUrl: 'https://underdogs-app-spotify.herokuapp.com/refresh',
-        };
+        this.currentTrack = null;
+        this.playlist = null;
 
-        this.loaded = false;
-
-        cordova.plugins.spotifyAuth.authorize(config)
-            .then(({accessToken, encryptedRefreshToken, expiresAt}) => {
-                this.result = {access_token: accessToken, expires_in: expiresAt, ref: encryptedRefreshToken};
-                this.spotifyApi.setAccessToken(accessToken);
-                this.storage.set('music_logged_in', true);
-                this.getPlaylist();
-            })
-            .catch(() => this.loaded = true);
+        this.apiProvider.resolve(this.apiProvider.http.get(`${this.spotifyAppUrl}/token`)).subscribe(res => {
+            this.spotifyApi.setAccessToken(res.access_token);
+            this.getPlaylist();
+            this.getCurrentTrack();
+        });
     }
 
     /**
      *
      */
     private getPlaylist() {
-        this.loaded = false;
-
         const fields = 'items(track(artists,album(images),name))';
 
+        this.playlist = null;
+
         this.spotifyApi.getPlaylistTracks(this.playlistId, {fields: fields})
-            .then(data => {
-                this.playlist = data.items.reverse();
-                this.loaded = true;
-            });
+            .then(data => this.playlist = data.items.reverse());
+    }
+
+    /**
+     *
+     */
+    private getCurrentTrack() {
+        this.spotifyApi.getMyCurrentPlayingTrack()
+            .then(data => this.currentTrack = data.item);
     }
 
     /**
