@@ -11,6 +11,7 @@ export class ManagerProductListComponent {
     @Input('emptyMessage') emptyMessage: string;
     @Input('options') options: boolean = true;
     @Input('loaded') loaded: boolean = false;
+    @Input('clickable') clickable: boolean = true;
 
     @Output() onRemove: EventEmitter<any> = new EventEmitter();
     @Output() onEdit: EventEmitter<any> = new EventEmitter();
@@ -20,8 +21,6 @@ export class ManagerProductListComponent {
         if (!this.emptyMessage) {
             this.emptyMessage = 'Nenhum produto encontrado';
         }
-
-        console.log(this.products);
     }
 
     /**
@@ -29,10 +28,12 @@ export class ManagerProductListComponent {
      * @param {number} key
      */
     click(id: number, key: number) {
-        if (this.options) {
-            this.showOptions(id, key);
-        } else {
-            this.navCtrl.push('ManagerProductsFormPage', {id: id})
+        if (this.clickable) {
+            if (this.options) {
+                this.showOptions(id, key);
+            } else {
+                this.navCtrl.push('ManagerProductsFormPage', {id: id})
+            }
         }
     }
 
