@@ -24,6 +24,7 @@ export class MusicPage {
     currentTrack: any = null;
     spotifyApi: any;
     loaded: boolean = false;
+    currentTrackLoaded: boolean = false;
     user: any = null;
     selectedTrack: any = null;
     trackSubscription: Subscription;
@@ -84,7 +85,13 @@ export class MusicPage {
      */
     private getCurrentTrack() {
         this.spotifyApi.getMyCurrentPlayingTrack()
-            .then(data => this.currentTrack = data.item);
+            .then(data => {
+                if (data) {
+                    this.currentTrack = data.item;
+                }
+
+                this.currentTrackLoaded = true;
+            });
     }
 
     /**

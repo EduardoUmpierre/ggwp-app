@@ -11,7 +11,7 @@
                 <span>Tocando agora</span>
             </div>
 
-            <loader [loading]="currentTrack"></loader>
+            <loader [loading]="currentTrackLoaded"></loader>
 
             <ion-item text-wrap *ngIf="currentTrack">
                 <ion-thumbnail item-start>
@@ -21,6 +21,10 @@
 
                 <div class="list__content-title">{{ currentTrack.name }}</div>
                 <div class="list__content-description">{{currentTrack.artists[0].name }}</div>
+            </ion-item>
+
+            <ion-item *ngIf="!currentTrack && currentTrackLoaded">
+                <div class="list__content-description">Nenhuma música está sendo tocada no momento</div>
             </ion-item>
 
             <div class="list__header">
