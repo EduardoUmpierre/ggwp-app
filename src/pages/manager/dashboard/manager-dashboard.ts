@@ -20,9 +20,6 @@ export class ManagerDashboardPage {
     }
 
     ionViewWillEnter() {
-        this.apiProvider.builder('dashboard').loader().get().subscribe(res => {
-            this.report = res;
-            console.log(res);
-        });
+        this.apiProvider.builder('dashboard').loader().get().subscribe(res => this.report = res);
     }
 }

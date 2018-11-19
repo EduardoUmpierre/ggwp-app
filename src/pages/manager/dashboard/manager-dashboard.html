@@ -30,7 +30,9 @@
                                 <ion-col col-4>
                                     <div class="detail-container__group">
                                         <div class="detail-container__label">Consumo atual</div>
-                                        <div class="detail-container__text">{{ report.online.total | currency:'BRL':'R$' }}</div>
+                                        <div class="detail-container__text">
+                                            {{ report.online.total | currency:'BRL':'R$' }}
+                                        </div>
                                     </div>
                                 </ion-col>
                             </ion-row>
@@ -54,7 +56,9 @@
                                 <ion-col col-4>
                                     <div class="detail-container__group">
                                         <div class="detail-container__label">Consumo total</div>
-                                        <div class="detail-container__text">{{ report.daily.total | currency:'BRL':'R$' }}</div>
+                                        <div class="detail-container__text">
+                                            {{ report.daily.total | currency:'BRL':'R$' }}
+                                        </div>
                                     </div>
                                 </ion-col>
                             </ion-row>
@@ -66,7 +70,8 @@
                             <span>Produtos mais vendidos hoje</span>
                         </div>
 
-                        <manager-product-list [products]="report.products" layout="small" [options]="false"></manager-product-list>
+                        <manager-product-list [products]="report.products" layout="small" [clickable]="false"
+                                              [options]="false"></manager-product-list>
                     </ion-item>
                 </ion-list>
             </div>
