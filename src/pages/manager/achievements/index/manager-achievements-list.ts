@@ -104,4 +104,13 @@ export class ManagerAchievementsListPage {
     private remove(id: number, key: number) {
         this.apiProvider.builder(`achievements/${id}`).loader().delete().subscribe(() => this.achievements.splice(key, 1));
     }
+
+    /**
+     * Edits and item
+     *
+     * @param {number} id
+     */
+    edit(id: number) {
+        this.goToForm(id);
+    }
 }
