@@ -8,7 +8,7 @@
             {{ data.subtitleDecoration }}{{ getSubtitle(item[data.subtitleKey]) }}
         </div>
 
-        <button ion-button type="button" clear item-end icon-only class="options-button">
+        <button ion-button type="button" clear item-end icon-only class="options-button" *ngIf="options">
             <ion-icon name="more"></ion-icon>
         </button>
     </ion-item>

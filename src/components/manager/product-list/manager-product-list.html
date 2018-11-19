@@ -17,6 +17,11 @@
             {{ product.quantity }}
         </div>
 
+        <div class="list__content-side" item-end *ngIf="product.count">
+            <small>X</small>
+            {{ product.count }}
+        </div>
+
         <button ion-button type="button" clear item-end icon-only class="options-button" *ngIf="options">
             <ion-icon name="more"></ion-icon>
         </button>

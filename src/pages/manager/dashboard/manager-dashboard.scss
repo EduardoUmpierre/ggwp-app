@@ -2,5 +2,9 @@ page-manager-dashboard {
 
     ion-list .list__header {
         margin-bottom: 1rem;
+
+        &.product {
+            margin-bottom: 0;
+        }
     }
 }

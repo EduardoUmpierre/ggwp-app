@@ -8,12 +8,21 @@ import { ApiProvider } from '../../../providers/api/api';
     templateUrl: 'manager-dashboard.html',
 })
 export class ManagerDashboardPage {
-    private sum;
+    private report;
+
+    data = {
+        titleKey: 'name',
+        subtitle: true,
+        subtitleKey: 'count'
+    };
 
     constructor(public navCtrl: NavController, public navParams: NavParams, private apiProvider: ApiProvider) {
     }
 
     ionViewWillEnter() {
-        this.apiProvider.builder('users/online/stats').loader().get().subscribe(res => this.sum = res);
+        this.apiProvider.builder('dashboard').loader().get().subscribe(res => {
+            this.report = res;
+            console.log(res);
+        });
     }
 }
