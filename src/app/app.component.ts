@@ -39,7 +39,7 @@ export class MyApp {
 
                 this.oneSignal.startInit('2758eb87-0840-4921-8003-53f01423a71c', '179976682819');
 
-                this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+                this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
 
                 this.oneSignal.handleNotificationReceived().subscribe((data) => {
                     // do something when notification is received
@@ -148,25 +148,37 @@ export class MyApp {
      * @param data
      */
     handleNotification(data) {
-        const payload = data.notification.payload;
+        let payload;
 
-        const alert = this.alertCtrl.create({
-            title: payload.title,
-            message: payload.body,
-            buttons: [
-                {
-                    text: 'Fechar',
-                    role: 'cancel'
-                },
-                {
-                    text: 'Ver recompensa',
-                    handler: () => {
-                        this.profile();
-                    }
-                }
-            ]
+        if (data.hasOwnProperty('notification')) {
+            payload = data.notification.payload;
+        } else {
+            payload = data.payload;
+        }
+
+        this.authProvider.getUser(false).subscribe(user => {
+            this.storage.set('user', user).then(() => {
+                this.events.publish('user:updated', true);
+
+                const alert = this.alertCtrl.create({
+                    title: payload.title,
+                    message: payload.body,
+                    buttons: [
+                        {
+                            text: 'Fechar',
+                            role: 'cancel'
+                        },
+                        {
+                            text: 'Ver recompensa',
+                            handler: () => {
+                                this.profile();
+                            }
+                        }
+                    ]
+                });
+
+                alert.present();
+            });
         });
-
-        alert.present();
     }
 }

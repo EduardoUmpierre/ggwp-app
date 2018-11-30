@@ -15,8 +15,11 @@ export class AuthProvider extends ApiProvider {
      *
      * @returns {any}
      */
-    getUser() {
-        return this.builder('auth/me').loader().get();
+    getUser(loader: boolean = true) {
+        if (loader)
+            return this.builder('auth/me').loader().get();
+
+        return this.builder('auth/me').get();
     }
 
     /**

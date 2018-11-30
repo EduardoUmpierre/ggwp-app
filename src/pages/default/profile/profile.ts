@@ -26,7 +26,11 @@ export class ProfilePage {
         this.storage.get('user').then((user) => {
             this.user = user;
 
-            this.apiProvider.builder(`users/${user.id}/profile`).get().subscribe(profile => this.profile = profile);
+            this.apiProvider.builder(`users/${user.id}/profile`).get().subscribe(profile => {
+                this.profile = profile;
+
+                console.log(profile);
+            });
         });
     }
 
